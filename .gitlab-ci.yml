@@ -1,26 +1,53 @@
-image: node:18
+image: node:20
 
 stages:
+  - verify
   - build
   - deploy
 
-cache:
-  paths:
-    - node_modules/
-    - .next/
-
 variables:
   NODE_ENV: production
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+cache:
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - .npm
+    - node_modules/
+    - .next/cache/
+
+# ファイル構造を確認
+verify:
+  stage: verify
+  script:
+    - echo "===== Verifying project structure ====="
+    - ls -la
+    - echo "===== Checking components directory ====="
+    - ls -la components/ || echo "components directory not found!"
+    - echo "===== Checking app directory ====="
+    - ls -la app/
+    - echo "===== Checking tsconfig.json ====="
+    - cat tsconfig.json || echo "tsconfig.json not found!"
+    - echo "===== Checking package.json ====="
+    - cat package.json
+  only:
+    - main
+    - develop
 
 build:
   stage: build
+  before_script:
+    - echo "Node version:" $(node --version)
+    - echo "NPM version:" $(npm --version)
+    - npm ci --prefer-offline --no-audit
   script:
-    - npm install  # npm ci から変更
+    - echo "===== Starting build process ====="
     - npm run build
   artifacts:
     paths:
       - out/
-      - .next/
     expire_in: 1 hour
   only:
     - main
@@ -31,8 +58,11 @@ pages:
   dependencies:
     - build
   script:
+    - echo "===== Deploying to GitLab Pages ====="
     - mkdir -p public
     - cp -r out/* public/
+    - echo "===== Deployment complete ====="
+    - ls -la public/
   artifacts:
     paths:
       - public

@@ -41,10 +41,15 @@ build:
   before_script:
     - echo "Node version:" $(node --version)
     - echo "NPM version:" $(npm --version)
-    - npm ci --prefer-offline --no-audit
+    - npm install --prefer-offline --no-audit
+    - |
+      if [ -f package-lock.json ]; then
+        npm ci --prefer-offline --no-audit
+      else
+        npm install --prefer-offline --no-audit
+      fi
   script:
     - echo "===== Starting build process ====="
-    - npm install --prefer-offline --no-audit
     - npm run build
   artifacts:
     paths:

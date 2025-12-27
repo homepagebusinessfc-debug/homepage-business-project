@@ -41,15 +41,15 @@ build:
   before_script:
     - echo "Node version:" $(node --version)
     - echo "NPM version:" $(npm --version)
-    - npm install -D tailwindcss postcss autoprefixer
+  script:
+    - echo "===== Starting build process ====="
     - |
       if [ -f package-lock.json ]; then
         npm ci --prefer-offline --no-audit
       else
         npm install --prefer-offline --no-audit
       fi
-  script:
-    - echo "===== Starting build process ====="
+    - npm install -D tailwindcss postcss autoprefixer
     - npm run build
   artifacts:
     paths:

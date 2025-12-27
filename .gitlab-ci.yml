@@ -44,6 +44,7 @@ build:
     - npm ci --prefer-offline --no-audit
   script:
     - echo "===== Starting build process ====="
+    - npm install --prefer-offline --no-audit
     - npm run build
   artifacts:
     paths:

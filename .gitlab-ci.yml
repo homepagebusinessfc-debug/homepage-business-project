@@ -38,14 +38,3 @@ pages:
       - public
   only:
     - main
-
-# Vercelデプロイ用の設定（オプション）
-deploy_vercel:
-  stage: deploy
-  script:
-    - npm ci
-    - npm run build
-    # Vercel CLIを使用する場合はここに追加
-  only:
-    - main
-  when: manual

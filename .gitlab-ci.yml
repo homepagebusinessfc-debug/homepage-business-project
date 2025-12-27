@@ -41,7 +41,7 @@ build:
   before_script:
     - echo "Node version:" $(node --version)
     - echo "NPM version:" $(npm --version)
-    - npm install --prefer-offline --no-audit
+    - npm install -D tailwindcss postcss autoprefixer
     - |
       if [ -f package-lock.json ]; then
         npm ci --prefer-offline --no-audit

@@ -6,7 +6,8 @@ stages:
   - deploy
 
 variables:
-  NODE_ENV: production
+   # NODE_ENV=production は ビルド後のみ に使うのでコメントアウト
+   # NODE_ENV: production
   npm_config_cache: "$CI_PROJECT_DIR/.npm"
 
 cache:
@@ -49,7 +50,6 @@ build:
       else
         npm install --prefer-offline --no-audit
       fi
-    - npm install -D tailwindcss postcss autoprefixer
     - npm run build
   artifacts:
     paths:

@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { ChevronRight, Clock, DollarSign, Car, Truck } from 'lucide-react';
 

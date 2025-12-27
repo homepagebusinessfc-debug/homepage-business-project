@@ -1,0 +1,48 @@
+image: node:18
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+    - .next/
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - .next/
+      - out/
+    expire_in: 1 hour
+  only:
+    - main
+    - develop
+
+pages:
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build
+    - mkdir -p public
+    - cp -r out/* public/ || cp -r .next/standalone/* public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
+# Vercelデプロイ用の設定（オプション）
+deploy_vercel:
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build
+    # Vercel CLIを使用する場合はここに追加
+  only:
+    - main
+  when: manual

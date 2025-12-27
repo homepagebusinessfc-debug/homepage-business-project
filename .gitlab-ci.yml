@@ -9,15 +9,18 @@ cache:
     - node_modules/
     - .next/
 
+variables:
+  NODE_ENV: production
+
 build:
   stage: build
   script:
-    - npm install
+    - npm ci
     - npm run build
   artifacts:
     paths:
-      - .next/
       - out/
+      - .next/
     expire_in: 1 hour
   only:
     - main
@@ -25,11 +28,11 @@ build:
 
 pages:
   stage: deploy
+  dependencies:
+    - build
   script:
-    - npm install
-    - npm run build
     - mkdir -p public
-    - cp -r out/* public/ || cp -r .next/standalone/* public/
+    - cp -r out/* public/
   artifacts:
     paths:
       - public
@@ -40,7 +43,7 @@ pages:
 deploy_vercel:
   stage: deploy
   script:
-    - npm install
+    - npm ci
     - npm run build
     # Vercel CLIを使用する場合はここに追加
   only:

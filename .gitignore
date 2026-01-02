@@ -34,3 +34,8 @@ next-env.d.ts
 
 # gitlab
 .npm
+
+# キャッシュから削除（コミット済みファイルが対象）
+git rm -r --cached public/
+# フォルダ全体を除外
+public/

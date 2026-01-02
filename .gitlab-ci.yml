@@ -51,6 +51,8 @@ build:
         npm install --prefer-offline --no-audit
       fi
     - npm run build
+    # GitLab Pages は SSR をサポートしないため、必ず next export を使う必要があります
+    - npm run export
   artifacts:
     paths:
       - out/

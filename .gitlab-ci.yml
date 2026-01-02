@@ -51,8 +51,8 @@ build:
         npm install --prefer-offline --no-audit
       fi
     - npm run build
-    # GitLab Pages は SSR をサポートしないため、必ず next export を使う必要があります
-    - npm run export
+    # GitLab Pages は SSR をサポートしないため、必ず next export を使う必要があるが、Next.js 15では、を実行すると自動的にエクスポートも行われるので不要
+    # - npm run export
     - mv out public
   artifacts:
     paths:

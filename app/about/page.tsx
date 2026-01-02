@@ -89,13 +89,6 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-
-            {/* 運営会社情報 */}
-            <div className="mt-12 p-6 bg-gray-50 rounded-lg border">
-              <p className="text-sm text-gray-600">
-                ※「カッチャウ」は、株式会社ローリングキッズが運営・管理しております。
-              </p>
-            </div>
           </div>
         </div>
       </div>

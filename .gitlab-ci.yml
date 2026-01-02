@@ -53,8 +53,10 @@ build:
     - npm run build
     # GitLab Pages は SSR をサポートしないため、必ず next export を使う必要があります
     - npm run export
+    - mv out public
   artifacts:
     paths:
+      - public
       - out/
     expire_in: 1 hour
   only:

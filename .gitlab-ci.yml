@@ -71,6 +71,6 @@ pages:
     - ls -la public/
   artifacts:
     paths:
-      - public
+      - out
   only:
     - main

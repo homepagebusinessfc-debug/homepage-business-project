@@ -53,10 +53,9 @@ build:
     - npm run build
     # GitLab Pages は SSR をサポートしないため、必ず next export を使う必要があるが、Next.js 15では、を実行すると自動的にエクスポートも行われるので不要
     # - npm run export
-    - mv out public
+    # - mv out public
   artifacts:
     paths:
-      - public
       - out/
     expire_in: 1 hour
   only:
@@ -70,11 +69,18 @@ pages:
   script:
     - echo "===== Deploying to GitLab Pages ====="
     - mkdir -p public
-    - cp -r out/* public/
-    - echo "===== Deployment complete ====="
-    - ls -la public/
+    # ↓ 修正: out/フォルダが存在するか確認してからコピー
+    - |
+      if [ -d "out" ]; then
+        cp -r out/* public/
+      else
+        echo "エラー: out/フォルダが見つかりません"
+        echo "利用可能なフォルダ:"
+        ls -la
+        exit 1
+      fi
   artifacts:
     paths:
-      - out
+      - public
   only:
     - main

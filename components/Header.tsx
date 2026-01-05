@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Phone, Mail, Menu, X } from 'lucide-react';
 
@@ -21,8 +22,16 @@ export default function Header() {
       {/* Top Bar */}
       <div className="bg-red-600 text-white py-3 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
-          <Link href="/" className="text-2xl md:text-3xl font-bold hover:opacity-90 transition-opacity">
-            カッチャウ佐賀南3号店
+          <Link href="/" className="flex items-center gap-3 text-2xl md:text-3xl font-bold hover:opacity-90 transition-opacity">
+            <Image 
+              src="/logo_kacchau.png" 
+              alt="カッチャウロゴ" 
+              width={50} 
+              height={50}
+              className="object-contain"
+              priority
+            />
+            <span>カッチャウ佐賀南3号店</span>
           </Link>
           <div className="flex items-center gap-4 md:gap-6 text-sm md:text-base">
             <span className="hidden md:inline">お気軽にお問い合わせ下さい</span>

@@ -22,13 +22,13 @@ export default function Header() {
       <div className="bg-red-600 text-white py-3 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
           <Link href="/" className="text-2xl md:text-3xl font-bold hover:opacity-90 transition-opacity">
-            カッチャウ
+            カッチャウ佐賀南3号店
           </Link>
           <div className="flex items-center gap-4 md:gap-6 text-sm md:text-base">
             <span className="hidden md:inline">お気軽にお問い合わせ下さい</span>
-            <a href="tel:0952-28-0392" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
+            <a href="tel:0952-27-0060" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
               <Phone size={20} />
-              <span className="font-bold text-lg md:text-xl">0952-28-0392</span>
+              <span className="font-bold text-lg md:text-xl">0952-27-0060</span>
             </a>
             <Link 
               href="/contact" 

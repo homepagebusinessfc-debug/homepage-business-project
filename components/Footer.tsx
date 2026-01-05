@@ -5,10 +5,10 @@ export default function Footer() {
     <footer className="bg-gray-800 text-white py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <h3 className="text-3xl font-bold mb-4">カッチャウ</h3>
+          <h3 className="text-3xl font-bold mb-4">カッチャウ佐賀南3号店</h3>
           <p className="text-gray-300">
-            〒849-0913　佐賀市兵庫町大字渕1347-1<br />
-            TEL: 0952-29-3401 FAX: 0952-29-3325
+            〒840-0027　佐賀市本庄町大字本庄968-1<br />
+            TEL 0952-27-0060
           </p>
         </div>
         
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
         
         <div className="text-center text-sm text-gray-400 border-t border-gray-700 pt-6">
-          <p>Copyright © Kacchau All Rights Reserved.</p>
+          <p>Copyright © Kacchau Saga Minami 3gouten All Rights Reserved.</p>
         </div>
       </div>
     </footer>

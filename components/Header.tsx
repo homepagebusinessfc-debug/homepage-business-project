@@ -20,7 +20,7 @@ export default function Header() {
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       {/* Top Bar */}
-      <div className="bg-red-600 text-white py-3 px-4">
+      <div className="bg-[#FFC107] text-gray-900 py-3 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
           <Link href="/" className="flex items-center gap-3 text-2xl md:text-3xl font-bold hover:opacity-90 transition-opacity">
             <Image 
@@ -41,7 +41,7 @@ export default function Header() {
             </a>
             <Link 
               href="/contact" 
-              className="flex items-center gap-2 bg-white text-red-600 px-4 py-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="flex items-center gap-2 bg-white text-[#FFC107] px-4 py-2 rounded-full hover:bg-gray-100 transition-colors border-2 border-[#FFC107]"
             >
               <Mail size={20} />
               <span className="font-semibold">お問い合わせ</span>
@@ -69,7 +69,7 @@ export default function Header() {
               <li key={item.href} className="flex-1">
                 <Link
                   href={item.href}
-                  className="block py-5 px-4 text-center text-gray-700 hover:bg-gray-50 hover:text-red-600 border-b-3 border-transparent hover:border-red-600 transition-all duration-200"
+                  className="block py-5 px-4 text-center text-gray-700 hover:bg-gray-50 hover:text-[#FFC107] border-b-3 border-transparent hover:border-[#FFC107] transition-all duration-200"
                 >
                   {item.label}
                 </Link>
@@ -85,7 +85,7 @@ export default function Header() {
                   <Link
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-red-600 rounded-lg transition-colors"
+                    className="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-[#FFC107] rounded-lg transition-colors"
                   >
                     {item.label}
                   </Link>

@@ -6,11 +6,13 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-red-600 to-red-700 text-white py-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">カッチャウ</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto">
+      {/* Hero Section - 紫→黄色グラデーション */}
+      <section className="bg-gradient-to-r from-[#FFC107] to-[#FFD54F] text-gray-900 py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            カッチャウ
+          </h1>
+          <p className="text-xl md:text-2xl">
             車を買いたい・売りたい そんな時はカッチャウにおまかせください！
           </p>
         </div>
@@ -119,7 +121,7 @@ export default function Home() {
       <section className="py-12 text-center bg-gray-50">
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="px-8 py-4 bg-red-600 text-white rounded-full font-bold text-lg hover:bg-red-700 transition-colors"
+          className="px-8 py-4 bg-[#FFC107] text-white rounded-full font-bold text-lg hover:bg-red-700 transition-colors"
         >
           ページトップへ
         </button>

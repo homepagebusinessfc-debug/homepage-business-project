@@ -24,7 +24,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
           <Link href="/" className="flex items-center gap-3 text-2xl md:text-3xl font-bold hover:opacity-90 transition-opacity">
             <Image 
-              src="/logo_kacchau.png" 
+              src="public/logo_kacchau.png" 
               alt="カッチャウロゴ" 
               width={50} 
               height={50}

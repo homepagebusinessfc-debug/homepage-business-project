@@ -31,7 +31,7 @@ export default function Home() {
       {/* Recommended Cars */}
       <section className="py-16 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 text-red-600">
+          <h2 className="text-4xl font-bold text-center mb-12 text-kacchau">
             オススメの新車・中古車
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -46,7 +46,7 @@ export default function Home() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{car.name}</h3>
-                  <p className="text-2xl font-bold text-red-600">本体価格：{car.price}</p>
+                  <p className="text-2xl font-bold text-kacchau">本体価格：{car.price}</p>
                 </div>
               </div>
             ))}
@@ -57,7 +57,7 @@ export default function Home() {
       {/* Services */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 text-red-600">
+          <h2 className="text-4xl font-bold text-center mb-12 text-kacchau">
             カッチャウの事業
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

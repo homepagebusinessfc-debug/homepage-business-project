@@ -11,22 +11,25 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        'kacchau-yellow': {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
+        // カッチャウのカラーパレット
+        'kacchau': {
+          DEFAULT: '#FFC107',      // メインカラー
+          light: '#FFD54F',        // アクセントカラー
+          dark: '#FFB300',         // 濃い黄色
+          50: '#FFF8E1',
+          100: '#FFECB3',
+          200: '#FFE082',
+          300: '#FFD54F',
+          400: '#FFCA28',
+          500: '#FFC107',
+          600: '#FFB300',
+          700: '#FFA000',
+          800: '#FF8F00',
+          900: '#FF6F00',
         },
-        // メインカラーのショートカット
-        'kacchau': '#FFC107',
-        'kacchau-dark': '#FFB300',
-        'kacchau-light': '#FFD54F',
+        'kacchau-text': '#333333',     // テキストカラー
+        'kacchau-bg': '#FFFFFF',       // 背景カラー
+        'kacchau-border': '#E0E0E0',   // ボーダーカラー
       },
       fontFamily: {
         sans: [

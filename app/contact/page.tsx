@@ -235,10 +235,9 @@ export default function ContactPage() {
                   </h2>
                 </div>
                 <p className="text-gray-700 leading-relaxed">
-                  〒849-0913<br />
-                  佐賀市兵庫町大字渕1347-1<br />
-                  TEL: 0952-29-3401<br />
-                  FAX: 0952-29-3325
+                  〒840-0027<br />
+                  佐賀市本庄町大字本庄968-1<br />
+                  TEL: 0952-27-0060
                 </p>
                 <Link 
                   href="/shop"

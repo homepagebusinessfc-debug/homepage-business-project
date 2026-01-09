@@ -3,6 +3,9 @@ const path = require('path');
 
 // 色の変換マッピング
 const COLOR_MAP = {
+  'text-red-400': 'text-kacchau',
+  'text-red-600': 'text-kacchau',
+  'text-red-700': 'text-kacchau-dark',
   'text-red-600': 'text-kacchau',
   'text-red-700': 'text-kacchau-dark',
   'text-red-500': 'text-kacchau-500',

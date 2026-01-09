@@ -14,7 +14,7 @@ export default function Footer() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h4 className="font-bold text-lg mb-3 text-red-400">サービス</h4>
+            <h4 className="font-bold text-lg mb-3 text-kacchau">サービス</h4>
             <ul className="space-y-2">
               <li><Link href="/search" className="text-gray-300 hover:text-white transition-colors">クルマを探す</Link></li>
               <li><Link href="/sell" className="text-gray-300 hover:text-white transition-colors">クルマを売る</Link></li>
@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-bold text-lg mb-3 text-red-400">店舗情報</h4>
+            <h4 className="font-bold text-lg mb-3 text-kacchau">店舗情報</h4>
             <ul className="space-y-2">
               <li><Link href="/shop" className="text-gray-300 hover:text-white transition-colors">店舗一覧</Link></li>
               <li><Link href="/about" className="text-gray-300 hover:text-white transition-colors">カッチャウについて</Link></li>
@@ -31,7 +31,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-bold text-lg mb-3 text-red-400">サポート</h4>
+            <h4 className="font-bold text-lg mb-3 text-kacchau">サポート</h4>
             <ul className="space-y-2">
               <li><Link href="/question" className="text-gray-300 hover:text-white transition-colors">よくある質問</Link></li>
               <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors">お問い合わせ</Link></li>

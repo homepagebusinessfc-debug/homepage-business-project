@@ -20,15 +20,15 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
-      {/* 1. テキスト部分（上）- 背景色を白に変更 */}
+      {/* 1. テキスト部分（上） */}
       <div className="bg-white text-gray-900 py-3 px-4 border-b">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
           <Link href="/" className="flex items-center gap-3 text-2xl md:text-3xl font-bold hover:opacity-90 transition-opacity">
             <Image 
               src="/logo_kacchau.png" 
               alt="カッチャウロゴ" 
-              width={50} 
-              height={50}
+              width={80}
+              height={80}
               className="object-contain"
               priority
             />
@@ -56,7 +56,6 @@ export default function Header() {
         className="h-32 md:h-48 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: 'url(/shop_picture.jpg)' }}
       >
-        {/* オーバーレイ（オプション：画像を少し暗くする） */}
         <div className="w-full h-full bg-black/20"></div>
       </div>
 

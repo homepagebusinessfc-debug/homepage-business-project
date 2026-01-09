@@ -34,7 +34,7 @@ export default function ContactPage() {
       {/* Breadcrumb */}
       <div className="bg-white py-4 px-4 border-b">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm">
-          <Link href="/" className="text-red-600 hover:underline">ホーム</Link>
+          <Link href="/" className="text-kacchau hover:underline">ホーム</Link>
           <ChevronRight size={16} className="text-gray-400" />
           <span className="text-gray-600">お問い合わせ</span>
         </div>
@@ -42,7 +42,7 @@ export default function ContactPage() {
 
       <div className="max-w-6xl mx-auto py-12 px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
-          <h1 className="text-4xl font-bold text-red-600 mb-8 pb-4 border-b-4 border-red-600">
+          <h1 className="text-4xl font-bold text-kacchau mb-8 pb-4 border-b-4 border-kacchau">
             お問い合わせ
           </h1>
 
@@ -56,7 +56,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    お名前 <span className="text-red-600">*</span>
+                    お名前 <span className="text-kacchau">*</span>
                   </label>
                   <input
                     type="text"
@@ -64,14 +64,14 @@ export default function ContactPage() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
                     placeholder="山田 太郎"
                   />
                 </div>
 
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    メールアドレス <span className="text-red-600">*</span>
+                    メールアドレス <span className="text-kacchau">*</span>
                   </label>
                   <input
                     type="email"
@@ -79,14 +79,14 @@ export default function ContactPage() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
                     placeholder="example@email.com"
                   />
                 </div>
 
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    電話番号 <span className="text-red-600">*</span>
+                    電話番号 <span className="text-kacchau">*</span>
                   </label>
                   <input
                     type="tel"
@@ -94,21 +94,21 @@ export default function ContactPage() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
                     placeholder="090-1234-5678"
                   />
                 </div>
 
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    お問い合わせ内容 <span className="text-red-600">*</span>
+                    お問い合わせ内容 <span className="text-kacchau">*</span>
                   </label>
                   <select
                     name="subject"
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
                   >
                     <option value="">選択してください</option>
                     <option value="purchase">車の購入について</option>
@@ -128,13 +128,13 @@ export default function ContactPage() {
                       name="preferredDate"
                       value={formData.preferredDate}
                       onChange={handleChange}
-                      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
                     />
                     <select
                       name="preferredTime"
                       value={formData.preferredTime}
                       onChange={handleChange}
-                      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
                     >
                       <option value="">時間帯</option>
                       <option value="morning">午前（9:00-12:00）</option>
@@ -146,7 +146,7 @@ export default function ContactPage() {
 
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    メッセージ <span className="text-red-600">*</span>
+                    メッセージ <span className="text-kacchau">*</span>
                   </label>
                   <textarea
                     name="message"
@@ -154,26 +154,31 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={6}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
                     placeholder="お問い合わせ内容を詳しくお書きください"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-red-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-red-700 transition-colors shadow-lg"
+                  className="w-full bg-kacchau text-gray-900 py-4 rounded-lg font-bold text-lg hover:bg-kacchau-dark transition-colors shadow-lg"
                 >
                   送信する
                 </button>
+
+                {/* 🆕 個人情報の取り扱いに関する注意書き */}
+                <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+                  ※お客様からご提供頂いた個人情報は、お車の買取、販売など当社サービスのご案内（電話・メール等）及びご提供のために利用いたします。
+                </p>
               </form>
             </div>
 
             {/* 店舗情報・カレンダー予約 */}
             <div className="space-y-8">
               {/* Timerex カレンダー統合エリア */}
-              <div className="bg-red-50 p-6 rounded-lg border-2 border-red-200">
+              <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
                 <div className="flex items-center gap-3 mb-4">
-                  <Calendar className="text-red-600" size={32} />
+                  <Calendar className="text-kacchau" size={32} />
                   <h2 className="text-2xl font-bold text-gray-800">
                     オンライン予約
                   </h2>
@@ -208,16 +213,16 @@ export default function ContactPage() {
               </div>
 
               {/* 電話でのお問い合わせ */}
-              <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-lg border border-red-200">
+              <div className="bg-gradient-to-br from-kacchau-yellow-50 to-white p-6 rounded-lg border border-kacchau-yellow-200">
                 <div className="flex items-center gap-3 mb-4">
-                  <Phone className="text-red-600" size={32} />
+                  <Phone className="text-kacchau" size={32} />
                   <h2 className="text-2xl font-bold text-gray-800">
                     お電話でのお問い合わせ
                   </h2>
                 </div>
                 <a 
                   href="tel:0952-27-0060"
-                  className="text-3xl font-bold text-red-600 hover:text-red-700 transition-colors"
+                  className="text-3xl font-bold text-kacchau hover:text-kacchau-dark transition-colors"
                 >
                   0952-27-0060
                 </a>
@@ -229,7 +234,7 @@ export default function ContactPage() {
               {/* 所在地 */}
               <div className="bg-gray-50 p-6 rounded-lg border">
                 <div className="flex items-center gap-3 mb-4">
-                  <MapPin className="text-red-600" size={32} />
+                  <MapPin className="text-kacchau" size={32} />
                   <h2 className="text-2xl font-bold text-gray-800">
                     所在地
                   </h2>
@@ -241,7 +246,7 @@ export default function ContactPage() {
                 </p>
                 <Link 
                   href="/shop"
-                  className="inline-block mt-4 text-red-600 font-semibold hover:underline"
+                  className="inline-block mt-4 text-kacchau font-semibold hover:underline"
                 >
                   全店舗を見る →
                 </Link>

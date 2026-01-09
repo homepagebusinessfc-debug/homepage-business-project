@@ -27,19 +27,25 @@ export default function Header() {
             <Image 
               src="/logo_kacchau.png" 
               alt="カッチャウロゴ" 
-              width={80}
-              height={80}
-              className="object-contain"
+              width={100}
+              height={100}
+              className="object-contain w-16 h-16 md:w-24 md:h-24"
               priority
             />
             <span>カッチャウ佐賀南3号店</span>
           </Link>
           <div className="flex items-center gap-4 md:gap-6 text-sm md:text-base">
             <span className="hidden md:inline">お気軽にお問い合わせ下さい</span>
-            <a href="tel:0952-27-0060" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-              <Phone size={20} />
-              <span className="font-bold text-lg md:text-xl">0952-27-0060</span>
-            </a>
+            
+            {/* 電話番号と受付時間 */}
+            <div className="flex flex-col items-center md:items-start">
+              <a href="tel:0952-27-0060" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
+                <Phone size={20} />
+                <span className="font-bold text-lg md:text-xl">0952-27-0060</span>
+              </a>
+              <span className="text-xs md:text-sm text-gray-600 mt-1">受付時間: 9:00〜19:00</span>
+            </div>
+
             <Link 
               href="/contact" 
               className="flex items-center gap-2 bg-kacchau text-gray-900 px-4 py-2 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau"

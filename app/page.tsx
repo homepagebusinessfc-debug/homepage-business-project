@@ -35,6 +35,19 @@ export default function Home() {
             オススメの新車・中古車
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* 車のカード（既存のコード） */}
+    </div>
+    
+    {/* 🆕 もっと見るボタンを追加 */}
+    <div className="text-center mt-12">
+      <Link 
+        href="/cars"
+        className="inline-block px-12 py-4 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
+      >
+        もっと見る
+      </Link>
+    </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { name: 'ＢＭＷ 318ｉ ツーリング', price: '18万円' },
               { name: 'ダイハツ タント', price: '118万円' },

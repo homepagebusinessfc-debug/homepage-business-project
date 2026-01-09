@@ -9,6 +9,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
+    { href: '/cars', label: '新車・中古車' },
     { href: '/search', label: 'クルマを探す' },
     { href: '/sell', label: 'クルマを売る' },
     { href: '/shop', label: '店舗一覧' },

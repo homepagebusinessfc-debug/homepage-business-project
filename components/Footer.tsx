@@ -16,6 +16,7 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-3 text-kacchau">サービス</h4>
             <ul className="space-y-2">
+            　<li><Link href="/cars" className="text-gray-300 hover:text-white transition-colors">新車・中古車</Link></li>
               <li><Link href="/search" className="text-gray-300 hover:text-white transition-colors">クルマを探す</Link></li>
               <li><Link href="/sell" className="text-gray-300 hover:text-white transition-colors">クルマを売る</Link></li>
               <li><Link href="/rental" className="text-gray-300 hover:text-white transition-colors">レンタカー</Link></li>

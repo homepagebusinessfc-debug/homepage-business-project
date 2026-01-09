@@ -20,8 +20,8 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
-      {/* 1. テキスト部分（上） */}
-      <div className="bg-kacchau text-gray-900 py-3 px-4">
+      {/* 1. テキスト部分（上）- 背景色を白に変更 */}
+      <div className="bg-white text-gray-900 py-3 px-4 border-b">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
           <Link href="/" className="flex items-center gap-3 text-2xl md:text-3xl font-bold hover:opacity-90 transition-opacity">
             <Image 
@@ -42,7 +42,7 @@ export default function Header() {
             </a>
             <Link 
               href="/contact" 
-              className="flex items-center gap-2 bg-white text-kacchau px-4 py-2 rounded-full hover:bg-gray-100 transition-colors border-2 border-kacchau"
+              className="flex items-center gap-2 bg-kacchau text-gray-900 px-4 py-2 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau"
             >
               <Mail size={20} />
               <span className="font-semibold">お問い合わせ</span>

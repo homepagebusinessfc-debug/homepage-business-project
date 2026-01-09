@@ -16,6 +16,7 @@ export default function Header() {
     { href: '/about', label: 'カッチャウについて' },
     { href: '/rental', label: 'レンタカー' },
     { href: '/question', label: 'よくある質問' },
+    { href: '/contact', label: 'お問い合わせ' },
   ];
 
   return (

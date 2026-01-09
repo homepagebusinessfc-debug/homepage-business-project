@@ -32,7 +32,7 @@ export default function Header() {
               className="object-contain w-16 h-16 md:w-24 md:h-24"
               priority
             />
-            <span>カッチャウ佐賀南3号店</span>
+            <span style={{ color: '#1A237E' }}>カッチャウ佐賀南3号店</span>
           </Link>
           <div className="flex items-center gap-4 md:gap-6 text-sm md:text-base">
             <span className="hidden md:inline">お気軽にお問い合わせ下さい</span>

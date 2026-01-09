@@ -216,10 +216,10 @@ export default function ContactPage() {
                   </h2>
                 </div>
                 <a 
-                  href="tel:0952-28-0392"
+                  href="tel:0952-27-0060"
                   className="text-3xl font-bold text-red-600 hover:text-red-700 transition-colors"
                 >
-                  0952-28-0392
+                  0952-27-0060
                 </a>
                 <p className="text-gray-600 mt-2">
                   受付時間: 9:00〜19:00

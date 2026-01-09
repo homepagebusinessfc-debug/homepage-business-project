@@ -41,7 +41,7 @@ export default function Footer() {
         </div>
         
         <div className="text-center text-sm text-gray-400 border-t border-gray-700 pt-6">
-          <p>Copyright © Kacchau Saga Minami 3gouten All Rights Reserved.</p>
+          <p>Copyright © カッチャウ佐賀南3号店 All Rights Reserved.</p>
         </div>
       </div>
     </footer>

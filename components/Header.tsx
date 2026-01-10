@@ -24,49 +24,49 @@ export default function Header() {
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
         {/* 1. テキスト部分（上） */}
-        <div className="bg-white text-gray-900 py-3 md:py-4 lg:py-5 px-4 lg:px-8 border-b">
-          <div className="max-w-full mx-auto">
-            {/* PC: 横並び、スマホ: 縦並び */}
-            <div className="flex flex-col lg:flex-row justify-between items-center gap-3 lg:gap-6">
+        <div className="bg-white text-gray-900 py-2 sm:py-3 lg:py-4 px-2 sm:px-4 lg:px-8 border-b">
+          <div className="max-w-[1600px] mx-auto">
+            {/* 一行表示・改行なし */}
+            <div className="flex flex-row flex-nowrap justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8">
               {/* 左側: ロゴとテキスト */}
-              <Link href="/" className="flex items-center gap-3 lg:gap-4 hover:opacity-90 transition-opacity shrink-0">
+              <Link href="/" className="flex items-center gap-1 sm:gap-2 lg:gap-3 hover:opacity-90 transition-opacity shrink-0">
                 <Image 
                   src="/logo_kacchau.png" 
                   alt="カッチャウロゴ" 
-                  width={300}
-                  height={300}
-                  className="object-contain w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56"
+                  width={500}
+                  height={500}
+                  className="object-contain w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-64 lg:h-64 xl:w-80 xl:h-80 2xl:w-96 2xl:h-96"
                   priority
                 />
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                  <span className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold whitespace-nowrap" style={{ color: '#1A237E' }}>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2">
+                  <span className="text-xs sm:text-sm md:text-base lg:text-xl xl:text-2xl 2xl:text-3xl font-bold whitespace-nowrap" style={{ color: '#1A237E' }}>
                     カッチャウ佐賀南3号店
                   </span>
                   {/* 車買取専門バッジ */}
-                  <div className="inline-block px-2 py-1 md:px-3 md:py-1.5 border-2 md:border-3 border-white bg-red-600 text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg rounded shadow-lg whitespace-nowrap">
+                  <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-3 lg:py-1.5 border-2 lg:border-3 border-white bg-red-600 text-white font-bold text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg rounded shadow-lg whitespace-nowrap">
                     車買取専門
                   </div>
                 </div>
               </Link>
 
               {/* 右側: 連絡先情報 */}
-              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 lg:gap-4 xl:gap-6 shrink-0">
-                <span className="hidden xl:inline text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap">お気軽にお問い合わせ下さい</span>
+              <div className="flex flex-row flex-nowrap items-center gap-1 sm:gap-2 lg:gap-3 xl:gap-4 shrink-0">
+                <span className="hidden 2xl:inline text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap">お気軽にお問い合わせ下さい</span>
                 
                 {/* 電話番号と受付時間 */}
                 <div className="flex flex-col items-center">
-                  <a href="tel:0952-27-0060" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-                    <Phone size={18} className="lg:w-5 lg:h-5" />
-                    <span className="font-bold text-base sm:text-lg md:text-xl lg:text-2xl whitespace-nowrap">0952-27-0060</span>
+                  <a href="tel:0952-27-0060" className="flex items-center gap-1 hover:opacity-90 transition-opacity">
+                    <Phone size={14} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+                    <span className="font-bold text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl whitespace-nowrap">0952-27-0060</span>
                   </a>
-                  <span className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 mt-0.5 whitespace-nowrap">受付時間: 9:00〜19:00</span>
+                  <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base text-gray-600 whitespace-nowrap">受付時間: 9:00〜19:00</span>
                 </div>
 
                 <Link 
                   href="/contact" 
-                  className="flex items-center gap-2 bg-kacchau text-gray-900 px-4 py-2 md:px-5 md:py-2.5 lg:px-6 lg:py-3 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau text-xs sm:text-sm md:text-base lg:text-lg font-semibold whitespace-nowrap"
+                  className="flex items-center gap-1 sm:gap-1.5 bg-kacchau text-gray-900 px-2 py-1 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold whitespace-nowrap"
                 >
-                  <Mail size={16} className="lg:w-5 lg:h-5" />
+                  <Mail size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 xl:w-5 xl:h-5" />
                   <span>お問い合わせ</span>
                 </Link>
               </div>
@@ -76,7 +76,7 @@ export default function Header() {
 
         {/* 2. ナビゲーション */}
         <nav className="bg-white border-b">
-          <div className="max-w-full mx-auto px-4 lg:px-8">
+          <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
             {/* Mobile Menu Button */}
             <div className="md:hidden flex justify-end py-3">
               <button
@@ -93,7 +93,7 @@ export default function Header() {
                 <li key={item.href} className="flex-1">
                   <Link
                     href={item.href}
-                    className="block py-4 lg:py-5 px-3 lg:px-4 text-center text-sm lg:text-base text-gray-700 hover:bg-gray-50 hover:text-kacchau border-b-3 border-transparent hover:border-kacchau transition-all duration-200"
+                    className="block py-3 lg:py-4 xl:py-5 px-2 lg:px-3 xl:px-4 text-center text-xs lg:text-sm xl:text-base text-gray-700 hover:bg-gray-50 hover:text-kacchau border-b-3 border-transparent hover:border-kacchau transition-all duration-200"
                   >
                     {item.label}
                   </Link>

@@ -51,7 +51,7 @@ export default function Header() {
 
               {/* 右側: 連絡先情報 */}
               <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 lg:gap-4 xl:gap-6 shrink-0">
-                <span className="hidden xl:inline text-sm lg:text-base whitespace-nowrap">お気軽にお問い合わせ下さい</span>
+                <span className="hidden xl:inline text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap">お気軽にお問い合わせ下さい</span>
                 
                 {/* 電話番号と受付時間 */}
                 <div className="flex flex-col items-center">
@@ -59,7 +59,7 @@ export default function Header() {
                     <Phone size={18} className="lg:w-5 lg:h-5" />
                     <span className="font-bold text-base sm:text-lg md:text-xl lg:text-2xl whitespace-nowrap">0952-27-0060</span>
                   </a>
-                  <span className="text-xs sm:text-sm lg:text-base text-gray-600 mt-0.5 whitespace-nowrap">受付時間: 9:00〜19:00</span>
+                  <span className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 mt-0.5 whitespace-nowrap">受付時間: 9:00〜19:00</span>
                 </div>
 
                 <Link 

@@ -33,12 +33,12 @@ export default function Header() {
               className="object-contain w-72 h-72 md:w-96 md:h-96 lg:w-[27rem] lg:h-[27rem]"
               priority
             />
-            <div className="flex flex-col items-start gap-2">
-              <span className="text-2xl md:text-3xl lg:text-4xl font-bold" style={{ color: '#1A237E' }}>
+            <div className="flex flex-row items-center gap-3">
+              <span className="text-2xl md:text-3xl lg:text-4xl font-bold whitespace-nowrap" style={{ color: '#1A237E' }}>
                 カッチャウ佐賀南3号店
               </span>
-              {/* 🆕 車買取専門バッジ */}
-              <div className="inline-block px-4 py-2 border-4 border-white bg-red-600 text-white font-bold text-lg md:text-xl rounded shadow-lg">
+              {/* 🆕 車買取専門バッジ - 右横に配置 */}
+              <div className="inline-block px-4 py-2 border-4 border-white bg-red-600 text-white font-bold text-lg md:text-xl rounded shadow-lg whitespace-nowrap">
                 車買取専門
               </div>
             </div>

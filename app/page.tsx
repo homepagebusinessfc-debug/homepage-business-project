@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section - 紫→黄色グラデーション */}
+      {/* Hero Section - 黄色グラデーション */}
       <section className="bg-gradient-to-r from-[#FFC107] to-[#FFD54F] text-gray-900 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -34,19 +34,8 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center mb-12 text-kacchau">
             オススメの新車・中古車
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {/* 車のカード（既存のコード） */}
-    </div>
-    
-    {/* 🆕 もっと見るボタンを追加 */}
-    <div className="text-center mt-12">
-      <Link 
-        href="/cars"
-        className="inline-block px-12 py-4 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
-      >
-        もっと見る
-      </Link>
-    </div>
+          
+          {/* 車のカード */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { name: 'ＢＭＷ 318ｉ ツーリング', price: '18万円' },
@@ -63,6 +52,16 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+          
+          {/* もっと見るボタン - 車のカードの下に配置 */}
+          <div className="text-center mt-12">
+            <Link 
+              href="/cars"
+              className="inline-block px-12 py-4 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
+            >
+              もっと見る
+            </Link>
           </div>
         </div>
       </section>
@@ -117,7 +116,7 @@ export default function Home() {
                 href={service.href}
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
               >
-                <div className="h-40 bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-6xl">
+                <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
                   {service.icon}
                 </div>
                 <div className="p-6 text-center">
@@ -134,7 +133,7 @@ export default function Home() {
       <section className="py-12 text-center bg-gray-50">
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="px-8 py-4 bg-[#FFC107] text-white rounded-full font-bold text-lg hover:bg-red-700 transition-colors"
+          className="px-8 py-4 bg-kacchau text-gray-900 rounded-full font-bold text-lg hover:bg-kacchau-dark transition-colors"
         >
           ページトップへ
         </button>

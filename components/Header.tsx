@@ -21,27 +21,27 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
-      {/* 1. テキスト部分（上） - パディングを増やす */}
-      <div className="bg-white text-gray-900 py-8 px-4 border-b">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <Link href="/" className="flex items-center gap-6 text-3xl md:text-4xl lg:text-5xl font-bold hover:opacity-90 transition-opacity">
+      {/* 1. テキスト部分（上） */}
+      <div className="bg-white text-gray-900 py-6 px-4 border-b">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <Link href="/" className="flex items-center gap-4 text-2xl md:text-3xl lg:text-4xl font-bold hover:opacity-90 transition-opacity">
             <Image 
               src="/logo_kacchau.png" 
               alt="カッチャウロゴ" 
-              width={600}
-              height={600}
-              className="object-contain w-96 h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem]"
+              width={450}
+              height={450}
+              className="object-contain w-72 h-72 md:w-96 md:h-96 lg:w-[27rem] lg:h-[27rem]"
               priority
             />
             <span style={{ color: '#1A237E' }}>カッチャウ佐賀南3号店</span>
           </Link>
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-base md:text-lg">
-            <span className="hidden lg:inline text-lg">お気軽にお問い合わせ下さい</span>
+            <span className="hidden lg:inline text-base">お気軽にお問い合わせ下さい</span>
             
             {/* 電話番号と受付時間 */}
             <div className="flex flex-col items-center md:items-start">
               <a href="tel:0952-27-0060" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-                <Phone size={24} />
+                <Phone size={22} />
                 <span className="font-bold text-xl md:text-2xl">0952-27-0060</span>
               </a>
               <span className="text-sm md:text-base text-gray-600 mt-1">受付時間: 9:00〜19:00</span>
@@ -49,9 +49,9 @@ export default function Header() {
 
             <Link 
               href="/contact" 
-              className="flex items-center gap-2 bg-kacchau text-gray-900 px-6 py-3 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau text-base md:text-lg font-semibold"
+              className="flex items-center gap-2 bg-kacchau text-gray-900 px-5 py-2.5 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau text-base font-semibold"
             >
-              <Mail size={24} />
+              <Mail size={20} />
               <span>お問い合わせ</span>
             </Link>
           </div>

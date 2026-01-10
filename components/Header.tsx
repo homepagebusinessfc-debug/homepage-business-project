@@ -69,9 +69,9 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 2. 背景画像部分（下） */}
+      {/* 2. 背景画像部分（下） - 高さを2倍以上に拡大 */}
       <div 
-        className="h-32 md:h-48 bg-cover bg-center bg-no-repeat"
+        className="h-64 md:h-96 lg:h-[32rem] bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: 'url(/shop_picture.jpg)' }}
       >
         <div className="w-full h-full bg-black/20"></div>

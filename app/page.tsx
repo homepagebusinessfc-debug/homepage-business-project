@@ -110,7 +110,7 @@ export default function Home() {
             >
               <div className="h-40 relative">
                 <Image 
-                  src="/sell_car.jpg" 
+                  src="/sell_car.png" 
                   alt="クルマを売る" 
                   fill
                   className="object-cover"

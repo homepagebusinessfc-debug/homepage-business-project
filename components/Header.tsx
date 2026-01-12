@@ -39,7 +39,6 @@ export default function Header() {
             <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
               {/* 左側: ロゴとテキスト */}
               <Link href="/" className="flex items-center gap-1 sm:gap-2 lg:gap-3 hover:opacity-90 transition-opacity shrink-0">
-                {/* ロゴサイズを350×69pxに変更（レスポンシブ対応） */}
                 <Image 
                   src="/logo_kacchau.png" 
                   alt="カッチャウロゴ" 
@@ -134,12 +133,15 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* 背景画像部分（固定表示しない） */}
-      <div 
-        className="h-48 sm:h-64 md:h-96 lg:h-[32rem] xl:h-[40rem] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/shop_picture.jpg)' }}
-      >
-        <div className="w-full h-full bg-black/20"></div>
+      {/* 背景画像部分 - 画像全体を表示 */}
+      <div className="w-full bg-gray-100">
+        <div className="max-w-[1920px] mx-auto">
+          <div 
+            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] bg-contain bg-center bg-no-repeat"
+            style={{ backgroundImage: 'url(/shop_picture.jpg)' }}
+          >
+          </div>
+        </div>
       </div>
 
       {/* スマホ表示のみ: 下部固定の連絡先バー */}

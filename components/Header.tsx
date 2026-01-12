@@ -23,11 +23,11 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - パディングを縮小 */}
+        {/* 1. テキスト部分（上） */}
         <div className="bg-white text-gray-900 py-1 sm:py-2 lg:py-2 px-1.5 sm:px-4 lg:px-8 border-b overflow-hidden">
           <div className="max-w-[1600px] mx-auto">
-            {/* スマホ: 左右に広げる、PC: 中央寄せ */}
-            <div className="flex flex-row flex-nowrap justify-between sm:justify-center items-center gap-1 sm:gap-3 lg:gap-6 xl:gap-8">
+            {/* スマホ: ロゴとメニューボタンのみ、PC: 全て表示 */}
+            <div className="flex flex-row flex-nowrap justify-between items-center gap-1 sm:gap-3 lg:gap-6 xl:gap-8">
               {/* 左側: ロゴとテキスト */}
               <Link href="/" className="flex items-center gap-0.5 sm:gap-2 lg:gap-3 hover:opacity-90 transition-opacity shrink-0">
                 <Image 
@@ -49,11 +49,12 @@ export default function Header() {
                 </div>
               </Link>
 
-              {/* 右側: 連絡先情報 */}
+              {/* 右側: PC表示のみ連絡先情報、スマホはメニューボタン */}
               <div className="flex flex-row flex-nowrap items-center gap-0.5 sm:gap-2 lg:gap-3 xl:gap-4 shrink-0">
-                <span className="hidden 2xl:inline text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap">お気軽にお問い合わせ下さい</span>
+                {/* PC表示のみ */}
+                <span className="hidden sm:inline 2xl:inline text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap">お気軽にお問い合わせ下さい</span>
                 
-                {/* 電話番号と受付時間 */}
+                {/* 電話番号と受付時間（PC表示のみ） */}
                 <div className="hidden sm:flex flex-col items-center">
                   <a href="tel:0952-27-0060" className="flex items-center gap-1 hover:opacity-90 transition-opacity">
                     <Phone size={14} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
@@ -62,33 +63,32 @@ export default function Header() {
                   <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base text-gray-600 whitespace-nowrap">受付時間: 9:00〜19:00</span>
                 </div>
 
+                {/* お問い合わせボタン（PC表示のみ） */}
                 <Link 
                   href="/contact" 
-                  className="flex items-center gap-0.5 sm:gap-1.5 bg-kacchau text-gray-900 px-1.5 py-0.5 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 rounded-full hover:bg-kacchau-dark transition-colors border border-kacchau sm:border-2 text-[8px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold whitespace-nowrap"
+                  className="hidden sm:flex items-center gap-0.5 sm:gap-1.5 bg-kacchau text-gray-900 px-1.5 py-0.5 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 rounded-full hover:bg-kacchau-dark transition-colors border border-kacchau sm:border-2 text-[8px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold whitespace-nowrap"
                 >
                   <Mail size={10} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 xl:w-5 xl:h-5" />
                   <span>お問い合わせ</span>
                 </Link>
+
+                {/* メニューボタン（スマホ表示のみ） */}
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="sm:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 2. ナビゲーション */}
+        {/* 2. ナビゲーション（PC表示のみ） */}
         <nav className="bg-white border-b">
           <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex justify-end py-2">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-
             {/* Desktop Navigation */}
-            <ul className="hidden md:flex justify-center items-center">
+            <ul className="hidden sm:flex justify-center items-center">
               {navItems.map((item) => (
                 <li key={item.href} className="flex-1">
                   <Link
@@ -103,7 +103,7 @@ export default function Header() {
 
             {/* Mobile Navigation */}
             {isMenuOpen && (
-              <ul className="md:hidden py-4 space-y-2">
+              <ul className="sm:hidden py-4 space-y-2">
                 {navItems.map((item) => (
                   <li key={item.href}>
                     <Link
@@ -128,6 +128,38 @@ export default function Header() {
       >
         <div className="w-full h-full bg-black/20"></div>
       </div>
+
+      {/* スマホ表示のみ: 下部固定の連絡先バー */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50">
+        <div className="flex flex-col items-center py-2 px-4">
+          {/* お気軽にお問い合わせ下さい */}
+          <span className="text-[10px] text-gray-600 mb-1">お気軽にお問い合わせ下さい</span>
+          
+          {/* 電話番号 */}
+          <a 
+            href="tel:0952-27-0060" 
+            className="flex items-center gap-1 mb-1 hover:opacity-80 transition-opacity"
+          >
+            <Phone size={16} className="text-kacchau" />
+            <span className="font-bold text-base text-gray-900">0952-27-0060</span>
+          </a>
+          
+          {/* 受付時間 */}
+          <span className="text-[9px] text-gray-500 mb-2">受付時間: 9:00〜19:00</span>
+          
+          {/* お問い合わせボタン */}
+          <Link 
+            href="/contact" 
+            className="flex items-center gap-1.5 bg-kacchau text-gray-900 px-6 py-2 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau text-sm font-semibold w-full justify-center"
+          >
+            <Mail size={16} />
+            <span>お問い合わせ</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* スマホ表示のみ: 下部固定バーの高さ分のスペーサー */}
+      <div className="sm:hidden h-32"></div>
     </>
   );
 }

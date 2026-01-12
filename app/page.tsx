@@ -110,7 +110,7 @@ export default function Home() {
             >
               <div className="h-40 relative">
                 <Image 
-                  src="/sell_car.png" 
+                  src="/sell_car.jpg" 
                   alt="クルマを売る" 
                   fill
                   className="object-cover"
@@ -161,13 +161,18 @@ export default function Home() {
               </div>
             </a>
 
-            {/* レンタカー */}
+            {/* レンタカー - 画像を追加 */}
             <a 
               href="#rental"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
-              <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
-                🚙
+              <div className="h-40 relative">
+                <Image 
+                  src="/rental_car.jpg" 
+                  alt="レンタカー" 
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="p-6 text-center">
                 <h3 className="text-xl font-bold mb-2">レンタカー</h3>
@@ -175,7 +180,7 @@ export default function Home() {
               </div>
             </a>
 
-            {/* よくある質問 - 画像を追加 */}
+            {/* よくある質問 */}
             <a 
               href="#question"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"

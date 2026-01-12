@@ -32,17 +32,16 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - 背景色をrgb(255, 193, 7)に設定 */}
+        {/* 1. テキスト部分（上） - 背景色を#ffc107に設定 */}
         <div 
           className="text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center"
-          style={{ backgroundColor: 'rgb(255, 193, 7)' }}
+          style={{ backgroundColor: '#ffc107' }}
         >
           <div className="max-w-[1600px] mx-auto w-full">
             {/* スマホ: 中央寄せ、PC: 中央寄せ */}
             <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
               {/* 左側: ロゴとテキスト */}
               <Link href="/" className="flex items-center gap-1 sm:gap-2 lg:gap-3 hover:opacity-90 transition-opacity shrink-0">
-                {/* ロゴサイズを大きく調整 */}
                 <Image 
                   src="/logo_kacchau.png" 
                   alt="カッチャウロゴ" 

@@ -30,21 +30,22 @@ export default function Header() {
 
   return (
     <>
-      {/* ヘッダー部分（固定表示） - 背景色を白色に */}
+      {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - 高さを90pxに固定、背景色を白色に */}
+        {/* 1. テキスト部分（上） - 高さを90pxに固定 */}
         <div className="bg-white text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b border-gray-200 overflow-hidden flex items-center">
           <div className="max-w-[1600px] mx-auto w-full">
             {/* スマホ: 中央寄せ、PC: 中央寄せ */}
             <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
               {/* 左側: ロゴとテキスト */}
               <Link href="/" className="flex items-center gap-1 sm:gap-2 lg:gap-3 hover:opacity-90 transition-opacity shrink-0">
+                {/* ロゴサイズを350×69pxに変更（レスポンシブ対応） */}
                 <Image 
                   src="/logo_kacchau.png" 
                   alt="カッチャウロゴ" 
-                  width={500}
-                  height={500}
-                  className="object-contain w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-20 lg:h-20 xl:w-20 xl:h-20 2xl:w-20 2xl:h-20"
+                  width={350}
+                  height={69}
+                  className="object-contain w-[200px] h-[39px] sm:w-[250px] sm:h-[49px] md:w-[300px] md:h-[59px] lg:w-[350px] lg:h-[69px]"
                   priority
                 />
                 {/* スマホ・PC共通: 横並び */}
@@ -95,7 +96,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* 2. ナビゲーション（PC表示のみ） - 背景色を白色に */}
+        {/* 2. ナビゲーション（PC表示のみ） */}
         <nav className="bg-white border-b border-gray-200">
           <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
             {/* Desktop Navigation */}

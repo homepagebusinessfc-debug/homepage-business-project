@@ -141,13 +141,19 @@ export default function Home() {
               </div>
             </a>
 
-            {/* カッチャウについて */}
+            {/* カッチャウについて - ロゴ画像を追加 */}
             <a 
               href="#about"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
-              <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
-                ℹ️
+              <div className="h-40 relative bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center p-4">
+                <Image 
+                  src="/logo_kacchau.png" 
+                  alt="カッチャウについて" 
+                  width={200}
+                  height={200}
+                  className="object-contain w-32 h-32"
+                />
               </div>
               <div className="p-6 text-center">
                 <h3 className="text-xl font-bold mb-2">カッチャウについて</h3>

@@ -9,7 +9,7 @@ export default function Home() {
       {/* Hero Section - 白色背景 */}
       <section className="bg-white text-gray-900 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          {/* カッチャウロゴ画像 - ヘッダーと同じサイズ */}
+          {/* カッチャウロゴ画像 */}
           <div className="flex items-center justify-center mb-6">
             <Image 
               src="/logo_kacchau.png" 
@@ -40,7 +40,7 @@ export default function Home() {
       </section>
 
       {/* Recommended Cars */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-16 px-4 bg-gray-50" id="cars">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12 text-kacchau">
             オススメの新車・中古車
@@ -65,7 +65,7 @@ export default function Home() {
             ))}
           </div>
           
-          {/* もっと見るボタン - 車のカードの下に配置 */}
+          {/* もっと見るボタン */}
           <div className="text-center mt-12">
             <Link 
               href="/cars"
@@ -84,58 +84,94 @@ export default function Home() {
             カッチャウの事業
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { 
-                href: '/search', 
-                icon: '🚗', 
-                title: 'クルマを探す',
-                desc: '直販システムで、いい車をお安く販売します。'
-              },
-              { 
-                href: '/sell', 
-                icon: '💰', 
-                title: 'クルマを売る',
-                desc: 'カッチャウの高額査定システムで高価買い取りが可能です。'
-              },
-              { 
-                href: '/shop', 
-                icon: '🏪', 
-                title: '店舗一覧',
-                desc: 'カッチャウは佐賀県内5店舗展開中です。'
-              },
-              { 
-                href: '/about', 
-                icon: 'ℹ️', 
-                title: 'カッチャウについて',
-                desc: '車を売る・買うならカッチャウのワケ。'
-              },
-              { 
-                href: '/rental', 
-                icon: '🚙', 
-                title: 'レンタカー',
-                desc: 'レンタカーもカッチャウで。'
-              },
-              { 
-                href: '/question', 
-                icon: '❓', 
-                title: 'よくある質問',
-                desc: '車を売る・買うに関する質問です。'
-              }
-            ].map((service, index) => (
-              <Link 
-                key={index}
-                href={service.href}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
-              >
-                <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
-                  {service.icon}
-                </div>
-                <div className="p-6 text-center">
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-gray-600">{service.desc}</p>
-                </div>
-              </Link>
-            ))}
+            {/* クルマを探す - 写真を追加 */}
+            <a 
+              href="#search"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/search_car.jpg" 
+                  alt="クルマを探す" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">クルマを探す</h3>
+                <p className="text-gray-600">直販システムで、いい車をお安く販売します。</p>
+              </div>
+            </a>
+
+            {/* クルマを売る */}
+            <a 
+              href="#sell"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
+                💰
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">クルマを売る</h3>
+                <p className="text-gray-600">カッチャウの高額査定システムで高価買い取りが可能です。</p>
+              </div>
+            </a>
+
+            {/* 店舗一覧 */}
+            <a 
+              href="#shop"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
+                🏪
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">店舗一覧</h3>
+                <p className="text-gray-600">カッチャウは佐賀県内5店舗展開中です。</p>
+              </div>
+            </a>
+
+            {/* カッチャウについて */}
+            <a 
+              href="#about"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
+                ℹ️
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">カッチャウについて</h3>
+                <p className="text-gray-600">車を売る・買うならカッチャウのワケ。</p>
+              </div>
+            </a>
+
+            {/* レンタカー */}
+            <a 
+              href="#rental"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
+                🚙
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">レンタカー</h3>
+                <p className="text-gray-600">レンタカーもカッチャウで。</p>
+              </div>
+            </a>
+
+            {/* よくある質問 */}
+            <a 
+              href="#question"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
+                ❓
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">よくある質問</h3>
+                <p className="text-gray-600">車を売る・買うに関する質問です。</p>
+              </div>
+            </a>
           </div>
         </div>
       </section>

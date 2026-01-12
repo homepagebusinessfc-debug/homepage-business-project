@@ -30,10 +30,10 @@ export default function Header() {
 
   return (
     <>
-      {/* ヘッダー部分（固定表示） */}
-      <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - 高さを90pxに固定 */}
-        <div className="bg-white text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b overflow-hidden flex items-center">
+      {/* ヘッダー部分（固定表示） - 背景色を黄色に変更 */}
+      <header className="bg-kacchau shadow-md sticky top-0 z-50">
+        {/* 1. テキスト部分（上） - 高さを90pxに固定、背景色を黄色に */}
+        <div className="bg-kacchau text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center">
           <div className="max-w-[1600px] mx-auto w-full">
             {/* スマホ: 中央寄せ、PC: 中央寄せ */}
             <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
@@ -70,14 +70,14 @@ export default function Header() {
                     <Phone size={14} className="sm:w-4 sm:h-4 lg:w-4 lg:h-4" />
                     <span className="font-bold text-[10px] sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg whitespace-nowrap">0952-27-0060</span>
                   </a>
-                  <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-xs xl:text-sm text-gray-600 whitespace-nowrap">受付時間: 9:00〜19:00</span>
+                  <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-xs xl:text-sm text-gray-700 whitespace-nowrap">受付時間: 9:00〜19:00</span>
                 </div>
 
                 {/* お問い合わせボタン（PC表示のみ） */}
                 <a 
                   href="#contact"
                   onClick={(e) => handleNavClick(e, '#contact')}
-                  className="hidden sm:flex items-center gap-0.5 sm:gap-1.5 bg-kacchau text-gray-900 px-1.5 py-0.5 sm:px-3 sm:py-1.5 lg:px-3 lg:py-1.5 xl:px-4 xl:py-2 rounded-full hover:bg-kacchau-dark transition-colors border border-kacchau sm:border-2 text-[8px] sm:text-xs md:text-sm lg:text-sm xl:text-base font-semibold whitespace-nowrap"
+                  className="hidden sm:flex items-center gap-0.5 sm:gap-1.5 bg-white text-gray-900 px-1.5 py-0.5 sm:px-3 sm:py-1.5 lg:px-3 lg:py-1.5 xl:px-4 xl:py-2 rounded-full hover:bg-gray-100 transition-colors border border-gray-300 sm:border-2 text-[8px] sm:text-xs md:text-sm lg:text-sm xl:text-base font-semibold whitespace-nowrap shadow-md"
                 >
                   <Mail size={10} className="sm:w-3.5 sm:h-3.5 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" />
                   <span>お問い合わせ</span>
@@ -87,7 +87,7 @@ export default function Header() {
               {/* メニューボタン（スマホ表示のみ・絶対配置で右端固定） */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="sm:hidden absolute right-2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                className="sm:hidden absolute right-2 p-2 hover:bg-kacchau-dark rounded-lg transition-colors"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -95,8 +95,8 @@ export default function Header() {
           </div>
         </div>
 
-        {/* 2. ナビゲーション（PC表示のみ） */}
-        <nav className="bg-white border-b">
+        {/* 2. ナビゲーション（PC表示のみ） - 背景色を黄色に */}
+        <nav className="bg-kacchau border-b border-kacchau-dark">
           <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
             {/* Desktop Navigation */}
             <ul className="hidden sm:flex justify-center items-center">
@@ -105,7 +105,7 @@ export default function Header() {
                   <a
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className="block py-1.5 lg:py-2 xl:py-2.5 px-2 lg:px-3 xl:px-4 text-center text-xs lg:text-sm xl:text-base text-gray-700 hover:bg-gray-50 hover:text-kacchau border-b-3 border-transparent hover:border-kacchau transition-all duration-200 cursor-pointer"
+                    className="block py-1.5 lg:py-2 xl:py-2.5 px-2 lg:px-3 xl:px-4 text-center text-xs lg:text-sm xl:text-base text-gray-900 hover:bg-kacchau-dark hover:text-gray-900 border-b-3 border-transparent hover:border-gray-900 transition-all duration-200 cursor-pointer font-medium"
                   >
                     {item.label}
                   </a>
@@ -121,7 +121,7 @@ export default function Header() {
                     <a
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item.href)}
-                      className="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-kacchau rounded-lg transition-colors cursor-pointer"
+                      className="block py-3 px-4 text-gray-900 hover:bg-kacchau-dark hover:text-gray-900 rounded-lg transition-colors cursor-pointer font-medium"
                     >
                       {item.label}
                     </a>

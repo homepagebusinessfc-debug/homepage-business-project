@@ -42,20 +42,21 @@ export default function Header() {
             <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
               {/* 左側: ロゴとテキスト */}
               <Link href="/" className="flex items-center gap-1 sm:gap-2 lg:gap-3 hover:opacity-90 transition-opacity shrink-0">
+                {/* ロゴサイズを大きく調整 */}
                 <Image 
                   src="/logo_kacchau.png" 
                   alt="カッチャウロゴ" 
                   width={350}
                   height={69}
-                  className="object-contain w-[150px] h-[29px] sm:w-[200px] sm:h-[39px] md:w-[250px] md:h-[49px] lg:w-[350px] lg:h-[69px]"
+                  className="object-contain w-[250px] h-[49px] sm:w-[280px] sm:h-[55px] md:w-[300px] md:h-[59px] lg:w-[350px] lg:h-[69px]"
                   priority
                 />
-                {/* スマホ: 縦並び、PC: 横並び */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0.5 sm:gap-2">
+                {/* スマホ: 縦並び（中央揃え）、PC: 横並び */}
+                <div className="flex flex-col sm:flex-row items-center sm:items-center gap-0.5 sm:gap-2">
                   <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
                     カッチャウ佐賀南3号店
                   </span>
-                  {/* 車買取専門バッジ - スマホは下、PCは右側に配置 */}
+                  {/* 車買取専門バッジ - スマホは中央下、PCは右側に配置 */}
                   <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[9px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
                     車買取専門
                   </div>

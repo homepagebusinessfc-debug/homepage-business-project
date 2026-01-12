@@ -32,8 +32,8 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - 高さを90pxに固定 */}
-        <div className="bg-white text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b border-gray-200 overflow-hidden flex items-center">
+        {/* 1. テキスト部分（上） - 背景色を黄色に変更 */}
+        <div className="bg-kacchau text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center">
           <div className="max-w-[1600px] mx-auto w-full">
             {/* スマホ: 中央寄せ、PC: 中央寄せ */}
             <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
@@ -44,15 +44,15 @@ export default function Header() {
                   alt="カッチャウロゴ" 
                   width={350}
                   height={69}
-                  className="object-contain w-[200px] h-[39px] sm:w-[250px] sm:h-[49px] md:w-[300px] md:h-[59px] lg:w-[350px] lg:h-[69px]"
+                  className="object-contain w-[150px] h-[29px] sm:w-[200px] sm:h-[39px] md:w-[250px] md:h-[49px] lg:w-[350px] lg:h-[69px]"
                   priority
                 />
-                {/* スマホ・PC共通: 横並び */}
-                <div className="flex flex-row items-center gap-1 sm:gap-2">
+                {/* スマホ: 縦並び、PC: 横並び */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0.5 sm:gap-2">
                   <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
                     カッチャウ佐賀南3号店
                   </span>
-                  {/* 車買取専門バッジ - 右側に配置 */}
+                  {/* 車買取専門バッジ - スマホは下、PCは右側に配置 */}
                   <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[9px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
                     車買取専門
                   </div>
@@ -62,22 +62,22 @@ export default function Header() {
               {/* 右側: PC表示のみ連絡先情報、スマホはメニューボタン（絶対配置） */}
               <div className="hidden sm:flex flex-row flex-nowrap items-center gap-0.5 sm:gap-2 lg:gap-3 xl:gap-4 shrink-0">
                 {/* PC表示のみ */}
-                <span className="hidden 2xl:inline text-xs sm:text-sm md:text-base lg:text-base whitespace-nowrap">お気軽にお問い合わせ下さい</span>
+                <span className="hidden 2xl:inline text-xs sm:text-sm md:text-base lg:text-base whitespace-nowrap text-gray-900">お気軽にお問い合わせ下さい</span>
                 
                 {/* 電話番号と受付時間（PC表示のみ） */}
                 <div className="hidden sm:flex flex-col items-center">
                   <a href="tel:0952-27-0060" className="flex items-center gap-1 hover:opacity-90 transition-opacity">
-                    <Phone size={14} className="sm:w-4 sm:h-4 lg:w-4 lg:h-4" />
-                    <span className="font-bold text-[10px] sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg whitespace-nowrap">0952-27-0060</span>
+                    <Phone size={14} className="sm:w-4 sm:h-4 lg:w-4 lg:h-4 text-gray-900" />
+                    <span className="font-bold text-[10px] sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg whitespace-nowrap text-gray-900">0952-27-0060</span>
                   </a>
-                  <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-xs xl:text-sm text-gray-600 whitespace-nowrap">受付時間: 9:00〜19:00</span>
+                  <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-xs xl:text-sm text-gray-700 whitespace-nowrap">受付時間: 9:00〜19:00</span>
                 </div>
 
                 {/* お問い合わせボタン（PC表示のみ） */}
                 <a 
                   href="#contact"
                   onClick={(e) => handleNavClick(e, '#contact')}
-                  className="hidden sm:flex items-center gap-0.5 sm:gap-1.5 bg-kacchau text-gray-900 px-1.5 py-0.5 sm:px-3 sm:py-1.5 lg:px-3 lg:py-1.5 xl:px-4 xl:py-2 rounded-full hover:bg-kacchau-dark transition-colors border border-kacchau sm:border-2 text-[8px] sm:text-xs md:text-sm lg:text-sm xl:text-base font-semibold whitespace-nowrap"
+                  className="hidden sm:flex items-center gap-0.5 sm:gap-1.5 bg-white text-gray-900 px-1.5 py-0.5 sm:px-3 sm:py-1.5 lg:px-3 lg:py-1.5 xl:px-4 xl:py-2 rounded-full hover:bg-gray-100 transition-colors border border-gray-300 sm:border-2 text-[8px] sm:text-xs md:text-sm lg:text-sm xl:text-base font-semibold whitespace-nowrap shadow-md"
                 >
                   <Mail size={10} className="sm:w-3.5 sm:h-3.5 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" />
                   <span>お問い合わせ</span>
@@ -87,7 +87,7 @@ export default function Header() {
               {/* メニューボタン（スマホ表示のみ・絶対配置で右端固定） */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="sm:hidden absolute right-2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                className="sm:hidden absolute right-2 p-2 hover:bg-kacchau-dark rounded-lg transition-colors"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -95,7 +95,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* 2. ナビゲーション（PC表示のみ） */}
+        {/* 2. ナビゲーション（PC表示のみ） - 背景色は白色のまま */}
         <nav className="bg-white border-b border-gray-200">
           <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
             {/* Desktop Navigation */}

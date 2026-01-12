@@ -9,14 +9,14 @@ export default function Home() {
       {/* Hero Section - 黄色グラデーション */}
       <section className="bg-gradient-to-r from-[#FFC107] to-[#FFD54F] text-gray-900 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          {/* カッチャウロゴ画像 */}
+          {/* カッチャウロゴ画像 - ヘッダーと同じサイズ */}
           <div className="flex items-center justify-center mb-6">
             <Image 
               src="/logo_kacchau.png" 
               alt="カッチャウ" 
-              width={300}
-              height={300}
-              className="object-contain w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64"
+              width={500}
+              height={500}
+              className="object-contain w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-64 lg:h-64 xl:w-80 xl:h-80 2xl:w-96 2xl:h-96"
               priority
             />
           </div>

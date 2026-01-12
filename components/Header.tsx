@@ -23,8 +23,8 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） */}
-        <div className="bg-white text-gray-900 py-2 sm:py-2 lg:py-2 px-2 sm:px-4 lg:px-8 border-b overflow-hidden">
+        {/* 1. テキスト部分（上） - パディングを縮小 */}
+        <div className="bg-white text-gray-900 py-1 sm:py-1 lg:py-1 px-2 sm:px-4 lg:px-8 border-b overflow-hidden">
           <div className="max-w-[1600px] mx-auto">
             {/* スマホ: 中央寄せ、PC: 中央寄せ */}
             <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
@@ -35,7 +35,7 @@ export default function Header() {
                   alt="カッチャウロゴ" 
                   width={500}
                   height={500}
-                  className="object-contain w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-64 lg:h-64 xl:w-80 xl:h-80 2xl:w-96 2xl:h-96"
+                  className="object-contain w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-48 lg:h-48 xl:w-56 xl:h-56 2xl:w-64 2xl:h-64"
                   priority
                 />
                 {/* スマホ・PC共通: 横並び */}
@@ -85,7 +85,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* 2. ナビゲーション（PC表示のみ） */}
+        {/* 2. ナビゲーション（PC表示のみ） - パディングを縮小 */}
         <nav className="bg-white border-b">
           <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
             {/* Desktop Navigation */}
@@ -94,7 +94,7 @@ export default function Header() {
                 <li key={item.href} className="flex-1">
                   <Link
                     href={item.href}
-                    className="block py-2 lg:py-3 xl:py-4 px-2 lg:px-3 xl:px-4 text-center text-xs lg:text-sm xl:text-base text-gray-700 hover:bg-gray-50 hover:text-kacchau border-b-3 border-transparent hover:border-kacchau transition-all duration-200"
+                    className="block py-1.5 lg:py-2 xl:py-2.5 px-2 lg:px-3 xl:px-4 text-center text-xs lg:text-sm xl:text-base text-gray-700 hover:bg-gray-50 hover:text-kacchau border-b-3 border-transparent hover:border-kacchau transition-all duration-200"
                   >
                     {item.label}
                   </Link>

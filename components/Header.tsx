@@ -133,16 +133,17 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* 背景画像部分 - 画像全体を表示 */}
+      {/* 背景画像部分 - 画像を引き延ばして余白をなくす */}
       <div className="w-full bg-gray-100">
         <div className="max-w-[1920px] mx-auto">
           <div 
-            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] bg-contain bg-center bg-no-repeat"
+            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: 'url(/shop_picture.jpg)' }}
           >
           </div>
         </div>
       </div>
+
 
       {/* スマホ表示のみ: 下部固定の連絡先バー */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50">

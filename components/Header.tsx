@@ -23,8 +23,8 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） */}
-        <div className="bg-white text-gray-900 py-1.5 sm:py-3 lg:py-4 px-1.5 sm:px-4 lg:px-8 border-b overflow-hidden">
+        {/* 1. テキスト部分（上） - パディングを縮小 */}
+        <div className="bg-white text-gray-900 py-1 sm:py-2 lg:py-2 px-1.5 sm:px-4 lg:px-8 border-b overflow-hidden">
           <div className="max-w-[1600px] mx-auto">
             {/* スマホ: 左右に広げる、PC: 中央寄せ */}
             <div className="flex flex-row flex-nowrap justify-between sm:justify-center items-center gap-1 sm:gap-3 lg:gap-6 xl:gap-8">
@@ -78,7 +78,7 @@ export default function Header() {
         <nav className="bg-white border-b">
           <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
             {/* Mobile Menu Button */}
-            <div className="md:hidden flex justify-end py-3">
+            <div className="md:hidden flex justify-end py-2">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -93,7 +93,7 @@ export default function Header() {
                 <li key={item.href} className="flex-1">
                   <Link
                     href={item.href}
-                    className="block py-3 lg:py-4 xl:py-5 px-2 lg:px-3 xl:px-4 text-center text-xs lg:text-sm xl:text-base text-gray-700 hover:bg-gray-50 hover:text-kacchau border-b-3 border-transparent hover:border-kacchau transition-all duration-200"
+                    className="block py-2 lg:py-3 xl:py-4 px-2 lg:px-3 xl:px-4 text-center text-xs lg:text-sm xl:text-base text-gray-700 hover:bg-gray-50 hover:text-kacchau border-b-3 border-transparent hover:border-kacchau transition-all duration-200"
                   >
                     {item.label}
                   </Link>

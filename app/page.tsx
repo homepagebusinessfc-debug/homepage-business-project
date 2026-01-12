@@ -122,13 +122,18 @@ export default function Home() {
               </div>
             </a>
 
-            {/* 店舗一覧 */}
+            {/* 店舗一覧 - 写真を追加 */}
             <a 
               href="#shop"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
-              <div className="h-40 bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center text-6xl">
-                🏪
+              <div className="h-40 relative">
+                <Image 
+                  src="/shop_list.png" 
+                  alt="店舗一覧" 
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="p-6 text-center">
                 <h3 className="text-xl font-bold mb-2">店舗一覧</h3>

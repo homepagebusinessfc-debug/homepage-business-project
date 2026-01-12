@@ -9,23 +9,32 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { href: '/cars', label: '新車・中古車' },
-    { href: '/search', label: 'クルマを探す' },
-    { href: '/sell', label: 'クルマを売る' },
-    { href: '/shop', label: '店舗一覧' },
-    { href: '/about', label: 'カッチャウについて' },
-    { href: '/rental', label: 'レンタカー' },
-    { href: '/question', label: 'よくある質問' },
-    { href: '/contact', label: 'お問い合わせ' },
+    { href: '#cars', label: '新車・中古車' },
+    { href: '#search', label: 'クルマを探す' },
+    { href: '#sell', label: 'クルマを売る' },
+    { href: '#shop', label: '店舗一覧' },
+    { href: '#about', label: 'カッチャウについて' },
+    { href: '#rental', label: 'レンタカー' },
+    { href: '#question', label: 'よくある質問' },
+    { href: '#contact', label: 'お問い合わせ' },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
+    }
+  };
 
   return (
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - パディングを縮小 */}
-        <div className="bg-white text-gray-900 py-1 sm:py-1 lg:py-1 px-2 sm:px-4 lg:px-8 border-b overflow-hidden">
-          <div className="max-w-[1600px] mx-auto">
+        {/* 1. テキスト部分（上） - 高さを90pxに固定 */}
+        <div className="bg-white text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b overflow-hidden flex items-center">
+          <div className="max-w-[1600px] mx-auto w-full">
             {/* スマホ: 中央寄せ、PC: 中央寄せ */}
             <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
               {/* 左側: ロゴとテキスト */}
@@ -35,16 +44,16 @@ export default function Header() {
                   alt="カッチャウロゴ" 
                   width={500}
                   height={500}
-                  className="object-contain w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-48 lg:h-48 xl:w-56 xl:h-56 2xl:w-64 2xl:h-64"
+                  className="object-contain w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-20 lg:h-20 xl:w-20 xl:h-20 2xl:w-20 2xl:h-20"
                   priority
                 />
                 {/* スマホ・PC共通: 横並び */}
                 <div className="flex flex-row items-center gap-1 sm:gap-2">
-                  <span className="text-xs sm:text-sm md:text-base lg:text-xl xl:text-2xl 2xl:text-3xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
+                  <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
                     カッチャウ佐賀南3号店
                   </span>
                   {/* 車買取専門バッジ - 右側に配置 */}
-                  <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-3 lg:py-1.5 border border-white sm:border-2 lg:border-3 bg-red-600 text-white font-bold text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg rounded shadow-lg whitespace-nowrap">
+                  <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[9px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
                     車買取専門
                   </div>
                 </div>
@@ -53,25 +62,26 @@ export default function Header() {
               {/* 右側: PC表示のみ連絡先情報、スマホはメニューボタン（絶対配置） */}
               <div className="hidden sm:flex flex-row flex-nowrap items-center gap-0.5 sm:gap-2 lg:gap-3 xl:gap-4 shrink-0">
                 {/* PC表示のみ */}
-                <span className="hidden 2xl:inline text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap">お気軽にお問い合わせ下さい</span>
+                <span className="hidden 2xl:inline text-xs sm:text-sm md:text-base lg:text-base whitespace-nowrap">お気軽にお問い合わせ下さい</span>
                 
                 {/* 電話番号と受付時間（PC表示のみ） */}
                 <div className="hidden sm:flex flex-col items-center">
                   <a href="tel:0952-27-0060" className="flex items-center gap-1 hover:opacity-90 transition-opacity">
-                    <Phone size={14} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
-                    <span className="font-bold text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl whitespace-nowrap">0952-27-0060</span>
+                    <Phone size={14} className="sm:w-4 sm:h-4 lg:w-4 lg:h-4" />
+                    <span className="font-bold text-[10px] sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg whitespace-nowrap">0952-27-0060</span>
                   </a>
-                  <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base text-gray-600 whitespace-nowrap">受付時間: 9:00〜19:00</span>
+                  <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-xs xl:text-sm text-gray-600 whitespace-nowrap">受付時間: 9:00〜19:00</span>
                 </div>
 
                 {/* お問い合わせボタン（PC表示のみ） */}
-                <Link 
-                  href="/contact" 
-                  className="hidden sm:flex items-center gap-0.5 sm:gap-1.5 bg-kacchau text-gray-900 px-1.5 py-0.5 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 rounded-full hover:bg-kacchau-dark transition-colors border border-kacchau sm:border-2 text-[8px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-semibold whitespace-nowrap"
+                <a 
+                  href="#contact"
+                  onClick={(e) => handleNavClick(e, '#contact')}
+                  className="hidden sm:flex items-center gap-0.5 sm:gap-1.5 bg-kacchau text-gray-900 px-1.5 py-0.5 sm:px-3 sm:py-1.5 lg:px-3 lg:py-1.5 xl:px-4 xl:py-2 rounded-full hover:bg-kacchau-dark transition-colors border border-kacchau sm:border-2 text-[8px] sm:text-xs md:text-sm lg:text-sm xl:text-base font-semibold whitespace-nowrap"
                 >
-                  <Mail size={10} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 xl:w-5 xl:h-5" />
+                  <Mail size={10} className="sm:w-3.5 sm:h-3.5 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4" />
                   <span>お問い合わせ</span>
-                </Link>
+                </a>
               </div>
 
               {/* メニューボタン（スマホ表示のみ・絶対配置で右端固定） */}
@@ -85,19 +95,20 @@ export default function Header() {
           </div>
         </div>
 
-        {/* 2. ナビゲーション（PC表示のみ） - パディングを縮小 */}
+        {/* 2. ナビゲーション（PC表示のみ） */}
         <nav className="bg-white border-b">
           <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-8">
             {/* Desktop Navigation */}
             <ul className="hidden sm:flex justify-center items-center">
               {navItems.map((item) => (
                 <li key={item.href} className="flex-1">
-                  <Link
+                  <a
                     href={item.href}
-                    className="block py-1.5 lg:py-2 xl:py-2.5 px-2 lg:px-3 xl:px-4 text-center text-xs lg:text-sm xl:text-base text-gray-700 hover:bg-gray-50 hover:text-kacchau border-b-3 border-transparent hover:border-kacchau transition-all duration-200"
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="block py-1.5 lg:py-2 xl:py-2.5 px-2 lg:px-3 xl:px-4 text-center text-xs lg:text-sm xl:text-base text-gray-700 hover:bg-gray-50 hover:text-kacchau border-b-3 border-transparent hover:border-kacchau transition-all duration-200 cursor-pointer"
                   >
                     {item.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -107,13 +118,13 @@ export default function Header() {
               <ul className="sm:hidden py-4 space-y-2">
                 {navItems.map((item) => (
                   <li key={item.href}>
-                    <Link
+                    <a
                       href={item.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-kacchau rounded-lg transition-colors"
+                      onClick={(e) => handleNavClick(e, item.href)}
+                      className="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-kacchau rounded-lg transition-colors cursor-pointer"
                     >
                       {item.label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -149,13 +160,14 @@ export default function Header() {
           <span className="text-[9px] text-gray-500 mb-2">受付時間: 9:00〜19:00</span>
           
           {/* お問い合わせボタン */}
-          <Link 
-            href="/contact" 
-            className="flex items-center gap-1.5 bg-kacchau text-gray-900 px-6 py-2 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau text-sm font-semibold w-full justify-center"
+          <a 
+            href="#contact"
+            onClick={(e) => handleNavClick(e, '#contact')}
+            className="flex items-center gap-1.5 bg-kacchau text-gray-900 px-6 py-2 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau text-sm font-semibold w-full justify-center cursor-pointer"
           >
             <Mail size={16} />
             <span>お問い合わせ</span>
-          </Link>
+          </a>
         </div>
       </div>
 

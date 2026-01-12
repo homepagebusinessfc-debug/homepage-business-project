@@ -6,8 +6,8 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section - 黄色グラデーション */}
-      <section className="bg-gradient-to-r from-[#FFC107] to-[#FFD54F] text-gray-900 py-20 px-4">
+      {/* Hero Section - 白色背景 */}
+      <section className="bg-white text-gray-900 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           {/* カッチャウロゴ画像 - ヘッダーと同じサイズ */}
           <div className="flex items-center justify-center mb-6">
@@ -20,9 +20,12 @@ export default function Home() {
               priority
             />
           </div>
-          <p className="text-xl md:text-2xl">
-            車を買いたい・売りたい そんな時はカッチャウにおまかせください！
-          </p>
+          {/* テキスト部分 - 白色背景 */}
+          <div className="bg-white px-6 py-4 rounded-lg inline-block">
+            <p className="text-xl md:text-2xl">
+              車を買いたい・売りたい そんな時はカッチャウにおまかせください！
+            </p>
+          </div>
         </div>
       </section>
 

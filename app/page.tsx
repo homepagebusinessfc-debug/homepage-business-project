@@ -9,9 +9,17 @@ export default function Home() {
       {/* Hero Section - 黄色グラデーション */}
       <section className="bg-gradient-to-r from-[#FFC107] to-[#FFD54F] text-gray-900 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            カッチャウ
-          </h1>
+          {/* カッチャウロゴ画像 */}
+          <div className="flex items-center justify-center mb-6">
+            <Image 
+              src="/logo_kacchau.png" 
+              alt="カッチャウ" 
+              width={300}
+              height={300}
+              className="object-contain w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64"
+              priority
+            />
+          </div>
           <p className="text-xl md:text-2xl">
             車を買いたい・売りたい そんな時はカッチャウにおまかせください！
           </p>

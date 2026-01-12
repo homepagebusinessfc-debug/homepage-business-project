@@ -24,10 +24,10 @@ export default function Header() {
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
         {/* 1. テキスト部分（上） */}
-        <div className="bg-white text-gray-900 py-1.5 sm:py-3 lg:py-4 px-1 sm:px-4 lg:px-8 border-b overflow-hidden">
+        <div className="bg-white text-gray-900 py-1.5 sm:py-3 lg:py-4 px-1.5 sm:px-4 lg:px-8 border-b overflow-hidden">
           <div className="max-w-[1600px] mx-auto">
-            {/* 一行表示・改行なし */}
-            <div className="flex flex-row flex-nowrap justify-center items-center gap-0.5 sm:gap-3 lg:gap-6 xl:gap-8">
+            {/* スマホ: 左右に広げる、PC: 中央寄せ */}
+            <div className="flex flex-row flex-nowrap justify-between sm:justify-center items-center gap-1 sm:gap-3 lg:gap-6 xl:gap-8">
               {/* 左側: ロゴとテキスト */}
               <Link href="/" className="flex items-center gap-0.5 sm:gap-2 lg:gap-3 hover:opacity-90 transition-opacity shrink-0">
                 <Image 

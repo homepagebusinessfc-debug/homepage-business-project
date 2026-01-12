@@ -32,8 +32,11 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - 背景色をtext-kacchauと同じ色に */}
-        <div className="bg-kacchau text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center">
+        {/* 1. テキスト部分（上） - 背景色を#FFD600に変更 */}
+        <div 
+          className="text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center"
+          style={{ backgroundColor: '#FFD600' }}
+        >
           <div className="max-w-[1600px] mx-auto w-full">
             {/* スマホ: 中央寄せ、PC: 中央寄せ */}
             <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
@@ -87,7 +90,10 @@ export default function Header() {
               {/* メニューボタン（スマホ表示のみ・絶対配置で右端固定） */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="sm:hidden absolute right-2 p-2 hover:bg-kacchau-dark rounded-lg transition-colors"
+                className="sm:hidden absolute right-2 p-2 rounded-lg transition-colors"
+                style={{ backgroundColor: 'rgba(255, 214, 0, 0.3)' }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 214, 0, 0.5)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 214, 0, 0.3)'}
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>

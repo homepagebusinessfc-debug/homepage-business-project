@@ -114,32 +114,18 @@ pages:
   only:
     - main
 
-# GitHubへの同期ジョブ（修正版）
+# GitHubへの同期ジョブ（シンプル版）
 sync_to_github:
   stage: sync
   image: alpine/git:latest
   only:
     - main
-  before_script:
-    - echo "===== Preparing GitHub sync ====="
-    - |
-      if [ -z "$GITHUB_TOKEN" ]; then
-        echo "Error: GITHUB_TOKEN is not set"
-        exit 1
-      fi
-    - |
-      if [ -z "$GITHUB_REPO" ]; then
-        echo "Error: GITHUB_REPO is not set"
-        exit 1
-      fi
   script:
     - echo "===== Syncing to GitHub ====="
-    - git config --global user.name "${GITLAB_USER_NAME:-GitLab CI}"
-    - git config --global user.email "${GITLAB_USER_EMAIL:-ci@gitlab.com}"
-    - git fetch --unshallow || git fetch --all
+    - git config --global user.name "GitLab CI"
+    - git config --global user.email "ci@gitlab.com"
+    - git fetch --all
     - git remote add github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git || git remote set-url github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git
     - git push github HEAD:main --force
-    - echo "Successfully synced to GitHub"
-  after_script:
-    - git remote remove github || true
+    - echo "✅ Successfully synced to GitHub"
   when: on_success

@@ -114,12 +114,17 @@ pages:
   only:
     - main
 
-# GitHubへの同期ジョブ（シンプル版）
+# GitHubへの同期ジョブ（修正版 - alpine:latest + git インストール）
 sync_to_github:
   stage: sync
-  image: alpine/git:latest
+  image: alpine:latest
   only:
     - main
+  before_script:
+    - echo "===== Installing Git ====="
+    - apk add --no-cache git
+    - echo "===== Git installed successfully ====="
+    - git --version
   script:
     - echo "===== Syncing to GitHub ====="
     - git config --global user.name "GitLab CI"

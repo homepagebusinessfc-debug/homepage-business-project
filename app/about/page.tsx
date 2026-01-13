@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
 
 export default function AboutPage() {
@@ -20,6 +21,16 @@ export default function AboutPage() {
           <h1 className="text-4xl font-bold text-red-600 mb-8 pb-4 border-b-4 border-red-600">
             カッチャウについて
           </h1>
+
+          {/* ロゴ画像セクション - 背景色 #FFD600 */}
+          <div className="relative h-64 mb-8 rounded-lg overflow-hidden" style={{ backgroundColor: '#FFD600' }}>
+            <Image 
+              src="/logo_kacchau.png" 
+              alt="カッチャウロゴ" 
+              fill
+              className="object-contain p-4"
+            />
+          </div>
 
           <div className="space-y-8">
             <p className="text-xl text-gray-700 leading-relaxed">

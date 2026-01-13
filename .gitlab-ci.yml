@@ -2,14 +2,12 @@ image: node:20
 
 stages:
   - verify
-  - convert      # 🆕 色変換ステージを追加
+  - convert
   - build
   - deploy
-  - sync         # 🆕 GitHub同期ステージを追加
+  - sync
 
 variables:
-   # NODE_ENV=production は ビルド後のみ に使うのでコメントアウト
-   # NODE_ENV: production
   npm_config_cache: "$CI_PROJECT_DIR/.npm"
 
 cache:
@@ -39,7 +37,7 @@ verify:
     - main
     - develop
 
-# 🆕 色の一括変換ステージ
+# 色の一括変換ステージ
 convert-colors:
   stage: convert
   before_script:
@@ -73,7 +71,7 @@ convert-colors:
 build:
   stage: build
   dependencies:
-    - convert-colors  # 🆕 色変換の成果物を使用
+    - convert-colors
   before_script:
     - echo "Node version:" $(node --version)
     - echo "NPM version:" $(npm --version)
@@ -86,9 +84,6 @@ build:
         npm install --prefer-offline --no-audit
       fi
     - npm run build
-    # GitLab Pages は SSR をサポートしないため、必ず next export を使う必要があるが、Next.js 15では、を実行すると自動的にエクスポートも行われるので不要
-    # - npm run export
-    # - mv out public
   artifacts:
     paths:
       - out/
@@ -104,7 +99,6 @@ pages:
   script:
     - echo "===== Deploying to GitLab Pages ====="
     - mkdir -p public
-    # ↓ 修正: out/フォルダが存在するか確認してからコピー
     - |
       if [ -d "out" ]; then
         cp -r out/* public/
@@ -120,7 +114,7 @@ pages:
   only:
     - main
 
-# 🆕 GitHubへの同期ジョブ
+# GitHubへの同期ジョブ（修正版）
 sync_to_github:
   stage: sync
   image: alpine/git:latest
@@ -128,34 +122,24 @@ sync_to_github:
     - main
   before_script:
     - echo "===== Preparing GitHub sync ====="
-    # トークンが設定されているか確認
     - |
       if [ -z "$GITHUB_TOKEN" ]; then
-        echo "❌ Error: GITHUB_TOKEN is not set"
+        echo "Error: GITHUB_TOKEN is not set"
         exit 1
       fi
     - |
       if [ -z "$GITHUB_REPO" ]; then
-        echo "❌ Error: GITHUB_REPO is not set"
+        echo "Error: GITHUB_REPO is not set"
         exit 1
       fi
   script:
     - echo "===== Syncing to GitHub ====="
-    # Gitの設定
     - git config --global user.name "${GITLAB_USER_NAME:-GitLab CI}"
     - git config --global user.email "${GITLAB_USER_EMAIL:-ci@gitlab.com}"
-    
-    # 全てのブランチとタグを取得
     - git fetch --unshallow || git fetch --all
-    
-    # GitHubリモートを追加（既に存在する場合はURLを更新）
-    - git remote add github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git 2>/dev/null || git remote set-url github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git
-    
-    # mainブランチをGitHubにプッシュ
+    - git remote add github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git || git remote set-url github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git
     - git push github HEAD:main --force
-    
-    - echo "✅ Successfully synced to GitHub"
+    - echo "Successfully synced to GitHub"
   after_script:
-    # セキュリティのためリモートを削除
-    - git remote remove github 2>/dev/null || true
-  when: on_success  # 前のステージ（deploy）が成功した場合のみ実行
+    - git remote remove github || true
+  when: on_success

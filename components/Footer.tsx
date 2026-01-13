@@ -56,7 +56,7 @@ export default function Footer() {
 
       {/* コピーライト */}
       <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-        <p>&copy; 2024 カッチャウ佐賀南3号店. All rights reserved.</p>
+        <p>&copy; 2026 カッチャウ佐賀南3号店. All rights reserved.</p>
       </div>
     </footer>
   );

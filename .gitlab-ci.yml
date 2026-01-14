@@ -1,5 +1,3 @@
-image: node:20
-
 stages:
   - verify
   - convert
@@ -19,46 +17,36 @@ cache:
     - node_modules/
     - .next/cache/
 
-# ファイル構造を確認
+# 1. verify
 verify:
   stage: verify
   script:
     - echo "===== Verifying project structure ====="
-    - ls -la
+    - Get-ChildItem -Force
     - echo "===== Checking components directory ====="
-    - ls -la components/ || echo "components directory not found!"
+    - if (Test-Path "components") { Get-ChildItem components } else { echo "components directory not found!" }
     - echo "===== Checking app directory ====="
-    - ls -la app/
+    - Get-ChildItem app
     - echo "===== Checking tsconfig.json ====="
-    - cat tsconfig.json || echo "tsconfig.json not found!"
+    - if (Test-Path "tsconfig.json") { Get-Content tsconfig.json } else { echo "tsconfig.json not found!" }
     - echo "===== Checking package.json ====="
-    - cat package.json
+    - Get-Content package.json
   only:
     - main
     - develop
 
-# 色の一括変換ステージ
+# 2. convert-colors
 convert-colors:
   stage: convert
-  before_script:
-    - echo "Node version:" $(node --version)
-    - echo "NPM version:" $(npm --version)
   script:
+    - echo "Node version:"
+    - node --version
+    - echo "NPM version:"
+    - npm --version
     - echo "===== Installing dependencies ====="
-    - |
-      if [ -f package-lock.json ]; then
-        npm ci --prefer-offline --no-audit
-      else
-        npm install --prefer-offline --no-audit
-      fi
-    - echo "===== Converting colors from red to yellow ====="
-    - |
-      if [ -f scripts/convert-colors.js ]; then
-        npm run convert-colors
-      else
-        echo "⚠️  Warning: scripts/convert-colors.js not found, skipping color conversion"
-      fi
-    - echo "===== Color conversion completed ====="
+    - if (Test-Path "package-lock.json") { npm ci } else { npm install }
+    - echo "===== Converting colors ====="
+    - if (Test-Path "scripts/convert-colors.js") { npm run convert-colors } else { echo "Warning: convert-colors.js not found" }
   artifacts:
     paths:
       - app/
@@ -68,21 +56,14 @@ convert-colors:
     - main
     - develop
 
+# 3. build
 build:
   stage: build
   dependencies:
     - convert-colors
-  before_script:
-    - echo "Node version:" $(node --version)
-    - echo "NPM version:" $(npm --version)
   script:
     - echo "===== Starting build process ====="
-    - |
-      if [ -f package-lock.json ]; then
-        npm ci --prefer-offline --no-audit
-      else
-        npm install --prefer-offline --no-audit
-      fi
+    - if (Test-Path "package-lock.json") { npm ci } else { npm install }
     - npm run build
   artifacts:
     paths:
@@ -92,45 +73,39 @@ build:
     - main
     - develop
 
+# 4. deploy (GitLab Pages)
 pages:
   stage: deploy
   dependencies:
     - build
   script:
     - echo "===== Deploying to GitLab Pages ====="
-    - mkdir -p public
-    - |
-      if [ -d "out" ]; then
-        cp -r out/* public/
-      else
-        echo "エラー: out/フォルダが見つかりません"
-        echo "利用可能なフォルダ:"
-        ls -la
+    - New-Item -ItemType Directory -Force -Path public
+    - if (Test-Path "out") {
+        Copy-Item "out/*" "public" -Recurse -Force
+      } else {
+        echo "out folder not found"
+        Get-ChildItem
         exit 1
-      fi
+      }
   artifacts:
     paths:
       - public
   only:
     - main
 
-# GitHubへの同期ジョブ（修正版 - alpine:latest + git インストール）
+# 5. sync_to_github
 sync_to_github:
   stage: sync
-  image: alpine:latest
   only:
     - main
-  before_script:
-    - echo "===== Installing Git ====="
-    - apk add --no-cache git
-    - echo "===== Git installed successfully ====="
-    - git --version
   script:
     - echo "===== Syncing to GitHub ====="
     - git config --global user.name "GitLab CI"
     - git config --global user.email "ci@gitlab.com"
     - git fetch --all
-    - git remote add github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git || git remote set-url github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git
+    - git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git `
+        -ErrorAction SilentlyContinue
+    - git remote set-url github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
     - git push github HEAD:main --force
-    - echo "✅ Successfully synced to GitHub"
-  when: on_success
+    - echo "Successfully synced to GitHub"

@@ -1,3 +1,5 @@
+# Windows PowerShell用の.gitlab-ci.yml
+
 stages:
   - verify
   - convert
@@ -17,36 +19,50 @@ cache:
     - node_modules/
     - .next/cache/
 
-# 1. verify
+# ファイル構造を確認
 verify:
   stage: verify
+  tags:
+    - windows  # ← Windowsタグを指定
   script:
-    - echo "===== Verifying project structure ====="
-    - Get-ChildItem -Force
-    - echo "===== Checking components directory ====="
-    - if (Test-Path "components") { Get-ChildItem components } else { echo "components directory not found!" }
-    - echo "===== Checking app directory ====="
+    - Write-Host "===== Verifying project structure ====="
+    - Get-ChildItem
+    - Write-Host "===== Checking components directory ====="
+    - if (Test-Path components) { Get-ChildItem components } else { Write-Host "components directory not found!" }
+    - Write-Host "===== Checking app directory ====="
     - Get-ChildItem app
-    - echo "===== Checking tsconfig.json ====="
-    - if (Test-Path "tsconfig.json") { Get-Content tsconfig.json } else { echo "tsconfig.json not found!" }
-    - echo "===== Checking package.json ====="
+    - Write-Host "===== Checking tsconfig.json ====="
+    - if (Test-Path tsconfig.json) { Get-Content tsconfig.json } else { Write-Host "tsconfig.json not found!" }
+    - Write-Host "===== Checking package.json ====="
     - Get-Content package.json
   only:
     - main
     - develop
 
-# 2. convert-colors
+# 色の一括変換ステージ
 convert-colors:
   stage: convert
+  tags:
+    - windows
+  before_script:
+    - Write-Host "Node version:" (node --version)
+    - Write-Host "NPM version:" (npm --version)
   script:
-    - echo "Node version:"
-    - node --version
-    - echo "NPM version:"
-    - npm --version
-    - echo "===== Installing dependencies ====="
-    - if (Test-Path "package-lock.json") { npm ci } else { npm install }
-    - echo "===== Converting colors ====="
-    - if (Test-Path "scripts/convert-colors.js") { npm run convert-colors } else { echo "Warning: convert-colors.js not found" }
+    - Write-Host "===== Installing dependencies ====="
+    - |
+      if (Test-Path package-lock.json) {
+        npm ci --prefer-offline --no-audit
+      } else {
+        npm install --prefer-offline --no-audit
+      }
+    - Write-Host "===== Converting colors from red to yellow ====="
+    - |
+      if (Test-Path scripts/convert-colors.js) {
+        npm run convert-colors
+      } else {
+        Write-Host "⚠️  Warning: scripts/convert-colors.js not found, skipping color conversion"
+      }
+    - Write-Host "===== Color conversion completed ====="
   artifacts:
     paths:
       - app/
@@ -56,14 +72,24 @@ convert-colors:
     - main
     - develop
 
-# 3. build
+# ビルド
 build:
   stage: build
+  tags:
+    - windows
   dependencies:
     - convert-colors
+  before_script:
+    - Write-Host "Node version:" (node --version)
+    - Write-Host "NPM version:" (npm --version)
   script:
-    - echo "===== Starting build process ====="
-    - if (Test-Path "package-lock.json") { npm ci } else { npm install }
+    - Write-Host "===== Starting build process ====="
+    - |
+      if (Test-Path package-lock.json) {
+        npm ci --prefer-offline --no-audit
+      } else {
+        npm install --prefer-offline --no-audit
+      }
     - npm run build
   artifacts:
     paths:
@@ -73,18 +99,25 @@ build:
     - main
     - develop
 
-# 4. deploy (GitLab Pages)
+# GitLab Pagesへのデプロイ
 pages:
   stage: deploy
+  tags:
+    - windows
   dependencies:
     - build
   script:
-    - echo "===== Deploying to GitLab Pages ====="
-    - New-Item -ItemType Directory -Force -Path public
-    - if (Test-Path "out") {
-        Copy-Item "out/*" "public" -Recurse -Force
+    - Write-Host "===== Deploying to GitLab Pages ====="
+    - |
+      if (-not (Test-Path public)) {
+        New-Item -ItemType Directory -Path public
+      }
+    - |
+      if (Test-Path out) {
+        Copy-Item -Path out/* -Destination public/ -Recurse -Force
       } else {
-        echo "out folder not found"
+        Write-Host "エラー: out/フォルダが見つかりません"
+        Write-Host "利用可能なフォルダ:"
         Get-ChildItem
         exit 1
       }
@@ -94,18 +127,23 @@ pages:
   only:
     - main
 
-# 5. sync_to_github
+# GitHubへの同期
 sync_to_github:
   stage: sync
+  tags:
+    - windows
   only:
     - main
   script:
-    - echo "===== Syncing to GitHub ====="
+    - Write-Host "===== Syncing to GitHub ====="
     - git config --global user.name "GitLab CI"
     - git config --global user.email "ci@gitlab.com"
     - git fetch --all
-    - git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git `
-        -ErrorAction SilentlyContinue
-    - git remote set-url github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
+    - |
+      git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git 2>$null
+      if ($LASTEXITCODE -ne 0) {
+        git remote set-url github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
+      }
     - git push github HEAD:main --force
-    - echo "Successfully synced to GitHub"
+    - Write-Host "✅ Successfully synced to GitHub"
+  when: on_success

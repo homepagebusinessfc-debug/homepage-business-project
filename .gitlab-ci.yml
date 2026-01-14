@@ -8,14 +8,14 @@ stages:
   - sync
 
 variables:
-  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+  npm_config_cache: "C:\\npm-cache"  # 短いパスに変更
 
 cache:
   key:
     files:
       - package-lock.json
   paths:
-    - .npm
+    - C:\\npm-cache
     - node_modules/
     - .next/cache/
 
@@ -23,7 +23,9 @@ cache:
 verify:
   stage: verify
   tags:
-    - windows  # ← Windowsタグを指定
+    - windows
+  before_script:
+    - git config --global core.longPaths true  # ← 追加
   script:
     - Write-Host "===== Verifying project structure ====="
     - Get-ChildItem
@@ -45,6 +47,8 @@ convert-colors:
   tags:
     - windows
   before_script:
+    - git config --global core.longPaths true  # ← 追加
+    - npm cache clean --force  # ← 追加
     - Write-Host "Node version:" (node --version)
     - Write-Host "NPM version:" (npm --version)
   script:
@@ -80,6 +84,8 @@ build:
   dependencies:
     - convert-colors
   before_script:
+    - git config --global core.longPaths true  # ← 追加
+    - npm cache clean --force  # ← 追加
     - Write-Host "Node version:" (node --version)
     - Write-Host "NPM version:" (npm --version)
   script:
@@ -106,6 +112,8 @@ pages:
     - windows
   dependencies:
     - build
+  before_script:
+    - git config --global core.longPaths true  # ← 追加
   script:
     - Write-Host "===== Deploying to GitLab Pages ====="
     - |
@@ -134,6 +142,8 @@ sync_to_github:
     - windows
   only:
     - main
+  before_script:
+    - git config --global core.longPaths true  # ← 追加
   script:
     - Write-Host "===== Syncing to GitHub ====="
     - git config --global user.name "GitLab CI"

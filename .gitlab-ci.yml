@@ -135,7 +135,7 @@ pages:
   only:
     - main
 
-# GitHubへの同期
+# GitHubへの同期（リポジトリ自動作成機能付き）
 sync_to_github:
   stage: sync
   tags:
@@ -143,17 +143,95 @@ sync_to_github:
   only:
     - main
   before_script:
-    - git config --global core.longPaths true  # ← 追加
+    - git config --global core.longPaths true
   script:
     - Write-Host "===== Syncing to GitHub ====="
+    - Write-Host "GitHub Repo: ${env:GITHUB_REPO}"
+    
+    # Git設定
     - git config --global user.name "GitLab CI"
     - git config --global user.email "ci@gitlab.com"
+    
+    # GitHubリポジトリの存在確認
+    - Write-Host "===== Checking if GitHub repository exists ====="
+    - |
+      $repoExists = $false
+      try {
+        $response = Invoke-WebRequest -Uri "https://api.github.com/repos/${env:GITHUB_REPO}" `
+          -Headers @{Authorization = "token ${env:GITHUB_TOKEN}"} `
+          -Method Get `
+          -ErrorAction Stop
+        $repoExists = $true
+        Write-Host "✅ Repository exists on GitHub"
+      } catch {
+        if ($_.Exception.Response.StatusCode -eq 404) {
+          Write-Host "⚠️  Repository does not exist on GitHub"
+          $repoExists = $false
+        } else {
+          Write-Host "❌ Error checking repository: $($_.Exception.Message)"
+          exit 1
+        }
+      }
+    
+    # リポジトリが存在しない場合は作成
+    - |
+      if (-not $repoExists) {
+        Write-Host "===== Creating GitHub repository ====="
+        $repoName = ($env:GITHUB_REPO -split '/')[1]
+        $owner = ($env:GITHUB_REPO -split '/')[0]
+        
+        # リポジトリ作成用のJSONペイロード
+        $body = @{
+          name = $repoName
+          description = "Synced from GitLab"
+          private = $false
+          auto_init = $false
+        } | ConvertTo-Json
+        
+        try {
+          # 個人アカウントの場合
+          $createUrl = "https://api.github.com/user/repos"
+          
+          # Organizationの場合（必要に応じてコメント解除）
+          # $createUrl = "https://api.github.com/orgs/${owner}/repos"
+          
+          $response = Invoke-RestMethod -Uri $createUrl `
+            -Headers @{
+              Authorization = "token ${env:GITHUB_TOKEN}"
+              Accept = "application/vnd.github.v3+json"
+            } `
+            -Method Post `
+            -Body $body `
+            -ContentType "application/json"
+          
+          Write-Host "✅ Repository created successfully: ${env:GITHUB_REPO}"
+          Start-Sleep -Seconds 3  # GitHubがリポジトリを準備するまで待機
+        } catch {
+          Write-Host "❌ Failed to create repository: $($_.Exception.Message)"
+          Write-Host "Response: $($_.ErrorDetails.Message)"
+          exit 1
+        }
+      }
+    
+    # GitHubリモートを追加
+    - Write-Host "===== Adding GitHub remote ====="
     - git fetch --all
     - |
       git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git 2>$null
       if ($LASTEXITCODE -ne 0) {
         git remote set-url github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
       }
-    - git push github HEAD:main --force
-    - Write-Host "✅ Successfully synced to GitHub"
+    
+    # GitHubにプッシュ
+    - Write-Host "===== Pushing to GitHub ====="
+    - |
+      if (-not $repoExists) {
+        # 新規リポジトリの場合は通常のpush
+        git push github HEAD:main
+      } else {
+        # 既存リポジトリの場合は強制push
+        git push github HEAD:main --force
+      }
+    
+    - Write-Host "✅ Successfully synced to GitHub: https://github.com/${env:GITHUB_REPO}"
   when: on_success

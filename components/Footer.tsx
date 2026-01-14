@@ -5,7 +5,6 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        
         {/* 店舗情報 */}
         <div>
           <h3 className="text-xl font-bold mb-4 text-kacchau">店舗情報</h3>

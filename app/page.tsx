@@ -6,11 +6,11 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section - 白色背景 - 縦幅を狭く調整 */}
-      <section className="bg-white text-gray-900 py-8 px-4">
+      {/* Hero Section - 白色背景 - 縦幅をさらに小さく調整 */}
+      <section className="bg-white text-gray-900 py-4 px-4">
         <div className="max-w-4xl mx-auto text-center">
           {/* カッチャウロゴ画像 - スマホ表示時に大きく */}
-          <div className="flex items-center justify-center mb-4">
+          <div className="flex items-center justify-center mb-2">
             <Image 
               src="/logo_kacchau.png" 
               alt="カッチャウ" 
@@ -21,7 +21,7 @@ export default function Home() {
             />
           </div>
           {/* テキスト部分 - 白色背景 */}
-          <div className="bg-white px-6 py-2 rounded-lg inline-block">
+          <div className="bg-white px-6 py-1 rounded-lg inline-block">
             <p className="text-lg md:text-xl">
               車を買いたい・売りたい そんな時はカッチャウにおまかせください！
             </p>
@@ -201,8 +201,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Page Top Button */}
-      <section className="py-12 text-center bg-gray-50">
+      {/* Page Top Button - スマホ表示時は下部固定バーの高さ分のパディングを追加 */}
+      <section className="py-12 pb-32 sm:pb-12 text-center bg-gray-50">
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="px-8 py-4 bg-kacchau text-gray-900 rounded-full font-bold text-lg hover:bg-kacchau-dark transition-colors"

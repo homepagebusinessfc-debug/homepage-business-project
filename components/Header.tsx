@@ -47,16 +47,16 @@ export default function Header() {
                   alt="カッチャウロゴ" 
                   width={350}
                   height={69}
-                  className="object-contain w-[250px] h-[49px] sm:w-[280px] sm:h-[55px] md:w-[300px] md:h-[59px] lg:w-[350px] lg:h-[69px]"
+                  className="object-contain w-[120px] h-[24px] sm:w-[200px] sm:h-[39px] md:w-[250px] md:h-[49px] lg:w-[300px] lg:h-[59px] xl:w-[350px] xl:h-[69px]"
                   priority
                 />
                 {/* スマホ: 縦並び（中央揃え）、PC: 横並び */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-center gap-0.5 sm:gap-2">
-                  <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
+                  <span className="text-[10px] sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
                     カッチャウ佐賀南3号店
                   </span>
                   {/* 車買取専門バッジ - スマホは中央下、PCは右側に配置 */}
-                  <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[9px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
+                  <div className="inline-block px-1 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[8px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
                     車買取専門
                   </div>
                 </div>

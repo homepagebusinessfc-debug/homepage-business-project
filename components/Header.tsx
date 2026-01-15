@@ -175,9 +175,6 @@ export default function Header() {
           </a>
         </div>
       </div>
-
-      {/* スマホ表示のみ: 下部固定バーの高さ分のスペーサー */}
-      <div className="sm:hidden h-32"></div>
     </>
   );
 }

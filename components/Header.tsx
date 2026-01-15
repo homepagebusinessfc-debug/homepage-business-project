@@ -32,37 +32,41 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - スマホ時は高さを小さく */}
+        {/* 1. テキスト部分（上） - スマホ時は左右配置 */}
         <div 
           className="text-gray-900 h-[60px] sm:h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center"
           style={{ backgroundColor: '#FFD600' }}
         >
           <div className="max-w-[1600px] mx-auto w-full">
-            {/* スマホ: 中央寄せ、PC: 中央寄せ */}
-            <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
-              {/* 左側: ロゴとテキスト */}
-              <Link href="/" className="flex items-center gap-1 sm:gap-2 lg:gap-3 hover:opacity-90 transition-opacity shrink-0">
+            {/* スマホ: 左右配置、PC: 中央寄せ */}
+            <div className="flex flex-row flex-nowrap justify-between sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
+              {/* 左側: ロゴ（スマホ時は大きく） */}
+              <Link href="/" className="flex items-center hover:opacity-90 transition-opacity shrink-0">
                 <Image 
                   src="/logo_kacchau.png" 
                   alt="カッチャウロゴ" 
                   width={350}
                   height={69}
-                  className="object-contain w-[80px] h-[16px] sm:w-[200px] sm:h-[39px] md:w-[250px] md:h-[49px] lg:w-[300px] lg:h-[59px] xl:w-[350px] xl:h-[69px]"
+                  className="object-contain w-[110px] h-[22px] sm:w-[200px] sm:h-[39px] md:w-[250px] md:h-[49px] lg:w-[300px] lg:h-[59px] xl:w-[350px] xl:h-[69px]"
                   priority
                 />
-                {/* スマホ: 縦並び（中央揃え）、PC: 横並び */}
-                <div className="flex flex-col sm:flex-row items-center sm:items-center gap-0.5 sm:gap-2">
-                  <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
+              </Link>
+
+              {/* 中央〜右側: テキスト（スマホ時は右寄せ、PC時は中央） */}
+              <div className="flex items-center gap-1 sm:gap-2 lg:gap-3 shrink-0 mr-10 sm:mr-0">
+                {/* スマホ: 縦並び（右揃え）、PC: 横並び */}
+                <div className="flex flex-col sm:flex-row items-end sm:items-center gap-0.5 sm:gap-2">
+                  <span className="text-[10px] sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
                     カッチャウ佐賀南3号店
                   </span>
-                  {/* 車買取専門バッジ - スマホは中央下、PCは右側に配置 */}
-                  <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[9px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
+                  {/* 車買取専門バッジ */}
+                  <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[8px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
                     車買取専門
                   </div>
                 </div>
-              </Link>
+              </div>
 
-              {/* 右側: PC表示のみ連絡先情報、スマホはメニューボタン（絶対配置） */}
+              {/* 右側: PC表示のみ連絡先情報 */}
               <div className="hidden sm:flex flex-row flex-nowrap items-center gap-0.5 sm:gap-2 lg:gap-3 xl:gap-4 shrink-0">
                 {/* PC表示のみ */}
                 <span className="hidden 2xl:inline text-xs sm:text-sm md:text-base lg:text-base whitespace-nowrap text-gray-900">お気軽にお問い合わせ下さい</span>

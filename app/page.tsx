@@ -6,33 +6,33 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section - 白色背景 */}
-      <section className="bg-white text-gray-900 py-20 px-4">
+      {/* Hero Section - 白色背景 - 縦幅を狭く調整 */}
+      <section className="bg-white text-gray-900 py-8 px-4">
         <div className="max-w-4xl mx-auto text-center">
           {/* カッチャウロゴ画像 */}
-          <div className="flex items-center justify-center mb-6">
+          <div className="flex items-center justify-center mb-4">
             <Image 
               src="/logo_kacchau.png" 
               alt="カッチャウ" 
               width={500}
               height={500}
-              className="object-contain w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-64 lg:h-64 xl:w-80 xl:h-80 2xl:w-96 2xl:h-96"
+              className="object-contain w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 xl:w-56 xl:h-56"
               priority
             />
           </div>
           {/* テキスト部分 - 白色背景 */}
-          <div className="bg-white px-6 py-4 rounded-lg inline-block">
-            <p className="text-xl md:text-2xl">
+          <div className="bg-white px-6 py-2 rounded-lg inline-block">
+            <p className="text-lg md:text-xl">
               車を買いたい・売りたい そんな時はカッチャウにおまかせください！
             </p>
           </div>
         </div>
       </section>
 
-      {/* Introduction */}
-      <section className="py-16 px-4 bg-white">
+      {/* Introduction - 縦幅を狭く調整 */}
+      <section className="py-8 px-4 bg-white">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
+          <p className="text-base md:text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
             カッチャウは全国ネットワークで買い取った車両情報を店頭公開するので種類が豊富。<br />
             買い取りでは、あなたの愛車を細かく査定し、データだけにとらわれないカッチャウオリジナルの高価査定を実現します。
           </p>

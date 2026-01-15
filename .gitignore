@@ -39,3 +39,6 @@ next-env.d.ts
 git rm -r --cached public/
 # フォルダ全体を除外
 public/
+
+# Netlify CMS
+public/uploads/

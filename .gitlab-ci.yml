@@ -134,7 +134,7 @@ pages:
   only:
     - main
 
-# GitHubへの同期（リポジトリ自動作成機能付き）
+# GitHubへの同期（プライベートリポジトリ）
 sync_to_github:
   stage: sync
   tags:
@@ -161,7 +161,9 @@ sync_to_github:
           -Method Get `
           -ErrorAction Stop
         $repoExists = $true
+        $repoInfo = $response.Content | ConvertFrom-Json
         Write-Host "✅ Repository exists on GitHub"
+        Write-Host "Current visibility: $(if ($repoInfo.private) { 'Private' } else { 'Public' })"
       } catch {
         if ($_.Exception.Response.StatusCode -eq 404) {
           Write-Host "⚠️  Repository does not exist on GitHub"
@@ -172,16 +174,16 @@ sync_to_github:
         }
       }
       
-      # リポジトリが存在しない場合は作成
+      # リポジトリが存在しない場合は作成（プライベート）
       if (-not $repoExists) {
-        Write-Host "===== Creating GitHub repository ====="
+        Write-Host "===== Creating GitHub repository (Private) ====="
         $repoName = ($env:GITHUB_REPO -split '/')[1]
         $owner = ($env:GITHUB_REPO -split '/')[0]
         
         $body = @{
           name = $repoName
           description = "Synced from GitLab"
-          private = $false
+          private = $true
           auto_init = $false
         } | ConvertTo-Json
         
@@ -197,12 +199,38 @@ sync_to_github:
             -Body $body `
             -ContentType "application/json"
           
-          Write-Host "✅ Repository created successfully: ${env:GITHUB_REPO}"
+          Write-Host "✅ Private repository created successfully: ${env:GITHUB_REPO}"
           Start-Sleep -Seconds 3
         } catch {
           Write-Host "❌ Failed to create repository: $($_.Exception.Message)"
           Write-Host "Response: $($_.ErrorDetails.Message)"
           exit 1
+        }
+      } else {
+        # 既存のリポジトリがパブリックの場合、プライベートに変更
+        if (-not $repoInfo.private) {
+          Write-Host "===== Converting repository to Private ====="
+          $updateBody = @{
+            private = $true
+          } | ConvertTo-Json
+          
+          try {
+            $response = Invoke-RestMethod -Uri "https://api.github.com/repos/${env:GITHUB_REPO}" `
+              -Headers @{
+                Authorization = "token ${env:GITHUB_TOKEN}"
+                Accept = "application/vnd.github.v3+json"
+              } `
+              -Method Patch `
+              -Body $updateBody `
+              -ContentType "application/json"
+            
+            Write-Host "✅ Repository converted to Private"
+          } catch {
+            Write-Host "⚠️  Warning: Failed to convert repository to private: $($_.Exception.Message)"
+            Write-Host "Continuing with sync..."
+          }
+        } else {
+          Write-Host "✅ Repository is already Private"
         }
       }
       
@@ -222,5 +250,5 @@ sync_to_github:
         git push github HEAD:main --force
       }
       
-      Write-Host "✅ Successfully synced to GitHub: https://github.com/${env:GITHUB_REPO}"
+      Write-Host "✅ Successfully synced to GitHub (Private): https://github.com/${env:GITHUB_REPO}"
   when: on_success

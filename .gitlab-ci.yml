@@ -145,36 +145,42 @@ sync_to_github:
     - git config --global core.longPaths true
   script:
     - |
+      $ProgressPreference = 'SilentlyContinue'
+      
       Write-Host "===== Syncing to GitHub ====="
       Write-Host "GitHub Repo: ${env:GITHUB_REPO}"
       
-      # Git設定
       git config --global user.name "GitLab CI"
       git config --global user.email "ci@gitlab.com"
       
-      # GitHubリポジトリの存在確認
       Write-Host "===== Checking if GitHub repository exists ====="
       $repoExists = $false
+      $repoInfo = $null
+      
       try {
-        $response = Invoke-WebRequest -Uri "https://api.github.com/repos/${env:GITHUB_REPO}" `
+        $response = Invoke-WebRequest `
+          -Uri "https://api.github.com/repos/${env:GITHUB_REPO}" `
           -Headers @{Authorization = "token ${env:GITHUB_TOKEN}"} `
           -Method Get `
+          -UseBasicParsing `
           -ErrorAction Stop
+        
         $repoExists = $true
         $repoInfo = $response.Content | ConvertFrom-Json
         Write-Host "✅ Repository exists on GitHub"
         Write-Host "Current visibility: $(if ($repoInfo.private) { 'Private' } else { 'Public' })"
       } catch {
-        if ($_.Exception.Response.StatusCode -eq 404) {
-          Write-Host "⚠️  Repository does not exist on GitHub"
+        $statusCode = $_.Exception.Response.StatusCode.value__
+        if ($statusCode -eq 404) {
+          Write-Host "⚠️  Repository does not exist on GitHub (404)"
           $repoExists = $false
         } else {
-          Write-Host "❌ Error checking repository: $($_.Exception.Message)"
+          Write-Host "❌ Error checking repository (Status: $statusCode)"
+          Write-Host "Error: $($_.Exception.Message)"
           exit 1
         }
       }
       
-      # リポジトリが存在しない場合は作成（プライベート）
       if (-not $repoExists) {
         Write-Host "===== Creating GitHub repository (Private) ====="
         $repoName = ($env:GITHUB_REPO -split '/')[1]
@@ -190,43 +196,50 @@ sync_to_github:
         try {
           $createUrl = "https://api.github.com/user/repos"
           
-          $response = Invoke-RestMethod -Uri $createUrl `
+          $response = Invoke-RestMethod `
+            -Uri $createUrl `
             -Headers @{
               Authorization = "token ${env:GITHUB_TOKEN}"
               Accept = "application/vnd.github.v3+json"
             } `
             -Method Post `
             -Body $body `
-            -ContentType "application/json"
+            -ContentType "application/json" `
+            -ErrorAction Stop
           
           Write-Host "✅ Private repository created successfully: ${env:GITHUB_REPO}"
           Start-Sleep -Seconds 3
         } catch {
-          Write-Host "❌ Failed to create repository: $($_.Exception.Message)"
-          Write-Host "Response: $($_.ErrorDetails.Message)"
+          Write-Host "❌ Failed to create repository"
+          Write-Host "Error: $($_.Exception.Message)"
+          if ($_.ErrorDetails.Message) {
+            Write-Host "Details: $($_.ErrorDetails.Message)"
+          }
           exit 1
         }
       } else {
-        # 既存のリポジトリがパブリックの場合、プライベートに変更
-        if (-not $repoInfo.private) {
+        if ($repoInfo -and -not $repoInfo.private) {
           Write-Host "===== Converting repository to Private ====="
           $updateBody = @{
             private = $true
           } | ConvertTo-Json
           
           try {
-            $response = Invoke-RestMethod -Uri "https://api.github.com/repos/${env:GITHUB_REPO}" `
+            $response = Invoke-RestMethod `
+              -Uri "https://api.github.com/repos/${env:GITHUB_REPO}" `
               -Headers @{
                 Authorization = "token ${env:GITHUB_TOKEN}"
                 Accept = "application/vnd.github.v3+json"
               } `
               -Method Patch `
               -Body $updateBody `
-              -ContentType "application/json"
+              -ContentType "application/json" `
+              -ErrorAction Stop
             
             Write-Host "✅ Repository converted to Private"
           } catch {
-            Write-Host "⚠️  Warning: Failed to convert repository to private: $($_.Exception.Message)"
+            Write-Host "⚠️  Warning: Failed to convert repository to private"
+            Write-Host "Error: $($_.Exception.Message)"
             Write-Host "Continuing with sync..."
           }
         } else {
@@ -234,7 +247,6 @@ sync_to_github:
         }
       }
       
-      # GitHubリモートを追加
       Write-Host "===== Adding GitHub remote ====="
       git fetch --all
       git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git 2>$null
@@ -242,7 +254,6 @@ sync_to_github:
         git remote set-url github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
       }
       
-      # GitHubにプッシュ
       Write-Host "===== Pushing to GitHub ====="
       if (-not $repoExists) {
         git push github HEAD:main

@@ -8,7 +8,7 @@ stages:
   - sync
 
 variables:
-  npm_config_cache: "C:\\npm-cache"  # 短いパスに変更
+  npm_config_cache: "C:\\npm-cache"
 
 cache:
   key:
@@ -25,18 +25,19 @@ verify:
   tags:
     - windows
   before_script:
-    - git config --global core.longPaths true  # ← 追加
+    - git config --global core.longPaths true
   script:
-    - Write-Host "===== Verifying project structure ====="
-    - Get-ChildItem
-    - Write-Host "===== Checking components directory ====="
-    - if (Test-Path components) { Get-ChildItem components } else { Write-Host "components directory not found!" }
-    - Write-Host "===== Checking app directory ====="
-    - Get-ChildItem app
-    - Write-Host "===== Checking tsconfig.json ====="
-    - if (Test-Path tsconfig.json) { Get-Content tsconfig.json } else { Write-Host "tsconfig.json not found!" }
-    - Write-Host "===== Checking package.json ====="
-    - Get-Content package.json
+    - |
+      Write-Host "===== Verifying project structure ====="
+      Get-ChildItem
+      Write-Host "===== Checking components directory ====="
+      if (Test-Path components) { Get-ChildItem components } else { Write-Host "components directory not found!" }
+      Write-Host "===== Checking app directory ====="
+      Get-ChildItem app
+      Write-Host "===== Checking tsconfig.json ====="
+      if (Test-Path tsconfig.json) { Get-Content tsconfig.json } else { Write-Host "tsconfig.json not found!" }
+      Write-Host "===== Checking package.json ====="
+      Get-Content package.json
   only:
     - main
     - develop
@@ -47,26 +48,25 @@ convert-colors:
   tags:
     - windows
   before_script:
-    - git config --global core.longPaths true  # ← 追加
-    - npm cache clean --force  # ← 追加
-    - Write-Host "Node version:" (node --version)
-    - Write-Host "NPM version:" (npm --version)
+    - git config --global core.longPaths true
+    - npm cache clean --force
   script:
-    - Write-Host "===== Installing dependencies ====="
     - |
+      Write-Host "Node version:" (node --version)
+      Write-Host "NPM version:" (npm --version)
+      Write-Host "===== Installing dependencies ====="
       if (Test-Path package-lock.json) {
         npm ci --prefer-offline --no-audit
       } else {
         npm install --prefer-offline --no-audit
       }
-    - Write-Host "===== Converting colors from red to yellow ====="
-    - |
+      Write-Host "===== Converting colors from red to yellow ====="
       if (Test-Path scripts/convert-colors.js) {
         npm run convert-colors
       } else {
         Write-Host "⚠️  Warning: scripts/convert-colors.js not found, skipping color conversion"
       }
-    - Write-Host "===== Color conversion completed ====="
+      Write-Host "===== Color conversion completed ====="
   artifacts:
     paths:
       - app/
@@ -84,19 +84,19 @@ build:
   dependencies:
     - convert-colors
   before_script:
-    - git config --global core.longPaths true  # ← 追加
-    - npm cache clean --force  # ← 追加
-    - Write-Host "Node version:" (node --version)
-    - Write-Host "NPM version:" (npm --version)
+    - git config --global core.longPaths true
+    - npm cache clean --force
   script:
-    - Write-Host "===== Starting build process ====="
     - |
+      Write-Host "Node version:" (node --version)
+      Write-Host "NPM version:" (npm --version)
+      Write-Host "===== Starting build process ====="
       if (Test-Path package-lock.json) {
         npm ci --prefer-offline --no-audit
       } else {
         npm install --prefer-offline --no-audit
       }
-    - npm run build
+      npm run build
   artifacts:
     paths:
       - out/
@@ -113,14 +113,13 @@ pages:
   dependencies:
     - build
   before_script:
-    - git config --global core.longPaths true  # ← 追加
+    - git config --global core.longPaths true
   script:
-    - Write-Host "===== Deploying to GitLab Pages ====="
     - |
+      Write-Host "===== Deploying to GitLab Pages ====="
       if (-not (Test-Path public)) {
         New-Item -ItemType Directory -Path public
       }
-    - |
       if (Test-Path out) {
         Copy-Item -Path out/* -Destination public/ -Recurse -Force
       } else {
@@ -145,16 +144,16 @@ sync_to_github:
   before_script:
     - git config --global core.longPaths true
   script:
-    - Write-Host "===== Syncing to GitHub ====="
-    - Write-Host "GitHub Repo: ${env:GITHUB_REPO}"
-    
-    # Git設定
-    - git config --global user.name "GitLab CI"
-    - git config --global user.email "ci@gitlab.com"
-    
-    # GitHubリポジトリの存在確認
-    - Write-Host "===== Checking if GitHub repository exists ====="
     - |
+      Write-Host "===== Syncing to GitHub ====="
+      Write-Host "GitHub Repo: ${env:GITHUB_REPO}"
+      
+      # Git設定
+      git config --global user.name "GitLab CI"
+      git config --global user.email "ci@gitlab.com"
+      
+      # GitHubリポジトリの存在確認
+      Write-Host "===== Checking if GitHub repository exists ====="
       $repoExists = $false
       try {
         $response = Invoke-WebRequest -Uri "https://api.github.com/repos/${env:GITHUB_REPO}" `
@@ -172,15 +171,13 @@ sync_to_github:
           exit 1
         }
       }
-    
-    # リポジトリが存在しない場合は作成
-    - |
+      
+      # リポジトリが存在しない場合は作成
       if (-not $repoExists) {
         Write-Host "===== Creating GitHub repository ====="
         $repoName = ($env:GITHUB_REPO -split '/')[1]
         $owner = ($env:GITHUB_REPO -split '/')[0]
         
-        # リポジトリ作成用のJSONペイロード
         $body = @{
           name = $repoName
           description = "Synced from GitLab"
@@ -189,11 +186,7 @@ sync_to_github:
         } | ConvertTo-Json
         
         try {
-          # 個人アカウントの場合
           $createUrl = "https://api.github.com/user/repos"
-          
-          # Organizationの場合（必要に応じてコメント解除）
-          # $createUrl = "https://api.github.com/orgs/${owner}/repos"
           
           $response = Invoke-RestMethod -Uri $createUrl `
             -Headers @{
@@ -205,33 +198,29 @@ sync_to_github:
             -ContentType "application/json"
           
           Write-Host "✅ Repository created successfully: ${env:GITHUB_REPO}"
-          Start-Sleep -Seconds 3  # GitHubがリポジトリを準備するまで待機
+          Start-Sleep -Seconds 3
         } catch {
           Write-Host "❌ Failed to create repository: $($_.Exception.Message)"
           Write-Host "Response: $($_.ErrorDetails.Message)"
           exit 1
         }
       }
-    
-    # GitHubリモートを追加
-    - Write-Host "===== Adding GitHub remote ====="
-    - git fetch --all
-    - |
+      
+      # GitHubリモートを追加
+      Write-Host "===== Adding GitHub remote ====="
+      git fetch --all
       git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git 2>$null
       if ($LASTEXITCODE -ne 0) {
         git remote set-url github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
       }
-    
-    # GitHubにプッシュ
-    - Write-Host "===== Pushing to GitHub ====="
-    - |
+      
+      # GitHubにプッシュ
+      Write-Host "===== Pushing to GitHub ====="
       if (-not $repoExists) {
-        # 新規リポジトリの場合は通常のpush
         git push github HEAD:main
       } else {
-        # 既存リポジトリの場合は強制push
         git push github HEAD:main --force
       }
-    
-    - Write-Host "✅ Successfully synced to GitHub: https://github.com/${env:GITHUB_REPO}"
+      
+      Write-Host "✅ Successfully synced to GitHub: https://github.com/${env:GITHUB_REPO}"
   when: on_success

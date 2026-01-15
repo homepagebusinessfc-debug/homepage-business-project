@@ -32,9 +32,9 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - 背景色を#FFD600に変更 */}
+        {/* 1. テキスト部分（上） - スマホ時は高さを小さく */}
         <div 
-          className="text-gray-900 h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center"
+          className="text-gray-900 h-[60px] sm:h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center"
           style={{ backgroundColor: '#FFD600' }}
         >
           <div className="max-w-[1600px] mx-auto w-full">
@@ -47,16 +47,16 @@ export default function Header() {
                   alt="カッチャウロゴ" 
                   width={350}
                   height={69}
-                  className="object-contain w-[120px] h-[24px] sm:w-[200px] sm:h-[39px] md:w-[250px] md:h-[49px] lg:w-[300px] lg:h-[59px] xl:w-[350px] xl:h-[69px]"
+                  className="object-contain w-[80px] h-[16px] sm:w-[200px] sm:h-[39px] md:w-[250px] md:h-[49px] lg:w-[300px] lg:h-[59px] xl:w-[350px] xl:h-[69px]"
                   priority
                 />
                 {/* スマホ: 縦並び（中央揃え）、PC: 横並び */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-center gap-0.5 sm:gap-2">
-                  <span className="text-[10px] sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
+                  <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
                     カッチャウ佐賀南3号店
                   </span>
                   {/* 車買取専門バッジ - スマホは中央下、PCは右側に配置 */}
-                  <div className="inline-block px-1 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[8px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
+                  <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[9px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
                     車買取専門
                   </div>
                 </div>
@@ -90,12 +90,12 @@ export default function Header() {
               {/* メニューボタン（スマホ表示のみ・絶対配置で右端固定） */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="sm:hidden absolute right-2 p-2 rounded-lg transition-colors"
+                className="sm:hidden absolute right-2 p-1.5 rounded-lg transition-colors"
                 style={{ backgroundColor: 'rgba(255, 214, 0, 0.3)' }}
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 214, 0, 0.5)'}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 214, 0, 0.3)'}
               >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>

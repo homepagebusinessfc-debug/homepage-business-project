@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
     "lint": "next lint",
     "convert-colors": "node scripts/convert-colors.js",
     "convert-colors-replace": "npx replace-in-file --configFile=.replace-config.js",

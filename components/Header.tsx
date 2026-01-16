@@ -45,13 +45,13 @@ export default function Header() {
 
               {/* 中央: テキスト（スマホ時は左から75%の位置、PC時は通常配置） */}
               <div className="absolute left-3/4 -translate-x-3/4 sm:static sm:translate-x-0 flex items-center gap-1 sm:gap-2 lg:gap-3 shrink-0">
-                {/* スマホ: 縦並び（中央揃え）、PC: 横並び */}
-                <div className="flex flex-col sm:flex-row items-center sm:items-center gap-0.5 sm:gap-2">
-                  <span className="text-[10px] sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
+                {/* スマホ・PC共に横並び */}
+                <div className="flex flex-row items-center gap-1 sm:gap-2">
+                  <span className="text-[9px] sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
                     カッチャウ佐賀南3号店
                   </span>
                   {/* 車買取専門バッジ */}
-                  <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[8px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
+                  <div className="inline-block px-1.5 py-0.5 sm:px-2 sm:py-1 lg:px-2 lg:py-1 border border-white sm:border-2 lg:border-2 bg-red-600 text-white font-bold text-[7px] sm:text-xs md:text-sm lg:text-sm xl:text-base rounded shadow-lg whitespace-nowrap">
                     車買取専門
                   </div>
                 </div>

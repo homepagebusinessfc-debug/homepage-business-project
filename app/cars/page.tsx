@@ -13,6 +13,7 @@ export default function CarsPage() {
       id: 1,
       name: 'ＢＭＷ 318ｉ ツーリング', 
       image: '/car1.jpg',
+      type: 'used', // 新車: 'new', 中古車: 'used'
       year: '2015年',
       mileage: '8.5万km',
       repairHistory: '修復歴なし',
@@ -30,6 +31,7 @@ export default function CarsPage() {
       id: 2,
       name: 'ダイハツ タント', 
       image: '/car2.jpg',
+      type: 'used',
       year: '2020年',
       mileage: '3.2万km',
       repairHistory: '修復歴なし',
@@ -47,6 +49,7 @@ export default function CarsPage() {
       id: 3,
       name: 'ダイハツ タント カスタムＸ', 
       image: '/car3.jpg',
+      type: 'new', // 新車の例
       year: '2019年',
       mileage: '4.5万km',
       repairHistory: '修復歴なし',
@@ -133,9 +136,17 @@ export default function CarsPage() {
                   fill
                   className="object-cover"
                 />
-                {/* 保証バッジ */}
+                {/* 保証バッジ（左上） */}
                 <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
                   {car.warranty}
+                </div>
+                {/* 新車/中古車バッジ（右上） */}
+                <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-sm font-bold shadow-lg ${
+                  car.type === 'new' 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-orange-500 text-white'
+                }`}>
+                  {car.type === 'new' ? '新車' : '中古車'}
                 </div>
               </div>
 

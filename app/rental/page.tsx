@@ -11,7 +11,7 @@ export default function RentalPage() {
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm">
           <Link href="/" className="text-red-600 hover:underline">ホーム</Link>
           <ChevronRight size={16} className="text-gray-400" />
-          <span className="text-gray-600">レンタカー</span>
+          <span className="text-gray-600">レンタカー（代車サービス）</span>
         </div>
       </div>
 

@@ -14,7 +14,7 @@ export default function Header() {
     { href: '/sell', label: 'クルマを売る' },
     { href: '/shop', label: '店舗一覧' },
     { href: '/about', label: 'カッチャウについて' },
-    { href: '/rental', label: 'レンタカー' },
+    { href: '/rental', label: 'レンタカー（代車サービス）' },
     { href: '/question', label: 'よくある質問' },
     { href: '/contact', label: 'お問い合わせ' },
   ];

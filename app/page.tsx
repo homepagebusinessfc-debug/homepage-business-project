@@ -168,13 +168,13 @@ export default function Home() {
               <div className="h-40 relative">
                 <Image 
                   src="/rental_car.jpg" 
-                  alt="レンタカー" 
+                  alt="レンタカー（代車サービス）" 
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-2">レンタカー</h3>
+                <h3 className="text-xl font-bold mb-2">レンタカー（代車サービス）</h3>  {/* 修正 */}
                 <p className="text-gray-600">レンタカーもカッチャウで。</p>
               </div>
             </Link>

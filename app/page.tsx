@@ -49,17 +49,146 @@ export default function Home() {
           {/* 車のカード */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: 'ＢＭＷ 318ｉ ツーリング', price: '18万円' },
-              { name: 'ダイハツ タント', price: '118万円' },
-              { name: 'ダイハツ タント カスタムＸ', price: '113万円' }
-            ].map((car, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-48 bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-400 text-lg">{car.name}</span>
+              {
+                id: 1,
+                name: 'ＢＭＷ 318ｉ ツーリング',
+                image: '/car1.jpg',
+                type: 'used',
+                year: '2015年',
+                mileage: '8.5万km',
+                repairHistory: '修復歴なし',
+                transmission: 'AT',
+                drive: '2WD',
+                displacement: '2000cc',
+                color: 'ホワイトパール',
+                warranty: '保証付き',
+                totalPrice: 18,
+                vehiclePrice: 15,
+                fees: 3
+              },
+              {
+                id: 2,
+                name: 'ダイハツ タント',
+                image: '/car2.jpg',
+                type: 'used',
+                year: '2020年',
+                mileage: '3.2万km',
+                repairHistory: '修復歴なし',
+                transmission: 'CVT',
+                drive: 'FF',
+                displacement: '660cc',
+                color: 'パールホワイト',
+                warranty: '保証付き',
+                totalPrice: 118,
+                vehiclePrice: 110,
+                fees: 8
+              },
+              {
+                id: 3,
+                name: 'ダイハツ タント カスタムＸ',
+                image: '/car3.jpg',
+                type: 'new',
+                year: '2019年',
+                mileage: '4.5万km',
+                repairHistory: '修復歴なし',
+                transmission: 'CVT',
+                drive: 'FF',
+                displacement: '660cc',
+                color: 'ブラックマイカ',
+                warranty: '保証付き',
+                totalPrice: 113,
+                vehiclePrice: 105,
+                fees: 8
+              }
+            ].map((car) => (
+              <div key={car.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                {/* 車両画像 */}
+                <div className="h-56 relative bg-gray-200">
+                  <Image 
+                    src={car.image} 
+                    alt={car.name} 
+                    fill
+                    className="object-cover"
+                  />
+                  {/* 保証バッジ（左上） */}
+                  <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                    {car.warranty}
+                  </div>
+                  {/* 新車/中古車バッジ（右上） */}
+                  <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-sm font-bold shadow-lg ${
+                    car.type === 'new' 
+                      ? 'bg-blue-600 text-white' 
+                      : 'bg-orange-500 text-white'
+                  }`}>
+                    {car.type === 'new' ? '新車' : '中古車'}
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{car.name}</h3>
-                  <p className="text-2xl font-bold text-kacchau">本体価格：{car.price}</p>
+
+                {/* 車両情報 */}
+                <div className="p-5">
+                  {/* 車名 */}
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 min-h-[3rem]">
+                    {car.name}
+                  </h3>
+
+                  {/* 価格情報 */}
+                  <div className="mb-4 pb-4 border-b-2 border-gray-200">
+                    <div className="text-3xl font-bold text-kacchau mb-2">
+                      支払総額 {car.totalPrice}万円
+                      <span className="text-sm text-gray-600 ml-1 font-normal">(税込)</span>
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      車両本体 <span className="font-semibold text-gray-900">{car.vehiclePrice}万円</span> / 諸費用 <span className="font-semibold text-gray-900">{car.fees}万円</span>
+                    </div>
+                  </div>
+
+                  {/* 詳細情報 */}
+                  <div className="space-y-2 text-sm mb-6">
+                    <div className="flex justify-between py-1.5">
+                      <span className="text-gray-600">年式</span>
+                      <span className="font-semibold text-gray-900">{car.year}</span>
+                    </div>
+                    <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
+                      <span className="text-gray-600">走行距離</span>
+                      <span className="font-semibold text-gray-900">{car.mileage}</span>
+                    </div>
+                    <div className="flex justify-between py-1.5">
+                      <span className="text-gray-600">修復歴</span>
+                      <span className="font-semibold text-green-600">{car.repairHistory}</span>
+                    </div>
+                    <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
+                      <span className="text-gray-600">シフト</span>
+                      <span className="font-semibold text-gray-900">{car.transmission}</span>
+                    </div>
+                    <div className="flex justify-between py-1.5">
+                      <span className="text-gray-600">駆動</span>
+                      <span className="font-semibold text-gray-900">{car.drive}</span>
+                    </div>
+                    <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
+                      <span className="text-gray-600">排気量</span>
+                      <span className="font-semibold text-gray-900">{car.displacement}</span>
+                    </div>
+                    <div className="flex justify-between py-1.5">
+                      <span className="text-gray-600">系統色</span>
+                      <span className="font-semibold text-gray-900">{car.color}</span>
+                    </div>
+                  </div>
+
+                  {/* ボタン */}
+                  <div className="space-y-2">
+                    <Link
+                      href={`/cars/${car.id}`}
+                      className="block w-full text-center px-6 py-3 bg-kacchau text-gray-900 rounded-full font-bold hover:bg-kacchau-dark transition-colors shadow-md"
+                    >
+                      詳細を見る
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className="block w-full text-center px-6 py-3 bg-white text-kacchau border-2 border-kacchau rounded-full font-bold hover:bg-gray-50 transition-colors"
+                    >
+                      お問い合わせ
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -124,7 +253,7 @@ export default function Home() {
 
             {/* 店舗一覧 */}
             <Link 
-              href="/shops"
+              href="/shop"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
               <div className="h-40 relative">
@@ -174,14 +303,14 @@ export default function Home() {
                 />
               </div>
               <div className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-2">レンタカー（代車サービス）</h3>  {/* 修正 */}
+                <h3 className="text-xl font-bold mb-2">レンタカー（代車サービス）</h3>
                 <p className="text-gray-600">レンタカーもカッチャウで。</p>
               </div>
             </Link>
 
             {/* よくある質問 */}
             <Link 
-              href="/faq"
+              href="/question"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
               <div className="h-40 relative">

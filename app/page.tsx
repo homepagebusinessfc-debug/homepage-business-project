@@ -85,8 +85,8 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* クルマを探す */}
-            <a 
-              href="#search"
+            <Link 
+              href="/search"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
               <div className="h-40 relative">
@@ -101,11 +101,11 @@ export default function Home() {
                 <h3 className="text-xl font-bold mb-2">クルマを探す</h3>
                 <p className="text-gray-600">直販システムで、いい車をお安く販売します。</p>
               </div>
-            </a>
+            </Link>
 
             {/* クルマを売る */}
-            <a 
-              href="#sell"
+            <Link 
+              href="/sell"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
               <div className="h-40 relative">
@@ -120,11 +120,11 @@ export default function Home() {
                 <h3 className="text-xl font-bold mb-2">クルマを売る</h3>
                 <p className="text-gray-600">カッチャウの高額査定システムで高価買い取りが可能です。</p>
               </div>
-            </a>
+            </Link>
 
             {/* 店舗一覧 */}
-            <a 
-              href="#shop"
+            <Link 
+              href="/shops"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
               <div className="h-40 relative">
@@ -139,11 +139,11 @@ export default function Home() {
                 <h3 className="text-xl font-bold mb-2">店舗一覧</h3>
                 <p className="text-gray-600">カッチャウは佐賀県内5店舗展開中です。</p>
               </div>
-            </a>
+            </Link>
 
             {/* カッチャウについて - ロゴ画像をさらに大きく表示 */}
-            <a 
-              href="#about"
+            <Link 
+              href="/about"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
               <div className="h-40 relative bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center">
@@ -158,11 +158,11 @@ export default function Home() {
                 <h3 className="text-xl font-bold mb-2">カッチャウについて</h3>
                 <p className="text-gray-600">車を売る・買うならカッチャウのワケ。</p>
               </div>
-            </a>
+            </Link>
 
             {/* レンタカー - 画像を追加 */}
-            <a 
-              href="#rental"
+            <Link 
+              href="/rental"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
               <div className="h-40 relative">
@@ -177,11 +177,11 @@ export default function Home() {
                 <h3 className="text-xl font-bold mb-2">レンタカー</h3>
                 <p className="text-gray-600">レンタカーもカッチャウで。</p>
               </div>
-            </a>
+            </Link>
 
             {/* よくある質問 */}
-            <a 
-              href="#question"
+            <Link 
+              href="/faq"
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
             >
               <div className="h-40 relative">
@@ -196,7 +196,7 @@ export default function Home() {
                 <h3 className="text-xl font-bold mb-2">よくある質問</h3>
                 <p className="text-gray-600">車を売る・買うに関する質問です。</p>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

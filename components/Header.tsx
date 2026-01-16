@@ -23,14 +23,14 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - スマホ時はロゴを左端に配置 */}
+        {/* 1. テキスト部分（上） - スマホ時はロゴを左、テキストを右に配置 */}
         <div 
           className="text-gray-900 h-[60px] sm:h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center"
           style={{ backgroundColor: '#FFD600' }}
         >
           <div className="max-w-[1600px] mx-auto w-full">
-            {/* スマホ: 左端配置、PC: 中央寄せ */}
-            <div className="flex flex-row flex-nowrap justify-start sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
+            {/* スマホ: 左右配置、PC: 中央寄せ */}
+            <div className="flex flex-row flex-nowrap justify-between sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
               {/* 左側: ロゴ - スマホ時は大きく */}
               <Link href="/" className="flex items-center hover:opacity-90 transition-opacity shrink-0">
                 <Image 
@@ -43,10 +43,10 @@ export default function Header() {
                 />
               </Link>
 
-              {/* 中央: テキスト（スマホ時は縦並び中央揃え、PC時は横並び） */}
-              <div className="flex items-center gap-1 sm:gap-2 lg:gap-3 shrink-0">
-                {/* スマホ: 縦並び（中央揃え）、PC: 横並び */}
-                <div className="flex flex-col sm:flex-row items-center sm:items-center gap-0.5 sm:gap-2">
+              {/* 右側: テキスト（スマホ時は右寄せ、PC時は中央） */}
+              <div className="flex items-center gap-1 sm:gap-2 lg:gap-3 shrink-0 mr-10 sm:mr-0">
+                {/* スマホ: 縦並び（右揃え）、PC: 横並び */}
+                <div className="flex flex-col sm:flex-row items-end sm:items-center gap-0.5 sm:gap-2">
                   <span className="text-[10px] sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>
                     カッチャウ佐賀南3号店
                   </span>

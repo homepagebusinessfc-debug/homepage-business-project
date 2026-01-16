@@ -115,7 +115,7 @@ export default function ContactPage() {
                     <option value="sell">車の売却について</option>
                     <option value="oil_change">オイル交換</option>
                     <option value="inspection">車検見積・予約</option>
-                    <option value="rental">レンタカーについて</option>
+                    <option value="rental">レンタカー（代車サービス）について</option>
                     <option value="other">その他</option>
                   </select>
                 </div>

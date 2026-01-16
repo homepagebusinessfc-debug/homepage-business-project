@@ -28,12 +28,12 @@ export default function Footer() {
             <div className="pt-3 border-t border-gray-700">
               <ul className="space-y-2">
                 <li>
-                  <a href="#shop" className="hover:text-kacchau transition-colors">
+                  <a href="/shop" className="hover:text-kacchau transition-colors">
                     店舗一覧
                   </a>
                 </li>
                 <li>
-                  <a href="#about" className="hover:text-kacchau transition-colors">
+                  <a href="/about" className="hover:text-kacchau transition-colors">
                     カッチャウについて
                   </a>
                 </li>
@@ -46,10 +46,10 @@ export default function Footer() {
         <div>
           <h3 className="text-xl font-bold mb-4 text-kacchau">サービス</h3>
           <ul className="space-y-2">
-            <li><a href="#cars" className="hover:text-kacchau transition-colors">新車・中古車</a></li>
-            <li><a href="#search" className="hover:text-kacchau transition-colors">クルマを探す</a></li>
-            <li><a href="#sell" className="hover:text-kacchau transition-colors">クルマを売る</a></li>
-            <li><a href="#rental" className="hover:text-kacchau transition-colors">レンタカー</a></li>
+            <li><a href="/cars" className="hover:text-kacchau transition-colors">新車・中古車</a></li>
+            <li><a href="/search" className="hover:text-kacchau transition-colors">クルマを探す</a></li>
+            <li><a href="/sell" className="hover:text-kacchau transition-colors">クルマを売る</a></li>
+            <li><a href="/rental" className="hover:text-kacchau transition-colors">レンタカー</a></li>
           </ul>
         </div>
 
@@ -57,9 +57,9 @@ export default function Footer() {
         <div>
           <h3 className="text-xl font-bold mb-4 text-kacchau">サポート</h3>
           <ul className="space-y-2">
-            <li><a href="#question" className="hover:text-kacchau transition-colors">よくある質問</a></li>
+            <li><a href="/question" className="hover:text-kacchau transition-colors">よくある質問</a></li>
             <li>
-              <a href="#contact" className="hover:text-kacchau transition-colors flex items-center gap-2">
+              <a href="/contact" className="hover:text-kacchau transition-colors flex items-center gap-2">
                 <Mail size={18} />
                 お問い合わせ
               </a>

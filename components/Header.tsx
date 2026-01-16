@@ -43,8 +43,8 @@ export default function Header() {
                 />
               </Link>
 
-              {/* 中央: テキスト（スマホ時は絶対配置で中央、PC時は通常配置） */}
-              <div className="absolute left-1/2 -translate-x-1/2 sm:static sm:translate-x-0 flex items-center gap-1 sm:gap-2 lg:gap-3 shrink-0">
+              {/* 中央: テキスト（スマホ時は左から75%の位置、PC時は通常配置） */}
+              <div className="absolute left-3/4 -translate-x-3/4 sm:static sm:translate-x-0 flex items-center gap-1 sm:gap-2 lg:gap-3 shrink-0">
                 {/* スマホ: 縦並び（中央揃え）、PC: 横並び */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-center gap-0.5 sm:gap-2">
                   <span className="text-[10px] sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold whitespace-nowrap leading-tight" style={{ color: '#1A237E' }}>

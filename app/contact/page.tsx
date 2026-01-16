@@ -113,6 +113,8 @@ export default function ContactPage() {
                     <option value="">選択してください</option>
                     <option value="purchase">車の購入について</option>
                     <option value="sell">車の売却について</option>
+                    <option value="oil_change">オイル交換</option>
+                    <option value="inspection">車検見積・予約</option>
                     <option value="rental">レンタカーについて</option>
                     <option value="other">その他</option>
                   </select>

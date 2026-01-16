@@ -23,14 +23,14 @@ export default function Header() {
     <>
       {/* ヘッダー部分（固定表示） */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        {/* 1. テキスト部分（上） - スマホ時はロゴを大きく */}
+        {/* 1. テキスト部分（上） - スマホ時はロゴを左端に配置 */}
         <div 
           className="text-gray-900 h-[60px] sm:h-[90px] px-2 sm:px-4 lg:px-8 border-b border-kacchau-dark overflow-hidden flex items-center"
           style={{ backgroundColor: '#FFD600' }}
         >
           <div className="max-w-[1600px] mx-auto w-full">
-            {/* スマホ: 中央寄せでバランス良く、PC: 中央寄せ */}
-            <div className="flex flex-row flex-nowrap justify-center sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
+            {/* スマホ: 左端配置、PC: 中央寄せ */}
+            <div className="flex flex-row flex-nowrap justify-start sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
               {/* 左側: ロゴ - スマホ時は大きく */}
               <Link href="/" className="flex items-center hover:opacity-90 transition-opacity shrink-0">
                 <Image 

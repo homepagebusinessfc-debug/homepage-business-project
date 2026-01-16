@@ -12,10 +12,10 @@ export default function Header() {
     { href: '/cars', label: '新車・中古車' },
     { href: '/search', label: 'クルマを探す' },
     { href: '/sell', label: 'クルマを売る' },
-    { href: '/shops', label: '店舗一覧' },
+    { href: '/shop', label: '店舗一覧' },
     { href: '/about', label: 'カッチャウについて' },
     { href: '/rental', label: 'レンタカー' },
-    { href: '/faq', label: 'よくある質問' },
+    { href: '/question', label: 'よくある質問' },
     { href: '/contact', label: 'お問い合わせ' },
   ];
 

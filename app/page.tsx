@@ -251,6 +251,44 @@ export default function Home() {
               </div>
             </Link>
 
+            {/* 車検見積・予約 */}
+            <Link 
+              href="/inspection"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/inspection.jpg" 
+                  alt="車検見積・予約" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">車検見積・予約</h3>
+                <p className="text-gray-600">車検のお見積もりとご予約を承ります。</p>
+              </div>
+            </Link>
+
+            {/* オイル交換 */}
+            <Link 
+              href="/oil-change"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/oil-change.jpg" 
+                  alt="オイル交換" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">オイル交換</h3>
+                <p className="text-gray-600">定期的なオイル交換で愛車を長持ちさせます。</p>
+              </div>
+            </Link>
+
             {/* 店舗一覧 */}
             <Link 
               href="/shop"

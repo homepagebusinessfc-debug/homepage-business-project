@@ -14,7 +14,7 @@ export default function Header() {
     { href: '/sell', label: 'クルマを売る' },
     { href: '/inspection', label: '車検見積・予約' },
     { href: '/oil-change', label: 'オイル交換' },
-    { href: '/rental', label: 'レンタカー（代車サービス）' },
+    { href: '/rental', label: 'レンタカー（代車）' },
     { href: '/question', label: 'よくある質問' },
     { href: '/contact', label: 'お問い合わせ' },
   ];

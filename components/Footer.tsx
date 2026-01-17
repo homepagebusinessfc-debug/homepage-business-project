@@ -49,7 +49,7 @@ export default function Footer() {
             <li><a href="/cars" className="hover:text-kacchau transition-colors">新車・中古車</a></li>
             <li><a href="/search" className="hover:text-kacchau transition-colors">クルマを探す</a></li>
             <li><a href="/sell" className="hover:text-kacchau transition-colors">クルマを売る</a></li>
-            <li><a href="/rental" className="hover:text-kacchau transition-colors">レンタカー（代車サービス）</a></li>
+            <li><a href="/rental" className="hover:text-kacchau transition-colors">レンタカー（代車）</a></li>
           </ul>
         </div>
 

@@ -11,19 +11,19 @@ export default function RentalPage() {
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm">
           <Link href="/" className="text-red-600 hover:underline">ホーム</Link>
           <ChevronRight size={16} className="text-gray-400" />
-          <span className="text-gray-600">レンタカー（代車サービス）</span>
+          <span className="text-gray-600">レンタカー（代車）</span>
         </div>
       </div>
 
       <div className="max-w-5xl mx-auto py-12 px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
           <h1 className="text-4xl font-bold text-red-600 mb-8 pb-4 border-b-4 border-red-600">
-            レンタカー
+            レンタカー（代車）
           </h1>
 
           <div className="space-y-8">
             <p className="text-xl text-gray-700 leading-relaxed">
-              レンタカーもご用意しております。
+              レンタカー（代車）もご用意しております。
             </p>
 
             {/* 料金情報 */}

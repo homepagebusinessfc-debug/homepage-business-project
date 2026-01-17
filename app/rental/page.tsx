@@ -9,27 +9,39 @@ export default function RentalPage() {
       {/* Breadcrumb */}
       <div className="bg-white py-4 px-4 border-b">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm">
-          <Link href="/" className="text-red-600 hover:underline">ホーム</Link>
+          <Link href="/" className="text-kacchau hover:underline">ホーム</Link>
           <ChevronRight size={16} className="text-gray-400" />
-          <span className="text-gray-600">レンタカー（代車）</span>
+          <span className="text-gray-600">レンタカー（代車サービス）</span>
         </div>
       </div>
 
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-kacchau to-kacchau-dark text-gray-900 py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Car size={48} className="text-gray-900" />
+            <h1 className="text-4xl md:text-5xl font-bold">レンタカー（代車サービス）</h1>
+          </div>
+          <p className="text-lg md:text-xl mb-2">
+            レンタカーもカッチャウで。
+          </p>
+          <p className="text-base md:text-lg">
+            車検や修理の際の代車、急な用事でのレンタカーなど、お気軽にご利用ください。
+          </p>
+        </div>
+      </section>
+
       <div className="max-w-5xl mx-auto py-12 px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
-          <h1 className="text-4xl font-bold text-red-600 mb-8 pb-4 border-b-4 border-red-600">
-            レンタカー（代車）
-          </h1>
-
           <div className="space-y-8">
             <p className="text-xl text-gray-700 leading-relaxed">
               レンタカー（代車）もご用意しております。
             </p>
 
             {/* 料金情報 */}
-            <div className="bg-red-50 border-l-4 border-red-600 p-6">
+            <div className="bg-kacchau-yellow-50 border-l-4 border-kacchau p-6">
               <div className="flex items-center gap-3 mb-4">
-                <DollarSign className="text-red-600" size={32} />
+                <DollarSign className="text-kacchau" size={32} />
                 <h2 className="text-2xl font-bold text-gray-800">料金</h2>
               </div>
               <div className="space-y-2 text-lg text-gray-700">
@@ -93,28 +105,28 @@ export default function RentalPage() {
               </h2>
               <ol className="space-y-4">
                 <li className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold">1</span>
+                  <span className="flex-shrink-0 w-8 h-8 bg-kacchau text-gray-900 rounded-full flex items-center justify-center font-bold">1</span>
                   <div>
                     <h3 className="font-bold text-lg">お電話または店舗でご予約</h3>
                     <p className="text-gray-600">利用日時と車種をお伝えください</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold">2</span>
+                  <span className="flex-shrink-0 w-8 h-8 bg-kacchau text-gray-900 rounded-full flex items-center justify-center font-bold">2</span>
                   <div>
                     <h3 className="font-bold text-lg">ご来店・手続き</h3>
                     <p className="text-gray-600">運転免許証をお持ちください</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold">3</span>
+                  <span className="flex-shrink-0 w-8 h-8 bg-kacchau text-gray-900 rounded-full flex items-center justify-center font-bold">3</span>
                   <div>
                     <h3 className="font-bold text-lg">ご出発</h3>
                     <p className="text-gray-600">安全運転でお楽しみください</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold">4</span>
+                  <span className="flex-shrink-0 w-8 h-8 bg-kacchau text-gray-900 rounded-full flex items-center justify-center font-bold">4</span>
                   <div>
                     <h3 className="font-bold text-lg">ご返却・精算</h3>
                     <p className="text-gray-600">ご利用時間に応じて精算いたします</p>
@@ -128,7 +140,7 @@ export default function RentalPage() {
           <div className="text-center mt-12">
             <Link 
               href="/contact"
-              className="inline-block px-12 py-4 bg-red-600 text-white text-lg font-bold rounded-full hover:bg-red-700 transition-colors shadow-lg"
+              className="inline-block px-12 py-4 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
             >
               ご予約・お問い合わせ
             </Link>

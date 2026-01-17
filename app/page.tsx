@@ -9,18 +9,6 @@ export default function Home() {
       {/* Hero Section - カッチャウカラーのグラデーション背景 */}
       <section className="bg-gradient-to-br from-kacchau to-kacchau-dark text-gray-900 py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          {/* カッチャウロゴ画像 */}
-          <div className="flex items-center justify-center mb-6">
-            <Image 
-              src="/logo_kacchau.png" 
-              alt="カッチャウ" 
-              width={500}
-              height={500}
-              className="object-contain w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64"
-              priority
-            />
-          </div>
-          
           {/* メインメッセージ */}
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
             車を買いたい・売りたい そんな時はカッチャウにおまかせください！

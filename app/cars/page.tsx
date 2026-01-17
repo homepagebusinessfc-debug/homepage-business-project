@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Car } from 'lucide-react';
 import { useState } from 'react';
 
 export default function CarsPage() {
@@ -89,12 +89,24 @@ export default function CarsPage() {
         </div>
       </div>
 
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-kacchau to-kacchau-dark text-gray-900 py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Car size={48} className="text-gray-900" />
+            <h1 className="text-4xl md:text-5xl font-bold">新車・中古車</h1>
+          </div>
+          <p className="text-lg md:text-xl mb-2">
+            豊富な在庫からあなたにぴったりの一台を。
+          </p>
+          <p className="text-base md:text-lg">
+            全店合計100台を超える展示車から、お気に入りの車を見つけましょう。
+          </p>
+        </div>
+      </section>
+
       {/* Main Content */}
       <div className="max-w-7xl mx-auto py-16 px-4">
-        <h1 className="text-4xl font-bold text-center mb-12 text-kacchau">
-          オススメの新車・中古車
-        </h1>
-
         {/* カテゴリーフィルター */}
         <div className="mb-12">
           <div className="flex flex-wrap gap-3 justify-center">

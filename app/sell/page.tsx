@@ -2,8 +2,16 @@
 
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 
 export default function SellPage() {
+  const [images, setImages] = useState<File[]>([]);
+
+  const handleImageUpload = (e: any) => {
+    const files = Array.from(e.target.files);
+    setImages(files as File[]);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
 
@@ -19,65 +27,88 @@ export default function SellPage() {
       <div className="max-w-5xl mx-auto py-12 px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
 
-          {/* Title */}
           <h1 className="text-4xl font-bold text-red-600 mb-8 pb-4 border-b-4 border-red-600">
-            クルマを売る
+            無料査定・クルマを売る
           </h1>
 
           <p className="text-xl text-gray-700 leading-relaxed mb-8">
-            「車を手放したい」「乗り換えを考えている」「車庫に眠っている車がある」など、<br />
-            おクルマの売却をご検討の際は、ぜひカッチャウにお任せください。
+            24時間いつでもオンライン査定を受付中。  
+            おクルマの情報と写真を送るだけで、概算査定額をご案内いたします。
           </p>
 
-          {/* Highlight Box */}
-          <div className="bg-red-50 border-l-4 border-red-600 p-6 mb-10">
-            <p className="text-xl text-gray-800 font-semibold leading-relaxed">
-              カッチャウ独自の査定システムで、あなたの愛車を高価買取いたします。<br />
-              事故車・長距離走行車・古い年式でも大歓迎。まずはお気軽にご相談ください。
-            </p>
+          {/* 査定ステップ */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {[
+              { step: 'STEP 1', text: '車両情報を入力' },
+              { step: 'STEP 2', text: '写真をアップロード' },
+              { step: 'STEP 3', text: '査定結果をご案内' },
+            ].map((s) => (
+              <div key={s.step} className="bg-red-50 p-6 rounded-lg border border-red-200 text-center">
+                <p className="text-red-600 font-bold">{s.step}</p>
+                <p className="text-gray-800 font-semibold mt-2">{s.text}</p>
+              </div>
+            ))}
           </div>
 
-          {/* Features */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-lg border border-red-100">
-              <h3 className="text-xl font-bold text-red-600 mb-3">✓ 高価買取</h3>
-              <p className="text-gray-700">市場データだけに頼らない、独自の査定基準でしっかり評価します。</p>
+          {/* フォーム */}
+          <form className="space-y-6">
+
+            <div>
+              <label className="font-semibold text-gray-700">お名前</label>
+              <input type="text" className="w-full border rounded-lg px-4 py-3 mt-2" />
             </div>
 
-            <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-lg border border-red-100">
-              <h3 className="text-xl font-bold text-red-600 mb-3">✓ 幅広い対応</h3>
-              <p className="text-gray-700">事故車・不動車・古い車でも買取可能です。</p>
+            <div>
+              <label className="font-semibold text-gray-700">メールアドレス</label>
+              <input type="email" className="w-full border rounded-lg px-4 py-3 mt-2" />
             </div>
 
-            <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-lg border border-red-100">
-              <h3 className="text-xl font-bold text-red-600 mb-3">✓ 全国ネットワーク</h3>
-              <p className="text-gray-700">全国の販売網・オークションを活用し、最適な売却先を確保します。</p>
+            <div>
+              <label className="font-semibold text-gray-700">車種・年式</label>
+              <input type="text" className="w-full border rounded-lg px-4 py-3 mt-2" />
             </div>
 
-            <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-lg border border-red-100">
-              <h3 className="text-xl font-bold text-red-600 mb-3">✓ スピード対応</h3>
-              <p className="text-gray-700">査定から売却手続きまでスムーズに対応いたします。</p>
+            <div>
+              <label className="font-semibold text-gray-700">走行距離</label>
+              <input type="text" className="w-full border rounded-lg px-4 py-3 mt-2" />
             </div>
-          </div>
 
-          {/* CTA Buttons */}
-          <div className="text-center mt-12 space-y-4">
-            <Link 
-              href="/contact"
-              className="inline-block px-12 py-4 bg-red-600 text-white text-lg font-bold rounded-full hover:bg-red-700 transition-colors shadow-lg"
+            {/* 写真アップロード */}
+            <div>
+              <label className="font-semibold text-gray-700">車の写真（最大5枚）</label>
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="w-full border rounded-lg px-4 py-3 mt-2"
+              />
+
+              <div className="flex gap-4 mt-4">
+                {images.map((img, i) => (
+                  <div key={i} className="w-24 h-24 border rounded-lg overflow-hidden">
+                    <img
+                      src={URL.createObjectURL(img)}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="font-semibold text-gray-700">ご要望・ご質問</label>
+              <textarea className="w-full border rounded-lg px-4 py-3 mt-2 h-32" />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-4 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 shadow-lg"
             >
-              24時間いつでもオンライン査定申込
-            </Link>
+              無料査定を申し込む
+            </button>
 
-            <div className="text-sm text-gray-600">または</div>
-
-            <Link 
-              href="/shop"
-              className="inline-block px-12 py-4 bg-white text-red-600 text-lg font-bold rounded-full hover:bg-gray-50 transition-colors shadow-lg border-2 border-red-600"
-            >
-              お近くの店舗に相談する
-            </Link>
-          </div>
+          </form>
 
         </div>
       </div>

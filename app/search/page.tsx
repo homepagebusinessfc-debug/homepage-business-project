@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Search } from 'lucide-react';
 import { useState } from 'react';
 
 export default function SearchPage() {
@@ -54,18 +54,30 @@ export default function SearchPage() {
       {/* Breadcrumb */}
       <div className="bg-white py-4 px-4 border-b">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm">
-          <Link href="/" className="text-red-600 hover:underline">ホーム</Link>
+          <Link href="/" className="text-kacchau hover:underline">ホーム</Link>
           <ChevronRight size={16} className="text-gray-400" />
           <span className="text-gray-600">クルマを探す</span>
         </div>
       </div>
 
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-kacchau to-kacchau-dark text-gray-900 py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Search size={48} className="text-gray-900" />
+            <h1 className="text-4xl md:text-5xl font-bold">クルマを探す</h1>
+          </div>
+          <p className="text-lg md:text-xl mb-2">
+            直販システムで、いい車をお安く販売します。
+          </p>
+          <p className="text-base md:text-lg">
+            全店合計100台を超える展示車から、あなたにピッタリの1台を見つけましょう。
+          </p>
+        </div>
+      </section>
+
       <div className="max-w-5xl mx-auto py-12 px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
-          <h1 className="text-4xl font-bold text-red-600 mb-8 pb-4 border-b-4 border-red-600">
-            クルマを探す・買う
-          </h1>
-
           <p className="text-2xl text-gray-700 mb-12 font-semibold">
             あなたが欲しいのは新車？中古車？
           </p>
@@ -86,7 +98,7 @@ export default function SearchPage() {
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 placeholder="例：N-BOX、プリウス、SUV など"
-                className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
               />
             </div>
 
@@ -105,7 +117,7 @@ export default function SearchPage() {
                     }
                     className={`border rounded-lg px-3 py-2 text-sm md:text-base text-center transition ${
                       selectedMaker === m
-                        ? 'bg-red-600 text-white border-red-600'
+                        ? 'bg-kacchau text-gray-900 border-kacchau'
                         : 'bg-white text-gray-800 hover:bg-gray-50'
                     }`}
                   >
@@ -130,7 +142,7 @@ export default function SearchPage() {
                     }
                     className={`border rounded-lg px-3 py-2 text-sm md:text-base text-center transition ${
                       selectedBody === b
-                        ? 'bg-red-600 text-white border-red-600'
+                        ? 'bg-kacchau text-gray-900 border-kacchau'
                         : 'bg-white text-gray-800 hover:bg-gray-50'
                     }`}
                   >
@@ -155,7 +167,7 @@ export default function SearchPage() {
                     }
                     className={`border rounded-lg px-3 py-2 text-sm md:text-base text-center transition ${
                       selectedPrice === p
-                        ? 'bg-red-600 text-white border-red-600'
+                        ? 'bg-kacchau text-gray-900 border-kacchau'
                         : 'bg-white text-gray-800 hover:bg-gray-50'
                     }`}
                   >
@@ -169,7 +181,7 @@ export default function SearchPage() {
               <button
                 type="button"
                 onClick={handleSearch}
-                className="inline-block px-10 py-3 bg-red-600 text-white text-lg font-bold rounded-full hover:bg-red-700 transition-colors shadow-lg"
+                className="inline-block px-10 py-3 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
               >
                 この条件で検索する
               </button>
@@ -197,7 +209,7 @@ export default function SearchPage() {
               全国からあなたにピッタリの1台を一緒に探しましょう。
             </p>
             
-            <div className="bg-red-50 border-l-4 border-red-600 p-6 mt-8">
+            <div className="bg-kacchau-yellow-50 border-l-4 border-kacchau p-6 mt-8">
               <h3 className="text-xl font-bold text-gray-800 mb-3">
                 まずはご希望をお聞かせください！
               </h3>
@@ -213,7 +225,7 @@ export default function SearchPage() {
           <div className="text-center mt-12">
             <Link 
               href="/contact"
-              className="inline-block px-12 py-4 bg-red-600 text-white text-lg font-bold rounded-full hover:bg-red-700 transition-colors shadow-lg"
+              className="inline-block px-12 py-4 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
             >
               お問い合わせはこちら
             </Link>

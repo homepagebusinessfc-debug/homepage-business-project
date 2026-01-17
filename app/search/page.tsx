@@ -17,47 +17,84 @@ export default function SearchPage() {
 
       <div className="max-w-5xl mx-auto py-12 px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
+
+          {/* Title */}
           <h1 className="text-4xl font-bold text-red-600 mb-8 pb-4 border-b-4 border-red-600">
             クルマを探す・買う
           </h1>
 
-          <p className="text-2xl text-gray-700 mb-12 font-semibold">
-            あなたが欲しいのは新車？中古車？
+          <p className="text-xl text-gray-700 mb-10 font-semibold">
+            ご希望の条件から、あなたにピッタリの1台をお探しします。
           </p>
 
-          {/* 新車セクション */}
+          {/* Search Section */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">キーワードで探す</h2>
+            <input
+              type="text"
+              placeholder="例：N-BOX、プリウス、SUV など"
+              className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+          </div>
+
+          {/* Condition Search */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">条件から探す</h2>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-gray-50 p-6 rounded-lg border">
+                <h3 className="text-xl font-semibold mb-3 text-gray-800">価格帯で選ぶ</h3>
+                <ul className="text-gray-700 space-y-2">
+                  <li>〜50万円</li>
+                  <li>50〜100万円</li>
+                  <li>100〜150万円</li>
+                  <li>150〜200万円</li>
+                  <li>200万円以上</li>
+                </ul>
+              </div>
+
+              <div className="bg-gray-50 p-6 rounded-lg border">
+                <h3 className="text-xl font-semibold mb-3 text-gray-800">ボディタイプで選ぶ</h3>
+                <ul className="text-gray-700 space-y-2">
+                  <li>軽自動車</li>
+                  <li>コンパクト</li>
+                  <li>セダン</li>
+                  <li>SUV</li>
+                  <li>ミニバン</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* New Car Section */}
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">新車</h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              「カッチャウ」は、国内全メーカー全車種を取扱い、海外メーカーも取扱いございます。
+              「カッチャウ」では、国内全メーカー・全車種に対応。<br />
+              グレード・カラー・オプションなど、細かなご要望にもお応えします。
             </p>
           </div>
 
-          {/* 中古車セクション */}
+          {/* Used Car Section */}
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">中古車</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              全店合計100台を超える展示車が、あなたをお待ちしております。<br />
-              欲しいクルマが店頭に無くても大丈夫！
+              全店で100台以上の展示車をご用意。<br />
+              店頭にない車両も、全国のオートオークションからお探しします。
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              「カッチャウ」は全国各地で行われているオートオークションに加盟しております。<br />
-              全国からあなたにピッタリの1台を一緒に探しましょう。
-            </p>
-            
+
             <div className="bg-red-50 border-l-4 border-red-600 p-6 mt-8">
               <h3 className="text-xl font-bold text-gray-800 mb-3">
-                まずはご希望をお聞かせください！
+                まずはご希望をお聞かせください
               </h3>
               <p className="text-gray-700 leading-relaxed">
-                車種が決まっていれば、直ぐにお探しします。<br />
-                「こんな機能が付いた車が欲しい」「免許を取った子どもに車を買ってあげたい」「予算内で何とかしたい」などなど、何でもご相談ください。<br />
-                専門スタッフが親身になって、お話をお聞きします。
+                「この車種が欲しい」「予算内で探したい」「子ども用の車を探している」など、<br />
+                どんなご相談でも大歓迎です。専門スタッフが丁寧にサポートいたします。
               </p>
             </div>
           </div>
 
-          {/* お問い合わせボタン */}
+          {/* Contact Button */}
           <div className="text-center mt-12">
             <Link 
               href="/contact"
@@ -66,6 +103,7 @@ export default function SearchPage() {
               お問い合わせはこちら
             </Link>
           </div>
+
         </div>
       </div>
     </div>

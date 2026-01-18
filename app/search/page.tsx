@@ -10,6 +10,37 @@ export default function SearchPage() {
   const [selectedBody, setSelectedBody] = useState<string | null>(null);
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
 
+  const [results, setResults] = useState<any[] | null>(null);
+  const [searched, setSearched] = useState(false);
+
+  // ▼ 仮の新車・中古車データ（後でAPIやDBに置き換え可能）
+  const cars = [
+    {
+      id: 1,
+      name: 'トヨタ プリウス',
+      maker: 'トヨタ',
+      body: 'セダン',
+      price: 150,
+      type: '中古車',
+    },
+    {
+      id: 2,
+      name: 'ホンダ N-BOX',
+      maker: 'ホンダ',
+      body: '軽自動車',
+      price: 120,
+      type: '中古車',
+    },
+    {
+      id: 3,
+      name: '日産 セレナ',
+      maker: '日産',
+      body: 'ミニバン',
+      price: 200,
+      type: '新車',
+    },
+  ];
+
   const makers = [
     'トヨタ',
     '日産',
@@ -38,15 +69,32 @@ export default function SearchPage() {
     '200万円以上',
   ];
 
-  const handleSearch = () => {
-    const params = new URLSearchParams();
-    if (keyword) params.set('keyword', keyword);
-    if (selectedMaker) params.set('maker', selectedMaker);
-    if (selectedBody) params.set('body', selectedBody);
-    if (selectedPrice) params.set('price', selectedPrice);
+  // ▼ 価格帯の判定
+  const priceInRange = (price: number, range: string | null) => {
+    if (!range) return true;
+    if (range === '〜50万円') return price <= 50;
+    if (range === '50〜100万円') return price >= 50 && price <= 100;
+    if (range === '100〜150万円') return price >= 100 && price <= 150;
+    if (range === '150〜200万円') return price >= 150 && price <= 200;
+    if (range === '200万円以上') return price >= 200;
+    return true;
+  };
 
-    // 必要に応じて検索結果ページを実装
-    window.location.href = `/search/result?${params.toString()}`;
+  // ▼ 検索処理（ページ内で完結）
+  const handleSearch = () => {
+    const filtered = cars.filter((car) => {
+      const matchKeyword =
+        keyword === '' || car.name.includes(keyword) || car.maker.includes(keyword);
+
+      const matchMaker = !selectedMaker || car.maker === selectedMaker;
+      const matchBody = !selectedBody || car.body === selectedBody;
+      const matchPrice = priceInRange(car.price, selectedPrice);
+
+      return matchKeyword && matchMaker && matchBody && matchPrice;
+    });
+
+    setResults(filtered);
+    setSearched(true);
   };
 
   return (
@@ -82,7 +130,7 @@ export default function SearchPage() {
             あなたが欲しいのは新車？中古車？
           </p>
 
-          {/* ▼ ここから追加：検索UIブロック ▼ */}
+          {/* ▼ 検索UIブロック（既存） */}
           <div className="mb-12 border border-gray-200 rounded-lg p-6 md:p-8 bg-gray-50">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               条件からクルマを探す
@@ -187,17 +235,45 @@ export default function SearchPage() {
               </button>
             </div>
           </div>
-          {/* ▲ 追加ここまで ▲ */}
 
-          {/* 新車セクション（元の文章そのまま） */}
-          <div className="mb-12">
+          {/* ▼ 検索結果表示エリア（今回追加） */}
+          {searched && (
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">検索結果</h2>
+
+              {results && results.length > 0 ? (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {results.map((car) => (
+                    <div
+                      key={car.id}
+                      className="border rounded-lg p-6 shadow-sm bg-white"
+                    >
+                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                        {car.name}
+                      </h3>
+                      <p className="text-gray-700">メーカー：{car.maker}</p>
+                      <p className="text-gray-700">ボディタイプ：{car.body}</p>
+                      <p className="text-gray-700">価格：{car.price}万円</p>
+                      <p className="text-gray-700">区分：{car.type}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-700 text-lg">
+                  該当の車は見つかりませんでした。
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* ▼ 以下は既存の文章（削除なし） */}
+          <div className="mb-12 mt-16">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">新車</h2>
             <p className="text-lg text-gray-700 leading-relaxed">
               「カッチャウ」は、国内全メーカー全車種を取扱い、海外メーカーも取扱いございます。
             </p>
           </div>
 
-          {/* 中古車セクション（元の文章そのまま） */}
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">中古車</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
@@ -221,7 +297,6 @@ export default function SearchPage() {
             </div>
           </div>
 
-          {/* お問い合わせボタン（元のまま） */}
           <div className="text-center mt-12">
             <Link 
               href="/contact"

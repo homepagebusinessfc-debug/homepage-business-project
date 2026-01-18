@@ -301,6 +301,23 @@ export default function InspectionPage() {
                 ></textarea>
               </div>
 
+              {/* プライバシーポリシー同意チェックボックス */}
+              <div className="bg-gray-50 border border-gray-300 rounded-lg p-4">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    className="mt-1 w-5 h-5 text-kacchau border-gray-300 rounded focus:ring-2 focus:ring-kacchau"
+                  />
+                  <span className="text-gray-700">
+                    <a href="/privacy" target="_blank" className="text-kacchau hover:underline font-semibold">
+                      当社プライバシーポリシー
+                    </a>
+                    に同意する <span className="text-kacchau text-sm">必須</span>
+                  </span>
+                </label>
+              </div>
+
               <button
                 type="submit"
                 className="w-full bg-kacchau text-gray-900 py-4 rounded-lg font-bold text-lg hover:bg-kacchau-dark transition-colors shadow-lg"

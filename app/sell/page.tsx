@@ -215,6 +215,10 @@ export default function SellPage() {
                   </span>
                 </label>
               </div>
+              {/* 個人情報利用に関する注意書き */}
+              <p className="mt-6 text-sm text-gray-600 leading-relaxed">
+                ※お客様からご提供頂いた個人情報は、買取のご案内（電話・メール等）及びサービス提供のために利用いたします。
+              </p>
 
               <div className="text-center pt-4">
                 <button
@@ -224,10 +228,6 @@ export default function SellPage() {
                   無料査定を申し込む
                 </button>
               </div>
-                {/* 個人情報利用に関する注意書き */}
-              <p className="mt-6 text-sm text-gray-600 leading-relaxed">
-                ※お客様からご提供頂いた個人情報は、買取のご案内（電話・メール等）及びサービス提供のために利用いたします。
-              </p>
             </form>
           </div>
 

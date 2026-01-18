@@ -7,9 +7,17 @@ import { useState } from 'react';
 
 export default function SearchPage() {
   const [keyword, setKeyword] = useState('');
-  const [selectedMaker, setSelectedMaker] = useState<string | null>(null);
+  const [selectedMaker, setSelectedMaker] = useState<string>('');
+  const [selectedCarModel, setSelectedCarModel] = useState<string>('');
   const [selectedBody, setSelectedBody] = useState<string | null>(null);
-  const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
+  const [priceMin, setPriceMin] = useState<string>('');
+  const [priceMax, setPriceMax] = useState<string>('');
+  const [tradein, setTradein] = useState<string>('');
+  const [customerName, setCustomerName] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [requirements, setRequirements] = useState<string>('');
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState<boolean>(false);
 
   const [results, setResults] = useState<any[] | null>(null);
   const [searched, setSearched] = useState(false);
@@ -87,7 +95,28 @@ export default function SearchPage() {
     'マツダ',
     'スバル',
     '三菱',
+    'レクサス',
+    'いすゞ',
+    '日野',
     'BMW',
+    'メルセデス・ベンツ',
+    'アウディ',
+    'フォルクスワーゲン',
+    'ポルシェ',
+    'ボルボ',
+    'プジョー',
+    'ルノー',
+    'シトロエン',
+    'フィアット',
+    'アルファロメオ',
+    'ジープ',
+    'フォード',
+    'シボレー',
+    'キャデラック',
+    'テスラ',
+    'ミニ',
+    'ランドローバー',
+    'ジャガー',
   ];
 
   const bodyTypes = [
@@ -97,25 +126,38 @@ export default function SearchPage() {
     'SUV',
     'ミニバン',
     'ワゴン',
+    'クーペ',
+    'オープンカー',
+    'ハッチバック',
+    'ステーションワゴン',
+    '商用車',
+    'トラック',
   ];
 
-  const prices = [
-    '〜50万円',
-    '50〜100万円',
-    '100〜150万円',
-    '150〜200万円',
-    '200万円以上',
+  const priceOptions = [
+    '下限なし',
+    '60万円',
+    '90万円',
+    '120万円',
+    '150万円',
+    '200万円',
+    '300万円',
+    '400万円',
+    '500万円',
+    '600万円',
+    '700万円',
+    '800万円',
+    '900万円',
+    '1000万円',
   ];
 
   // ▼ 価格帯の判定
-  const priceInRange = (price: number, range: string | null) => {
-    if (!range) return true;
-    if (range === '〜50万円') return price <= 50;
-    if (range === '50〜100万円') return price >= 50 && price <= 100;
-    if (range === '100〜150万円') return price >= 100 && price <= 150;
-    if (range === '150〜200万円') return price >= 150 && price <= 200;
-    if (range === '200万円以上') return price >= 200;
-    return true;
+  const priceInRange = (price: number, min: string, max: string) => {
+    const priceValue = price;
+    const minValue = min === '' || min === '下限なし' ? 0 : parseInt(min.replace('万円', ''));
+    const maxValue = max === '' || max === '上限なし' ? Infinity : parseInt(max.replace('万円', ''));
+    
+    return priceValue >= minValue && priceValue <= maxValue;
   };
 
   // ▼ 検索処理
@@ -127,9 +169,9 @@ export default function SearchPage() {
         car.maker.includes(keyword) ||
         car.body.includes(keyword);
 
-      const matchMaker = !selectedMaker || car.maker === selectedMaker;
+      const matchMaker = !selectedMaker || selectedMaker === 'メーカー名を選択してください。' || car.maker === selectedMaker;
       const matchBody = !selectedBody || car.body === selectedBody;
-      const matchPrice = priceInRange(car.totalPrice, selectedPrice);
+      const matchPrice = priceInRange(car.totalPrice, priceMin, priceMax);
 
       return matchKeyword && matchMaker && matchBody && matchPrice;
     });
@@ -181,96 +223,214 @@ export default function SearchPage() {
 
           {/* ▼ 検索UIブロック */}
           <div className="mb-12 border border-gray-200 rounded-lg p-6 md:p-8 bg-gray-50">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-8">
               条件からクルマを探す
             </h2>
 
-            {/* キーワード */}
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">
-                キーワードで探す
-              </label>
-              <input
-                type="text"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-                placeholder="例：N-BOX、プリウス、SUV など"
-                className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
-              />
-            </div>
-
-            {/* メーカー */}
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">
-                メーカーから選ぶ
-              </label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {makers.map((m) => (
-                  <button
-                    key={m}
-                    type="button"
-                    onClick={() =>
-                      setSelectedMaker((prev) => (prev === m ? null : m))
-                    }
-                    className={`border rounded-lg px-3 py-2 text-sm md:text-base text-center transition ${
-                      selectedMaker === m
-                        ? 'bg-kacchau text-gray-900 border-kacchau'
-                        : 'bg-white text-gray-800 hover:bg-gray-50'
-                    }`}
-                  >
-                    {m}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* ボディタイプ */}
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">
-                ボディタイプから選ぶ
-              </label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {bodyTypes.map((b) => (
-                  <button
-                    key={b}
-                    type="button"
-                    onClick={() =>
-                      setSelectedBody((prev) => (prev === b ? null : b))
-                    }
-                    className={`border rounded-lg px-3 py-2 text-sm md:text-base text-center transition ${
-                      selectedBody === b
-                        ? 'bg-kacchau text-gray-900 border-kacchau'
-                        : 'bg-white text-gray-800 hover:bg-gray-50'
-                    }`}
-                  >
-                    {b}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* 価格帯 */}
+            {/* お車について */}
             <div className="mb-8">
-              <label className="block text-gray-700 font-semibold mb-2">
-                価格帯で選ぶ
-              </label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {prices.map((p) => (
-                  <button
-                    key={p}
-                    type="button"
-                    onClick={() =>
-                      setSelectedPrice((prev) => (prev === p ? null : p))
-                    }
-                    className={`border rounded-lg px-3 py-2 text-sm md:text-base text-center transition ${
-                      selectedPrice === p
-                        ? 'bg-kacchau text-gray-900 border-kacchau'
-                        : 'bg-white text-gray-800 hover:bg-gray-50'
-                    }`}
+              <h3 className="text-xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-kacchau">
+                お車について
+              </h3>
+
+              {/* メーカー名 */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-semibold mb-2">
+                  メーカー名
+                </label>
+                <select
+                  value={selectedMaker}
+                  onChange={(e) => setSelectedMaker(e.target.value)}
+                  className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau bg-white"
+                >
+                  <option value="">メーカー名を選択してください。</option>
+                  {makers.map((m) => (
+                    <option key={m} value={m}>{m}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* 車種名 */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-semibold mb-2">
+                  車種名
+                </label>
+                <input
+                  type="text"
+                  value={selectedCarModel}
+                  onChange={(e) => setSelectedCarModel(e.target.value)}
+                  placeholder="車種名を選択してください。"
+                  className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                />
+              </div>
+
+              {/* ボディタイプ */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-semibold mb-2">
+                  ボディタイプから選ぶ
+                </label>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {bodyTypes.map((b) => (
+                    <button
+                      key={b}
+                      type="button"
+                      onClick={() =>
+                        setSelectedBody((prev) => (prev === b ? null : b))
+                      }
+                      className={`border rounded-lg px-3 py-2 text-sm md:text-base text-center transition ${
+                        selectedBody === b
+                          ? 'bg-kacchau text-gray-900 border-kacchau'
+                          : 'bg-white text-gray-800 hover:bg-gray-50'
+                      }`}
+                    >
+                      {b}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 予算（価格） */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-semibold mb-2">
+                  予算（価格）
+                </label>
+                <div className="flex flex-col md:flex-row gap-3 items-center">
+                  <select
+                    value={priceMin}
+                    onChange={(e) => setPriceMin(e.target.value)}
+                    className="w-full md:w-auto flex-1 border rounded-lg px-4 py-3 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau bg-white"
                   >
-                    {p}
-                  </button>
-                ))}
+                    {priceOptions.map((p) => (
+                      <option key={p} value={p}>{p}</option>
+                    ))}
+                  </select>
+                  <span className="text-gray-700 font-semibold">〜</span>
+                  <select
+                    value={priceMax}
+                    onChange={(e) => setPriceMax(e.target.value)}
+                    className="w-full md:w-auto flex-1 border rounded-lg px-4 py-3 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau bg-white"
+                  >
+                    <option value="上限なし">上限なし</option>
+                    {priceOptions.slice(1).map((p) => (
+                      <option key={p} value={p}>{p}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* 下取り車 */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-semibold mb-2">
+                  下取り車
+                </label>
+                <div className="flex gap-6">
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="tradein"
+                      value="有"
+                      checked={tradein === '有'}
+                      onChange={(e) => setTradein(e.target.value)}
+                      className="mr-2 w-4 h-4 text-kacchau focus:ring-kacchau"
+                    />
+                    <span className="text-gray-700">有</span>
+                  </label>
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="tradein"
+                      value="無"
+                      checked={tradein === '無'}
+                      onChange={(e) => setTradein(e.target.value)}
+                      className="mr-2 w-4 h-4 text-kacchau focus:ring-kacchau"
+                    />
+                    <span className="text-gray-700">無</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* お客様について */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-kacchau">
+                お客様について
+              </h3>
+
+              {/* お名前（かな） */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-semibold mb-2">
+                  お名前（かな）
+                </label>
+                <input
+                  type="text"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                  placeholder="例：やまだ たろう"
+                  className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                />
+              </div>
+
+              {/* 電話番号 */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-semibold mb-2">
+                  電話番号（半角数字）
+                </label>
+                <input
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  placeholder="例：09012345678"
+                  className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                />
+              </div>
+
+              {/* メールアドレス */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-semibold mb-2">
+                  メールアドレス
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="例：example@example.com"
+                  className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                />
+              </div>
+
+              {/* ご要望・ご質問など */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-semibold mb-2">
+                  ご要望・ご質問など
+                </label>
+                <textarea
+                  value={requirements}
+                  onChange={(e) => setRequirements(e.target.value)}
+                  placeholder="ご希望の査定方法（来店・出張など）やご相談事項があればご記入ください。"
+                  rows={5}
+                  className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau resize-none"
+                />
+              </div>
+
+              {/* プライバシーポリシー同意 */}
+              <div className="mb-6">
+                <label className="flex items-start cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={agreedToPrivacy}
+                    onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+                    className="mr-3 mt-1 w-5 h-5 text-kacchau focus:ring-kacchau rounded"
+                  />
+                  <span className="text-gray-700">
+                    <Link href="/privacy" className="text-kacchau hover:underline font-semibold">
+                      当社プライバシーポリシー
+                    </Link>
+                    に同意する <span className="text-red-600 font-bold">必須</span>
+                  </span>
+                </label>
+                <p className="text-sm text-gray-600 mt-2 ml-8">
+                  ※お客様からご提供頂いた個人情報は、販売のご案内（電話・メール等）及びサービス提供のために利用いたします。
+                </p>
               </div>
             </div>
 
@@ -278,7 +438,12 @@ export default function SearchPage() {
               <button
                 type="button"
                 onClick={handleSearch}
-                className="inline-block px-10 py-3 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
+                disabled={!agreedToPrivacy}
+                className={`inline-block px-10 py-3 text-lg font-bold rounded-full transition-colors shadow-lg ${
+                  agreedToPrivacy
+                    ? 'bg-kacchau text-gray-900 hover:bg-kacchau-dark cursor-pointer'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                }`}
               >
                 この条件で検索する
               </button>

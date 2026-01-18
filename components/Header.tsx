@@ -68,7 +68,7 @@ export default function Header() {
                     <Phone size={14} className="sm:w-4 sm:h-4 lg:w-4 lg:h-4 text-gray-900" />
                     <span className="font-bold text-[10px] sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg whitespace-nowrap text-gray-900">0952-27-0060</span>
                   </a>
-                  <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-xs xl:text-sm text-gray-700 whitespace-nowrap">受付時間: 9:00〜19:00</span>
+                  <span className="text-[8px] sm:text-[10px] md:text-xs lg:text-xs xl:text-sm text-gray-700 whitespace-nowrap">受付時間: 9:00〜19:00（不定休）</span>
                 </div>
 
                 {/* お問い合わせボタン（PC表示のみ） */}
@@ -155,7 +155,7 @@ export default function Header() {
           </a>
           
           {/* 受付時間 */}
-          <span className="text-[9px] text-gray-500 mb-2">受付時間: 9:00〜19:00</span>
+          <span className="text-[9px] text-gray-500 mb-2">受付時間: 9:00〜19:00（不定休）</span>
           
           {/* お問い合わせボタン */}
           <Link 

@@ -22,7 +22,7 @@ export default function Footer() {
                     0952-27-0060
                   </a>
                 </p>
-                <p className="text-sm text-gray-400">受付時間: 9:00〜19:00</p>
+                <p className="text-sm text-gray-400">受付時間: 9:00〜19:00（不定休）</p>
               </div>
             </div>
             <div className="pt-3 border-t border-gray-700">

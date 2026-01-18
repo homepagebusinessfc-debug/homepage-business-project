@@ -229,7 +229,7 @@ export default function ContactPage() {
                   0952-27-0060
                 </a>
                 <p className="text-gray-600 mt-2">
-                  受付時間: 9:00〜19:00
+                  受付時間: 9:00〜19:00（不定休）
                 </p>
               </div>
 

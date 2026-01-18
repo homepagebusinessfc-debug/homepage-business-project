@@ -103,13 +103,14 @@ export default function SellPage() {
               {/* メールアドレス */}
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
-                  メールアドレス <span className="text-kacchau text-sm">必須</span>
+                  メールアドレス <span className="text-gray-500 text-sm">任意</span>
                 </label>
                 <input
                   type="email"
                   className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
                 />
               </div>
+
 
               {/* 電話番号 */}
               <div>

@@ -205,12 +205,11 @@ export default function OilChangePage() {
 
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    メールアドレス <span className="text-kacchau">*</span>
+                    メールアドレス <span className="text-gray-500">任意</span>
                   </label>
                   <input
                     type="email"
                     name="email"
-                    required
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"

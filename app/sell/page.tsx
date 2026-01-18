@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { ChevronRight, DollarSign } from 'lucide-react';
+import { ChevronRight, Yen } from 'lucide-react';
 import { useState } from 'react';
+
 
 export default function SellPage() {
   const [images, setImages] = useState<File[]>([]);

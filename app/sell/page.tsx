@@ -131,6 +131,14 @@ export default function SellPage() {
                   placeholder="例：トヨタ プリウス 2018年式"
                   className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
                 />
+                {/* ★ 追加：注意書き */}
+                <p className="mt-2 text-sm text-gray-600">
+                  ※年式・車種が不明な方はお電話ください。（
+                  <a href="tel:0952-27-0060" className="text-kacchau hover:underline font-semibold">
+                    ℡0952-27-0060
+                  </a>
+                  ）
+                </p>
               </div>
 
               {/* 走行距離 */}
@@ -189,6 +197,23 @@ export default function SellPage() {
                 />
               </div>
 
+              {/* ★ 追加：プライバシーポリシー同意チェックボックス */}
+              <div className="bg-gray-50 border border-gray-300 rounded-lg p-4">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    className="mt-1 w-5 h-5 text-kacchau border-gray-300 rounded focus:ring-2 focus:ring-kacchau"
+                  />
+                  <span className="text-gray-700">
+                    <a href="/privacy" target="_blank" className="text-kacchau hover:underline font-semibold">
+                      当社プライバシーポリシー
+                    </a>
+                    に同意する <span className="text-kacchau text-sm">必須</span>
+                  </span>
+                </label>
+              </div>
+
               <div className="text-center pt-4">
                 <button
                   type="submit"
@@ -199,6 +224,7 @@ export default function SellPage() {
               </div>
             </form>
           </div>
+
 
           {/* 既存のボタン群 */}
           <div className="text-center mt-12 space-y-4">

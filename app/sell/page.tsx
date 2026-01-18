@@ -28,7 +28,7 @@ export default function SellPage() {
       <section className="bg-gradient-to-br from-kacchau to-kacchau-dark text-gray-900 py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <DollarSign size={48} className="text-gray-900" />
+            <Yen size={48} className="text-gray-900" />
             <h1 className="text-4xl md:text-5xl font-bold">クルマを売る</h1>
           </div>
           <p className="text-lg md:text-xl mb-2">
@@ -39,6 +39,7 @@ export default function SellPage() {
           </p>
         </div>
       </section>
+
 
       <div className="max-w-5xl mx-auto py-12 px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">

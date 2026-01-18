@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronRight, Search } from 'lucide-react';
 import { useState } from 'react';
 
@@ -13,32 +14,68 @@ export default function SearchPage() {
   const [results, setResults] = useState<any[] | null>(null);
   const [searched, setSearched] = useState(false);
 
-  // ▼ 仮の新車・中古車データ（後でAPIやDBに置き換え可能）
+  // ▼ app/cars/page.tsx と同じ車両データを使用
   const cars = [
-    {
+    { 
       id: 1,
-      name: 'トヨタ プリウス',
-      maker: 'トヨタ',
-      body: 'セダン',
-      price: 150,
-      type: '中古車',
+      name: 'ＢＭＷ 318ｉ ツーリング', 
+      image: '/car1.jpg',
+      type: 'used',
+      year: '2015年',
+      mileage: '8.5万km',
+      repairHistory: '修復歴なし',
+      transmission: 'AT',
+      drive: '2WD',
+      displacement: '2000cc',
+      color: 'ホワイトパール',
+      warranty: '保証付き',
+      totalPrice: 180,
+      vehiclePrice: 150,
+      fees: 30,
+      category: 'imported',
+      maker: 'BMW',
+      body: 'ワゴン'
     },
-    {
+    { 
       id: 2,
-      name: 'ホンダ N-BOX',
-      maker: 'ホンダ',
-      body: '軽自動車',
-      price: 120,
-      type: '中古車',
+      name: 'ダイハツ タント', 
+      image: '/car2.jpg',
+      type: 'used',
+      year: '2020年',
+      mileage: '3.2万km',
+      repairHistory: '修復歴なし',
+      transmission: 'CVT',
+      drive: 'FF',
+      displacement: '660cc',
+      color: 'パールホワイト',
+      warranty: '保証付き',
+      totalPrice: 118,
+      vehiclePrice: 110,
+      fees: 8,
+      category: 'kei',
+      maker: 'ダイハツ',
+      body: '軽自動車'
     },
-    {
+    { 
       id: 3,
-      name: '日産 セレナ',
-      maker: '日産',
-      body: 'ミニバン',
-      price: 200,
-      type: '新車',
-    },
+      name: 'ダイハツ タント カスタムＸ', 
+      image: '/car3.jpg',
+      type: 'new',
+      year: '2019年',
+      mileage: '4.5万km',
+      repairHistory: '修復歴なし',
+      transmission: 'CVT',
+      drive: 'FF',
+      displacement: '660cc',
+      color: 'ブラックマイカ',
+      warranty: '保証付き',
+      totalPrice: 113,
+      vehiclePrice: 105,
+      fees: 8,
+      category: 'kei',
+      maker: 'ダイハツ',
+      body: '軽自動車'
+    }
   ];
 
   const makers = [
@@ -50,6 +87,7 @@ export default function SearchPage() {
     'マツダ',
     'スバル',
     '三菱',
+    'BMW',
   ];
 
   const bodyTypes = [
@@ -80,21 +118,32 @@ export default function SearchPage() {
     return true;
   };
 
-  // ▼ 検索処理（ページ内で完結）
+  // ▼ 検索処理
   const handleSearch = () => {
     const filtered = cars.filter((car) => {
       const matchKeyword =
-        keyword === '' || car.name.includes(keyword) || car.maker.includes(keyword);
+        keyword === '' || 
+        car.name.includes(keyword) || 
+        car.maker.includes(keyword) ||
+        car.body.includes(keyword);
 
       const matchMaker = !selectedMaker || car.maker === selectedMaker;
       const matchBody = !selectedBody || car.body === selectedBody;
-      const matchPrice = priceInRange(car.price, selectedPrice);
+      const matchPrice = priceInRange(car.totalPrice, selectedPrice);
 
       return matchKeyword && matchMaker && matchBody && matchPrice;
     });
 
     setResults(filtered);
     setSearched(true);
+
+    // 結果が表示されるエリアまでスクロール
+    setTimeout(() => {
+      document.getElementById('search-results')?.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 100);
   };
 
   return (
@@ -130,7 +179,7 @@ export default function SearchPage() {
             あなたが欲しいのは新車？中古車？
           </p>
 
-          {/* ▼ 検索UIブロック（既存） */}
+          {/* ▼ 検索UIブロック */}
           <div className="mb-12 border border-gray-200 rounded-lg p-6 md:p-8 bg-gray-50">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               条件からクルマを探す
@@ -236,37 +285,123 @@ export default function SearchPage() {
             </div>
           </div>
 
-          {/* ▼ 検索結果表示エリア（今回追加） */}
+          {/* ▼ 検索結果表示エリア */}
           {searched && (
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">検索結果</h2>
+            <div id="search-results" className="mt-12 scroll-mt-4">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                検索結果 
+                {results && results.length > 0 && (
+                  <span className="ml-3 text-kacchau">{results.length}台</span>
+                )}
+              </h2>
 
               {results && results.length > 0 ? (
                 <div className="grid md:grid-cols-2 gap-6">
                   {results.map((car) => (
                     <div
                       key={car.id}
-                      className="border rounded-lg p-6 shadow-sm bg-white"
+                      className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
                     >
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">
-                        {car.name}
-                      </h3>
-                      <p className="text-gray-700">メーカー：{car.maker}</p>
-                      <p className="text-gray-700">ボディタイプ：{car.body}</p>
-                      <p className="text-gray-700">価格：{car.price}万円</p>
-                      <p className="text-gray-700">区分：{car.type}</p>
+                      {/* 車両画像 */}
+                      <div className="h-48 relative bg-gray-200">
+                        <Image 
+                          src={car.image} 
+                          alt={car.name} 
+                          fill
+                          className="object-cover"
+                        />
+                        {/* 保証バッジ */}
+                        <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                          {car.warranty}
+                        </div>
+                        {/* 新車/中古車バッジ */}
+                        <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-sm font-bold shadow-lg ${
+                          car.type === 'new' 
+                            ? 'bg-blue-600 text-white' 
+                            : 'bg-orange-500 text-white'
+                        }`}>
+                          {car.type === 'new' ? '新車' : '中古車'}
+                        </div>
+                      </div>
+
+                      {/* 車両情報 */}
+                      <div className="p-5">
+                        <h3 className="text-xl font-bold mb-3 text-gray-800">
+                          {car.name}
+                        </h3>
+
+                        {/* 価格 */}
+                        <div className="mb-4 pb-4 border-b">
+                          <div className="text-2xl font-bold text-kacchau mb-1">
+                            支払総額 {car.totalPrice}万円
+                            <span className="text-sm text-gray-600 ml-1 font-normal">(税込)</span>
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            車両本体 <span className="font-semibold">{car.vehiclePrice}万円</span> / 
+                            諸費用 <span className="font-semibold">{car.fees}万円</span>
+                          </div>
+                        </div>
+
+                        {/* 詳細情報 */}
+                        <div className="space-y-1.5 text-sm mb-5">
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">年式</span>
+                            <span className="font-semibold">{car.year}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">走行距離</span>
+                            <span className="font-semibold">{car.mileage}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">修復歴</span>
+                            <span className="font-semibold text-green-600">{car.repairHistory}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">色</span>
+                            <span className="font-semibold">{car.color}</span>
+                          </div>
+                        </div>
+
+                        {/* ボタン */}
+                        <div className="space-y-2">
+                          <Link
+                            href={`/cars/${car.id}`}
+                            className="block w-full text-center px-6 py-2.5 bg-kacchau text-gray-900 rounded-full font-bold hover:bg-kacchau-dark transition-colors shadow-md"
+                          >
+                            詳細を見る
+                          </Link>
+                          <Link
+                            href="/contact"
+                            className="block w-full text-center px-6 py-2.5 bg-white text-kacchau border-2 border-kacchau rounded-full font-bold hover:bg-gray-50 transition-colors"
+                          >
+                            お問い合わせ
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-700 text-lg">
-                  該当の車は見つかりませんでした。
-                </p>
+                <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                  <p className="text-gray-700 text-xl mb-4">
+                    該当の車は見つかりませんでした。
+                  </p>
+                  <p className="text-gray-600 mb-6">
+                    条件を変更して再度検索してください。<br />
+                    または、お気軽にお問い合わせください。
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="inline-block px-8 py-3 bg-kacchau text-gray-900 rounded-full font-bold hover:bg-kacchau-dark transition-colors shadow-md"
+                  >
+                    お問い合わせはこちら
+                  </Link>
+                </div>
               )}
             </div>
           )}
 
-          {/* ▼ 以下は既存の文章（削除なし） */}
+          {/* ▼ 以下は既存の文章 */}
           <div className="mb-12 mt-16">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">新車</h2>
             <p className="text-lg text-gray-700 leading-relaxed">
@@ -278,7 +413,7 @@ export default function SearchPage() {
             <h2 className="text-3xl font-bold text-gray-800 mb-4">中古車</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
               全店合計100台を超える展示車が、あなたをお待ちしております。<br />
-              欲しいクルマが店頭に無くても大丈夫！
+              欲しいクルマが店頭に無くても大丈夫!
             </p>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
               「カッチャウ」は全国各地で行われているオートオークションに加盟しております。<br />
@@ -287,7 +422,7 @@ export default function SearchPage() {
             
             <div className="bg-kacchau-yellow-50 border-l-4 border-kacchau p-6 mt-8">
               <h3 className="text-xl font-bold text-gray-800 mb-3">
-                まずはご希望をお聞かせください！
+                まずはご希望をお聞かせください!
               </h3>
               <p className="text-gray-700 leading-relaxed">
                 車種が決まっていれば、直ぐにお探しします。<br />

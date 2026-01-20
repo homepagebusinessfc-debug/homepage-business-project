@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import { ChevronRight, Mail, Phone, MapPin, Calendar } from 'lucide-react';
 import { useState } from 'react';
@@ -122,7 +121,7 @@ export default function ContactPage() {
 
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
-                    ご希望の来店日時（任意）
+                    ご希望の来店日時 <span className="text-gray-500 text-sm">（任意）</span>
                   </label>
                   <div className="grid grid-cols-2 gap-4">
                     <input
@@ -182,7 +181,7 @@ export default function ContactPage() {
                 <div className="flex items-center gap-3 mb-4">
                   <Calendar className="text-kacchau" size={32} />
                   <h2 className="text-2xl font-bold text-gray-800">
-                    オンライン予約
+                    オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
                   </h2>
                 </div>
                 <p className="text-gray-700 mb-4">

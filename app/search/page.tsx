@@ -414,7 +414,7 @@ export default function SearchPage() {
                   <textarea
                     value={requirements}
                     onChange={(e) => setRequirements(e.target.value)}
-                    placeholder="ご希望の査定方法（来店・出張など）やご相談事項があればご記入ください。"
+                    placeholder="ご質問やご要望がございましたらご記入ください。"
                     rows={5}
                     className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau resize-none"
                   />

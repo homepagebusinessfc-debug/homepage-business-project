@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronRight, Phone, Mail, Calendar, CheckCircle, Droplet, Wrench, DollarSign, Clock } from 'lucide-react';
@@ -94,7 +93,6 @@ export default function OilChangePage() {
           <h2 className="text-4xl font-bold text-center mb-12 text-kacchau">
             オイル交換のポイント
           </h2>
-
           <div className="grid md:grid-cols-3 gap-8">
             {oilChangePoints.map((point, index) => (
               <div key={index} className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
@@ -104,7 +102,6 @@ export default function OilChangePage() {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900">{point.title}</h3>
                 </div>
-
                 <ul className="space-y-3">
                   {point.items.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2">
@@ -125,7 +122,6 @@ export default function OilChangePage() {
           <h2 className="text-4xl font-bold text-center mb-12 text-kacchau">
             定期的なオイル交換のメリット
           </h2>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
@@ -202,7 +198,6 @@ export default function OilChangePage() {
                     placeholder="090-1234-5678"
                   />
                 </div>
-
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
                     メールアドレス <span className="text-gray-500">任意</span>
@@ -250,7 +245,6 @@ export default function OilChangePage() {
                     placeholder="例: トヨタ プリウス"
                   />
                 </div>
-
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
                     年式 <span className="text-kacchau">*</span>
@@ -269,7 +263,7 @@ export default function OilChangePage() {
 
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
-                  ご希望日時
+                  ご希望日時 <span className="text-gray-500 text-sm">（任意）</span>
                 </label>
                 <div className="grid grid-cols-2 gap-4">
                   <input
@@ -335,6 +329,45 @@ export default function OilChangePage() {
                 ※お客様からご提供頂いた個人情報は、オイル交換のご案内（電話・メール等）及びサービス提供のために利用いたします。
               </p>
             </form>
+          </div>
+
+          {/* ★ 新規追加：オンライン予約セクション */}
+          <div className="mt-12">
+            <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
+              <div className="flex items-center gap-3 mb-4">
+                <Calendar className="text-kacchau" size={32} />
+                <h2 className="text-2xl font-bold text-gray-800">
+                  オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
+                </h2>
+              </div>
+              <p className="text-gray-700 mb-4">
+                オイル交換のご来店予約をオンラインで受け付けています。<br />
+                以下のカレンダーからご都合の良い日時をお選びください。
+              </p>
+              
+              {/* Timerex埋め込みエリア */}
+              <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[400px] flex items-center justify-center">
+                <div className="text-center text-gray-500">
+                  <Calendar size={48} className="mx-auto mb-4" />
+                  <p className="font-semibold mb-2">
+                    Timerexカレンダーをここに埋め込みます
+                  </p>
+                  <p className="text-sm">
+                    実装時には、Timerexの埋め込みコードを<br />
+                    このエリアに挿入してください
+                  </p>
+                </div>
+                {/* 
+                実装例:
+                <iframe 
+                  src="YOUR_TIMEREX_EMBED_URL" 
+                  width="100%" 
+                  height="600" 
+                  frameBorder="0"
+                ></iframe>
+                */}
+              </div>
+            </div>
           </div>
         </div>
       </section>

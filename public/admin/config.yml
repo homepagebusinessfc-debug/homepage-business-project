@@ -2,9 +2,9 @@ backend:
   name: gitlab
   repo: homepage-business-group/homepage-business-project
   branch: main
-  auth_type: pkce  # ← implicitからpkceに変更
-  app_id: e9263f79115e4efa912d71cd06681c9d051e578a5625828b42a135c18bb8ded4  # ← ステップ1でコピーしたApplication IDに置き換え
-  base_url: https://gitlab.com  # ← 追加
+  auth_type: pkce
+  app_id: e9263f79115e4efa912d71cd06681c9d051e578a5625828b42a135c18bb8ded4
+  base_url: https://gitlab.com
 
 # メディアファイルの保存先
 media_folder: "public/uploads"
@@ -24,7 +24,7 @@ collections:
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Featured Image", name: "thumbnail", widget: "image", required: false }
 
-  # ブログ投稿コレクション（オプション）
+  # ブログ投稿コレクション
   - name: "blog"
     label: "Blog"
     folder: "content/blog"
@@ -37,3 +37,158 @@ collections:
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Featured Image", name: "thumbnail", widget: "image", required: false }
       - { label: "Tags", name: "tags", widget: "list", required: false }
+
+  # 新車・中古車コレクション
+  - name: "cars"
+    label: "新車・中古車"
+    label_singular: "車両"
+    folder: "content/cars"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "name"
+    summary: "{{name}} - {{type}} ({{year}})"
+    fields:
+      # 基本情報
+      - label: "車両名"
+        name: "name"
+        widget: "string"
+        hint: "例：ＢＭＷ 318ｉ ツーリング"
+      
+      - label: "車両ID"
+        name: "id"
+        widget: "number"
+        value_type: "int"
+        min: 1
+        hint: "車両の一意なID番号"
+      
+      - label: "車両区分"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "新車", value: "new" }
+          - { label: "中古車", value: "used" }
+        default: "used"
+      
+      - label: "カテゴリー"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "軽自動車", value: "kei" }
+          - { label: "コンパクトカー", value: "compact" }
+          - { label: "セダン", value: "sedan" }
+          - { label: "SUV", value: "suv" }
+          - { label: "ミニバン", value: "minivan" }
+          - { label: "ワゴン", value: "wagon" }
+          - { label: "輸入車", value: "imported" }
+        default: "kei"
+      
+      # メーカー・車種情報
+      - label: "メーカー名"
+        name: "maker"
+        widget: "string"
+        hint: "例：トヨタ、BMW、ダイハツ"
+        required: false
+      
+      - label: "ボディタイプ"
+        name: "body"
+        widget: "string"
+        hint: "例：セダン、SUV、軽自動車"
+        required: false
+      
+      # 車両画像
+      - label: "車両画像"
+        name: "image"
+        widget: "image"
+        hint: "車両のメイン画像をアップロードしてください"
+      
+      # 詳細情報
+      - label: "年式"
+        name: "year"
+        widget: "string"
+        hint: "例：2020年"
+      
+      - label: "走行距離"
+        name: "mileage"
+        widget: "string"
+        hint: "例：3.2万km、8.5万km"
+      
+      - label: "修復歴"
+        name: "repairHistory"
+        widget: "select"
+        options:
+          - { label: "修復歴なし", value: "修復歴なし" }
+          - { label: "修復歴あり", value: "修復歴あり" }
+        default: "修復歴なし"
+      
+      - label: "シフト（トランスミッション）"
+        name: "transmission"
+        widget: "select"
+        options:
+          - { label: "AT（オートマチック）", value: "AT" }
+          - { label: "MT（マニュアル）", value: "MT" }
+          - { label: "CVT", value: "CVT" }
+        default: "AT"
+      
+      - label: "駆動方式"
+        name: "drive"
+        widget: "select"
+        options:
+          - { label: "2WD（二輪駆動）", value: "2WD" }
+          - { label: "4WD（四輪駆動）", value: "4WD" }
+          - { label: "FF（前輪駆動）", value: "FF" }
+          - { label: "FR（後輪駆動）", value: "FR" }
+          - { label: "AWD（全輪駆動）", value: "AWD" }
+        default: "2WD"
+      
+      - label: "排気量"
+        name: "displacement"
+        widget: "string"
+        hint: "例：660cc、2000cc"
+      
+      - label: "系統色（ボディカラー）"
+        name: "color"
+        widget: "string"
+        hint: "例：ホワイトパール、ブラックマイカ、パールホワイト"
+      
+      - label: "保証"
+        name: "warranty"
+        widget: "select"
+        options:
+          - { label: "保証付き", value: "保証付き" }
+          - { label: "保証なし", value: "保証なし" }
+        default: "保証付き"
+      
+      # 価格情報
+      - label: "支払総額（万円）"
+        name: "totalPrice"
+        widget: "number"
+        value_type: "int"
+        min: 0
+        hint: "支払総額を万円単位で入力（例：118万円の場合は「118」と入力）"
+      
+      - label: "車両本体価格（万円）"
+        name: "vehiclePrice"
+        widget: "number"
+        value_type: "int"
+        min: 0
+        hint: "車両本体価格を万円単位で入力（例：110万円の場合は「110」と入力）"
+      
+      - label: "諸費用（万円）"
+        name: "fees"
+        widget: "number"
+        value_type: "int"
+        min: 0
+        hint: "諸費用を万円単位で入力（例：8万円の場合は「8」と入力）"
+      
+      # 公開設定
+      - label: "公開状態"
+        name: "published"
+        widget: "boolean"
+        default: true
+        hint: "チェックを外すと非公開になります"
+      
+      - label: "更新日"
+        name: "updatedAt"
+        widget: "datetime"
+        default: ""
+        required: false

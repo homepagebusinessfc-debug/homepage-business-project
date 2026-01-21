@@ -1,19 +1,41 @@
 'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronRight, Car } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+// 車両データの型定義
+interface CarData {
+  id: number;
+  name: string;
+  image: string;
+  type: 'new' | 'used';
+  year: string;
+  mileage: string;
+  repairHistory: string;
+  transmission: string;
+  drive: string;
+  displacement: string;
+  color: string;
+  warranty: string;
+  totalPrice: number;
+  vehiclePrice: number;
+  fees: number;
+  category: string;
+}
 
 export default function CarsPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [cars, setCars] = useState<CarData[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const cars = [
+  // フォールバックデータ（CMSにデータがない場合）
+  const fallbackCars: CarData[] = [
     { 
       id: 1,
       name: 'ＢＭＷ 318ｉ ツーリング', 
       image: '/car1.jpg',
-      type: 'used', // 新車: 'new', 中古車: 'used'
+      type: 'used',
       year: '2015年',
       mileage: '8.5万km',
       repairHistory: '修復歴なし',
@@ -22,9 +44,9 @@ export default function CarsPage() {
       displacement: '2000cc',
       color: 'ホワイトパール',
       warranty: '保証付き',
-      totalPrice: 18,
-      vehiclePrice: 15,
-      fees: 3,
+      totalPrice: 180,
+      vehiclePrice: 150,
+      fees: 30,
       category: 'imported'
     },
     { 
@@ -49,7 +71,7 @@ export default function CarsPage() {
       id: 3,
       name: 'ダイハツ タント カスタムＸ', 
       image: '/car3.jpg',
-      type: 'new', // 新車の例
+      type: 'new',
       year: '2019年',
       mileage: '4.5万km',
       repairHistory: '修復歴なし',
@@ -64,6 +86,28 @@ export default function CarsPage() {
       category: 'kei'
     }
   ];
+
+  useEffect(() => {
+    // APIから車両データを取得
+    async function fetchCars() {
+      try {
+        const response = await fetch('/api/cars');
+        if (response.ok) {
+          const data = await response.json();
+          setCars(data.length > 0 ? data : fallbackCars);
+        } else {
+          setCars(fallbackCars);
+        }
+      } catch (error) {
+        console.error('車両データの取得に失敗しました:', error);
+        setCars(fallbackCars);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCars();
+  }, []);
 
   const categories = [
     { id: 'all', label: 'すべて' },
@@ -133,104 +177,114 @@ export default function CarsPage() {
           </p>
         </div>
         
-        {/* 車両リスト */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredCars.map((car) => (
-            <div 
-              key={car.id} 
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-            >
-              {/* 車両画像 */}
-              <div className="h-56 relative bg-gray-200">
-                <Image 
-                  src={car.image} 
-                  alt={car.name} 
-                  fill
-                  className="object-cover"
-                />
-                {/* 保証バッジ（左上） */}
-                <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
-                  {car.warranty}
-                </div>
-                {/* 新車/中古車バッジ（右上） */}
-                <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-sm font-bold shadow-lg ${
-                  car.type === 'new' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-orange-500 text-white'
-                }`}>
-                  {car.type === 'new' ? '新車' : '中古車'}
-                </div>
-              </div>
+        {/* ローディング表示 */}
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-kacchau"></div>
+            <p className="mt-4 text-gray-600">車両情報を読み込み中...</p>
+          </div>
+        ) : (
+          <>
+            {/* 車両リスト */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredCars.map((car) => (
+                <div 
+                  key={car.id} 
+                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+                >
+                  {/* 車両画像 */}
+                  <div className="h-56 relative bg-gray-200">
+                    <Image 
+                      src={car.image} 
+                      alt={car.name} 
+                      fill
+                      className="object-cover"
+                    />
+                    {/* 保証バッジ（左上） */}
+                    <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                      {car.warranty}
+                    </div>
+                    {/* 新車/中古車バッジ（右上） */}
+                    <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-sm font-bold shadow-lg ${
+                      car.type === 'new' 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-orange-500 text-white'
+                    }`}>
+                      {car.type === 'new' ? '新車' : '中古車'}
+                    </div>
+                  </div>
 
-              {/* 車両情報 */}
-              <div className="p-5">
-                {/* 車名 */}
-                <h3 className="text-xl font-bold mb-4 text-gray-900 min-h-[3rem]">
-                  {car.name}
-                </h3>
+                  {/* 車両情報 */}
+                  <div className="p-5">
+                    {/* 車名 */}
+                    <h3 className="text-xl font-bold mb-4 text-gray-900 min-h-[3rem]">
+                      {car.name}
+                    </h3>
 
-                {/* 価格情報 */}
-                <div className="mb-4 pb-4 border-b-2 border-gray-200">
-                  <div className="text-3xl font-bold text-kacchau mb-2">
-                    支払総額 {car.totalPrice}万円
-                    <span className="text-sm text-gray-600 ml-1 font-normal">(税込)</span>
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    車両本体 <span className="font-semibold text-gray-900">{car.vehiclePrice}万円</span> / 諸費用 <span className="font-semibold text-gray-900">{car.fees}万円</span>
+                    {/* 価格情報 */}
+                    <div className="mb-4 pb-4 border-b-2 border-gray-200">
+                      <div className="text-3xl font-bold text-kacchau mb-2">
+                        支払総額 {car.totalPrice}万円
+                        <span className="text-sm text-gray-600 ml-1 font-normal">(税込)</span>
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        車両本体 <span className="font-semibold text-gray-900">{car.vehiclePrice}万円</span> / 諸費用 <span className="font-semibold text-gray-900">{car.fees}万円</span>
+                      </div>
+                    </div>
+
+                    {/* 詳細情報 */}
+                    <div className="space-y-2 text-sm mb-6">
+                      <div className="flex justify-between py-1.5">
+                        <span className="text-gray-600">年式</span>
+                        <span className="font-semibold text-gray-900">{car.year}</span>
+                      </div>
+                      <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
+                        <span className="text-gray-600">走行距離</span>
+                        <span className="font-semibold text-gray-900">{car.mileage}</span>
+                      </div>
+                      <div className="flex justify-between py-1.5">
+                        <span className="text-gray-600">修復歴</span>
+                        <span className="font-semibold text-green-600">{car.repairHistory}</span>
+                      </div>
+                      <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
+                        <span className="text-gray-600">シフト</span>
+                        <span className="font-semibold text-gray-900">{car.transmission}</span>
+                      </div>
+                      <div className="flex justify-between py-1.5">
+                        <span className="text-gray-600">駆動</span>
+                        <span className="font-semibold text-gray-900">{car.drive}</span>
+                      </div>
+                      <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
+                        <span className="text-gray-600">排気量</span>
+                        <span className="font-semibold text-gray-900">{car.displacement}</span>
+                      </div>
+                      <div className="flex justify-between py-1.5">
+                        <span className="text-gray-600">系統色</span>
+                        <span className="font-semibold text-gray-900">{car.color}</span>
+                      </div>
+                    </div>
+
+                    {/* ボタン */}
+                    <div className="space-y-2">
+                      <Link
+                        href={`/cars/${car.id}`}
+                        className="block w-full text-center px-6 py-3 bg-kacchau text-gray-900 rounded-full font-bold hover:bg-kacchau-dark transition-colors shadow-md"
+                      >
+                        詳細を見る
+                      </Link>
+                      <Link
+                        href="/contact"
+                        className="block w-full text-center px-6 py-3 bg-white text-kacchau border-2 border-kacchau rounded-full font-bold hover:bg-gray-50 transition-colors"
+                      >
+                        お問い合わせ
+                      </Link>
+                    </div>
                   </div>
                 </div>
-
-                {/* 詳細情報 */}
-                <div className="space-y-2 text-sm mb-6">
-                  <div className="flex justify-between py-1.5">
-                    <span className="text-gray-600">年式</span>
-                    <span className="font-semibold text-gray-900">{car.year}</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
-                    <span className="text-gray-600">走行距離</span>
-                    <span className="font-semibold text-gray-900">{car.mileage}</span>
-                  </div>
-                  <div className="flex justify-between py-1.5">
-                    <span className="text-gray-600">修復歴</span>
-                    <span className="font-semibold text-green-600">{car.repairHistory}</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
-                    <span className="text-gray-600">シフト</span>
-                    <span className="font-semibold text-gray-900">{car.transmission}</span>
-                  </div>
-                  <div className="flex justify-between py-1.5">
-                    <span className="text-gray-600">駆動</span>
-                    <span className="font-semibold text-gray-900">{car.drive}</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
-                    <span className="text-gray-600">排気量</span>
-                    <span className="font-semibold text-gray-900">{car.displacement}</span>
-                  </div>
-                  <div className="flex justify-between py-1.5">
-                    <span className="text-gray-600">系統色</span>
-                    <span className="font-semibold text-gray-900">{car.color}</span>
-                  </div>
-                </div>
-
-                {/* ボタン */}
-                <div className="space-y-2">
-                  <Link
-                    href={`/cars/${car.id}`}
-                    className="block w-full text-center px-6 py-3 bg-kacchau text-gray-900 rounded-full font-bold hover:bg-kacchau-dark transition-colors shadow-md"
-                  >
-                    詳細を見る
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="block w-full text-center px-6 py-3 bg-white text-kacchau border-2 border-kacchau rounded-full font-bold hover:bg-gray-50 transition-colors"
-                  >
-                    お問い合わせ
-                  </Link>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
 
         {/* お問い合わせCTA */}
         <div className="mt-16 text-center bg-white rounded-lg shadow-lg p-8">

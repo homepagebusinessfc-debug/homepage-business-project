@@ -310,6 +310,45 @@ export default function InspectionPage() {
                 </label>
               </div>
 
+              {/* ★ オンライン予約セクション */}
+              <div className="mb-6">
+                <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Calendar className="text-kacchau" size={32} />
+                    <h3 className="text-2xl font-bold text-gray-800">
+                      オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
+                    </h3>
+                  </div>
+                  <p className="text-gray-700 mb-4">
+                    車検のご来店予約をオンラインで受け付けています。<br />
+                    以下のカレンダーからご都合の良い日時をお選びください。
+                  </p>
+                  
+                  {/* Timerex埋め込みエリア */}
+                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[400px] flex items-center justify-center">
+                    <div className="text-center text-gray-500">
+                      <Calendar size={48} className="mx-auto mb-4" />
+                      <p className="font-semibold mb-2">
+                        Timerexカレンダーをここに埋め込みます
+                      </p>
+                      <p className="text-sm">
+                        実装時には、Timerexの埋め込みコードを<br />
+                        このエリアに挿入してください
+                      </p>
+                    </div>
+                    {/* 
+                    実装例:
+                    <iframe 
+                      src="YOUR_TIMEREX_EMBED_URL" 
+                      width="100%" 
+                      height="600" 
+                      frameBorder="0"
+                    ></iframe>
+                    */}
+                  </div>
+                </div>
+              </div>
+
               <button
                 type="submit"
                 className="w-full bg-kacchau text-gray-900 py-4 rounded-lg font-bold text-lg hover:bg-kacchau-dark transition-colors shadow-lg"
@@ -321,45 +360,6 @@ export default function InspectionPage() {
                 ※お客様からご提供頂いた個人情報は、車検のご案内（電話・メール等）及びサービス提供のために利用いたします。
               </p>
             </form>
-          </div>
-
-          {/* ★ 新規追加：オンライン予約セクション */}
-          <div className="mt-12">
-            <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
-              <div className="flex items-center gap-3 mb-4">
-                <Calendar className="text-kacchau" size={32} />
-                <h2 className="text-2xl font-bold text-gray-800">
-                  オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
-                </h2>
-              </div>
-              <p className="text-gray-700 mb-4">
-                車検のご来店予約をオンラインで受け付けています。<br />
-                以下のカレンダーからご都合の良い日時をお選びください。
-              </p>
-              
-              {/* Timerex埋め込みエリア */}
-              <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[400px] flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <Calendar size={48} className="mx-auto mb-4" />
-                  <p className="font-semibold mb-2">
-                    Timerexカレンダーをここに埋め込みます
-                  </p>
-                  <p className="text-sm">
-                    実装時には、Timerexの埋め込みコードを<br />
-                    このエリアに挿入してください
-                  </p>
-                </div>
-                {/* 
-                実装例:
-                <iframe 
-                  src="YOUR_TIMEREX_EMBED_URL" 
-                  width="100%" 
-                  height="600" 
-                  frameBorder="0"
-                ></iframe>
-                */}
-              </div>
-            </div>
           </div>
         </div>
       </section>

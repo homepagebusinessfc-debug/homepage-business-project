@@ -309,6 +309,168 @@ export default function CarsPage() {
         </div>
       </div>
 
+      {/* Services Section - カッチャウの事業 */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12 text-kacchau">
+            カッチャウの事業
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* クルマを探す */}
+            <Link 
+              href="/search"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/search_car.png" 
+                  alt="クルマを探す" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">クルマを探す</h3>
+                <p className="text-gray-600">直販システムで、いい車をお安く販売します。</p>
+              </div>
+            </Link>
+
+            {/* クルマを売る */}
+            <Link 
+              href="/sell"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/sell_car.png" 
+                  alt="クルマを売る" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">クルマを売る</h3>
+                <p className="text-gray-600">カッチャウの高額査定システムで高価買い取りが可能です。</p>
+              </div>
+            </Link>
+
+            {/* 車検見積・予約 */}
+            <Link 
+              href="/inspection"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/inspection.jpg" 
+                  alt="車検見積・予約" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">車検見積・予約</h3>
+                <p className="text-gray-600">車検のお見積もりとご予約を承ります。</p>
+              </div>
+            </Link>
+
+            {/* オイル交換 */}
+            <Link 
+              href="/oil-change"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/oil-change.jpg" 
+                  alt="オイル交換" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">オイル交換</h3>
+                <p className="text-gray-600">定期的なオイル交換で愛車を長持ちさせます。</p>
+              </div>
+            </Link>
+
+            {/* 店舗一覧 */}
+            <Link 
+              href="/shop"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/shop_list.png" 
+                  alt="店舗一覧" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">店舗一覧</h3>
+                <p className="text-gray-600">カッチャウは佐賀県内5店舗展開中です。</p>
+              </div>
+            </Link>
+
+            {/* カッチャウについて */}
+            <Link 
+              href="/about"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative bg-gradient-to-br from-kacchau to-kacchau-dark flex items-center justify-center">
+                <Image 
+                  src="/logo_kacchau.png" 
+                  alt="カッチャウについて" 
+                  fill
+                  className="object-contain p-2"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">カッチャウについて</h3>
+                <p className="text-gray-600">車を売る・買うならカッチャウのワケ。</p>
+              </div>
+            </Link>
+
+            {/* レンタカー */}
+            <Link 
+              href="/rental"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/rental_car.jpg" 
+                  alt="レンタカー（代車）" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">レンタカー（代車）</h3>
+                <p className="text-gray-600">レンタカーもカッチャウで。</p>
+              </div>
+            </Link>
+
+            {/* よくある質問 */}
+            <Link 
+              href="/question"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-2 duration-300"
+            >
+              <div className="h-40 relative">
+                <Image 
+                  src="/faq.jpg" 
+                  alt="よくある質問" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2">よくある質問</h3>
+                <p className="text-gray-600">車を売る・買うに関する質問です。</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Page Top Button */}
       <section className="py-12 pb-32 sm:pb-12 text-center bg-gray-50">
         <button 

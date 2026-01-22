@@ -199,7 +199,35 @@ export default function SellPage() {
                 />
               </div>
 
-              {/* ★ 追加：プライバシーポリシー同意チェックボックス */}
+              {/* オンライン予約（任意） */}
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2">
+                  オンライン予約 <span className="text-gray-500 text-sm">任意</span>
+                </label>
+                <p className="text-sm text-gray-600 mb-3">
+                  ご来店またはオンライン査定のご希望日時がございましたら、ご選択ください。
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-gray-600 mb-2">ご希望日</label>
+                    <input
+                      type="date"
+                      className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-600 mb-2">ご希望時間帯</label>
+                    <select className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau">
+                      <option value="">選択してください</option>
+                      <option value="morning">午前（9:00-12:00）</option>
+                      <option value="afternoon">午後（13:00-17:00）</option>
+                      <option value="evening">夕方（17:00-19:00）</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* プライバシーポリシー同意チェックボックス */}
               <div className="bg-gray-50 border border-gray-300 rounded-lg p-4">
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
@@ -215,6 +243,7 @@ export default function SellPage() {
                   </span>
                 </label>
               </div>
+
               {/* 個人情報利用に関する注意書き */}
               <p className="mt-6 text-sm text-gray-600 leading-relaxed">
                 ※お客様からご提供頂いた個人情報は、買取のご案内（電話・メール等）及びサービス提供のために利用いたします。

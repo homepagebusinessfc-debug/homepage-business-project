@@ -106,15 +106,20 @@ body {
 @media (max-width: 768px) {
   .timerex-container {
     min-height: auto !important;
+    max-height: none !important;
     padding: 0.5rem !important;
+    overflow: visible !important; /* スクロール可能に */
   }
   
   /* Timerexカレンダー全体を縮小して見やすく */
   .timerex-container #timerex_calendar {
-    transform: scale(0.85);
+    transform: scale(0.9);
     transform-origin: top center;
-    width: 117.6%; /* 100% / 0.85 = 117.6% */
-    margin-left: -8.8%; /* (117.6% - 100%) / 2 */
+    width: 111.1%; /* 100% / 0.9 */
+    margin-left: -5.55%; /* (111.1% - 100%) / 2 */
+    margin-bottom: 0; /* 負の値を削除 */
+    overflow-y: auto !important; /* 縦スクロール可能 */
+    max-height: 600px; /* 最大高さを設定 */
   }
   
   /* iframeがある場合の調整 */
@@ -127,9 +132,12 @@ body {
 /* さらに小さい画面（スマホ縦向き）の場合 */
 @media (max-width: 480px) {
   .timerex-container #timerex_calendar {
-    transform: scale(0.75);
+    transform: scale(0.85);
     transform-origin: top center;
-    width: 133.3%; /* 100% / 0.75 = 133.3% */
-    margin-left: -16.65%; /* (133.3% - 100%) / 2 */
+    width: 117.6%; /* 100% / 0.85 */
+    margin-left: -8.8%; /* (117.6% - 100%) / 2 */
+    margin-bottom: 0;
+    overflow-y: auto !important;
+    max-height: 500px;
   }
 }

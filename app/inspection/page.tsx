@@ -356,7 +356,7 @@ export default function InspectionPage() {
               <span>0952-27-0060</span>
             </a>
           </div>
-          <p className="text-gray-600 mt-4">受付時間: 9:00〜19:00</p>
+          <p className="text-gray-600 mt-4">受付時間: 9:00〜19:00(不定休)</p>
         </div>
       </section>
 

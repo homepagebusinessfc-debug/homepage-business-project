@@ -1,12 +1,12 @@
 'use client';
-
 import Link from 'next/link';
 import { ChevronRight, Calendar } from 'lucide-react';
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import Script from 'next/script';
 
 export default function SellPage() {
   const [images, setImages] = useState<File[]>([]);
+  const [timerexLoaded, setTimerexLoaded] = useState(false);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -14,8 +14,23 @@ export default function SellPage() {
     setImages(files as File[]);
   };
 
+  useEffect(() => {
+    // Timerexスクリプトがロードされたら初期化
+    if (timerexLoaded && typeof window !== 'undefined' && (window as any).TimerexCalendar) {
+      (window as any).TimerexCalendar();
+    }
+  }, [timerexLoaded]);
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Timerex Script */}
+      <Script
+        id="timerex_embed"
+        src="https://asset.timerex.net/js/embed.js"
+        strategy="lazyOnload"
+        onLoad={() => setTimerexLoaded(true)}
+      />
+
       {/* Breadcrumb */}
       <div className="bg-white py-4 px-4 border-b">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm">
@@ -40,7 +55,6 @@ export default function SellPage() {
           </p>
         </div>
       </section>
-
 
       <div className="max-w-5xl mx-auto py-12 px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
@@ -111,7 +125,6 @@ export default function SellPage() {
                 />
               </div>
 
-
               {/* 電話番号 */}
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
@@ -130,10 +143,9 @@ export default function SellPage() {
                 </label>
                 <input
                   type="text"
-                  placeholder="例：トヨタ プリウス 2018年式"
+                  placeholder="例:トヨタ プリウス 2018年式"
                   className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
                 />
-                {/* ★ 追加：注意書き */}
                 <p className="mt-2 text-sm text-gray-600">
                   ※年式・車種が不明な方はお電話ください。（
                   <a href="tel:0952-27-0060" className="text-kacchau hover:underline font-semibold">
@@ -150,7 +162,7 @@ export default function SellPage() {
                 </label>
                 <input
                   type="text"
-                  placeholder="例：50,000km"
+                  placeholder="例:50,000km"
                   className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
                 />
               </div>
@@ -199,7 +211,7 @@ export default function SellPage() {
                 />
               </div>
 
-              {/* ★ Timerexカレンダーセクションをここに移動 */}
+              {/* Timerexカレンダーセクション */}
               <div>
                 <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
                   <div className="flex items-center gap-3 mb-4">
@@ -214,26 +226,8 @@ export default function SellPage() {
                   </p>
                   
                   {/* Timerex埋め込みエリア */}
-                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[400px] flex items-center justify-center">
-                    <div className="text-center text-gray-500">
-                      <Calendar size={48} className="mx-auto mb-4" />
-                      <p className="font-semibold mb-2">
-                        Timerexカレンダーをここに埋め込みます
-                      </p>
-                      <p className="text-sm">
-                        実装時には、Timerexの埋め込みコードを<br />
-                        このエリアに挿入してください
-                      </p>
-                    </div>
-                    {/* 
-                    実装例:
-                    <iframe 
-                      src="YOUR_TIMEREX_EMBED_URL" 
-                      width="100%" 
-                      height="600" 
-                      frameBorder="0"
-                    ></iframe>
-                    */}
+                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[600px]">
+                    <div id="timerex_calendar" data-url="https://timerex.net/s/homepage.business.fc_8d0c/0b297a94"></div>
                   </div>
                 </div>
               </div>

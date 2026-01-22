@@ -226,8 +226,24 @@ export default function SellPage() {
                   </p>
                   
                   {/* Timerex埋め込みエリア */}
-                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[600px]">
-                    <div id="timerex_calendar" data-url="https://timerex.net/s/homepage.business.fc_8d0c/0b297a94"></div>
+                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[250px] md:min-h-[400px] timerex-container">
+                    {/* Begin TimeRex Widget */}
+                    <div 
+                      id="timerex_calendar" 
+                      data-url="https://timerex.net/s/homepage.business.fc_8d0c/0b297a94"
+                    ></div>
+                    
+                    <Script 
+                      id="timerex_embed" 
+                      src="https://asset.timerex.net/js/embed.js"
+                      strategy="lazyOnload"
+                      onLoad={() => {
+                        if (typeof window !== 'undefined' && (window as any).TimerexCalendar) {
+                          (window as any).TimerexCalendar();
+                        }
+                      }}
+                    />
+                    {/* End TimeRex Widget */}
                   </div>
                 </div>
               </div>

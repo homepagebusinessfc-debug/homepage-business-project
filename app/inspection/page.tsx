@@ -286,7 +286,7 @@ export default function InspectionPage() {
                   </p>
                   
                   {/* Timerex埋め込みエリア */}
-                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[400px]">
+                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[250px] md:min-h-[400px] timerex-container">
                     {/* Begin TimeRex Widget */}
                     <div 
                       id="timerex_calendar" 

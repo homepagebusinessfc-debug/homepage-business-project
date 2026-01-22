@@ -49,3 +49,67 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #b91c1c;
 }
+
+/* Timerexカスタマイズ */
+
+/* ロゴを非表示 */
+.timerex-container .timerex-logo,
+.timerex-container [class*="logo"],
+.timerex-container img[alt*="TimeRex"],
+.timerex-container img[alt*="timerex"] {
+  display: none !important;
+}
+
+/* 色をカッチャウの黄色系に変更 */
+.timerex-container .timerex-calendar,
+.timerex-container [class*="calendar"] {
+  --timerex-primary: #FFC700 !important;
+  --timerex-secondary: #FFD700 !important;
+}
+
+/* ボタンやリンクの色 */
+.timerex-container button,
+.timerex-container .btn,
+.timerex-container [class*="button"] {
+  background-color: #FFC700 !important;
+  border-color: #FFC700 !important;
+}
+
+.timerex-container button:hover,
+.timerex-container .btn:hover,
+.timerex-container [class*="button"]:hover {
+  background-color: #FFB700 !important;
+  border-color: #FFB700 !important;
+}
+
+/* 選択された日付の色 */
+.timerex-container .selected,
+.timerex-container [class*="selected"],
+.timerex-container .active,
+.timerex-container [class*="active"] {
+  background-color: #FFC700 !important;
+  color: #1a1a1a !important;
+}
+
+/* リンクの色 */
+.timerex-container a,
+.timerex-container [class*="link"] {
+  color: #FFC700 !important;
+}
+
+.timerex-container a:hover,
+.timerex-container [class*="link"]:hover {
+  color: #FFB700 !important;
+}
+
+/* スマホ表示時の高さ調整 */
+@media (max-width: 768px) {
+  .timerex-container {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  
+  .timerex-container iframe {
+    max-height: 450px;
+  }
+}

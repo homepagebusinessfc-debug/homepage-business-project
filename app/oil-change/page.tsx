@@ -276,38 +276,41 @@ export default function OilChangePage() {
                 ></textarea>
               </div>
 
-              {/* オンライン予約（任意） */}
+              {/* ★ Timerexカレンダーセクションを追加 */}
               <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  オンライン予約 <span className="text-gray-500 text-sm">任意</span>
-                </label>
-                <p className="text-sm text-gray-600 mb-3">
-                  ご希望の入庫日時がございましたら、ご選択ください。
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm text-gray-600 mb-2">ご希望日</label>
-                    <input
-                      type="date"
-                      name="preferredDate"
-                      value={formData.preferredDate}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
-                    />
+                <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Calendar className="text-kacchau" size={32} />
+                    <h3 className="text-xl font-bold text-gray-800">
+                      オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
+                    </h3>
                   </div>
-                  <div>
-                    <label className="block text-sm text-gray-600 mb-2">ご希望時間帯</label>
-                    <select
-                      name="preferredTime"
-                      value={formData.preferredTime}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
-                    >
-                      <option value="">選択してください</option>
-                      <option value="morning">午前（9:00-12:00）</option>
-                      <option value="afternoon">午後（13:00-17:00）</option>
-                      <option value="evening">夕方（17:00-19:00）</option>
-                    </select>
+                  <p className="text-gray-700 mb-4">
+                    オイル交換のご予約をオンラインで受け付けています。<br />
+                    以下のカレンダーからご都合の良い日時をお選びください。
+                  </p>
+                  
+                  {/* Timerex埋め込みエリア */}
+                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[400px] flex items-center justify-center">
+                    <div className="text-center text-gray-500">
+                      <Calendar size={48} className="mx-auto mb-4" />
+                      <p className="font-semibold mb-2">
+                        Timerexカレンダーをここに埋め込みます
+                      </p>
+                      <p className="text-sm">
+                        実装時には、Timerexの埋め込みコードを<br />
+                        このエリアに挿入してください
+                      </p>
+                    </div>
+                    {/* 
+                    実装例:
+                    <iframe 
+                      src="YOUR_TIMEREX_EMBED_URL" 
+                      width="100%" 
+                      height="600" 
+                      frameBorder="0"
+                    ></iframe>
+                    */}
                   </div>
                 </div>
               </div>

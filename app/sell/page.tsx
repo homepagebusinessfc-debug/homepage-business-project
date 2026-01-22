@@ -199,30 +199,41 @@ export default function SellPage() {
                 />
               </div>
 
-              {/* オンライン予約（任意） */}
+              {/* ★ Timerexカレンダーセクションをここに移動 */}
               <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  オンライン予約 <span className="text-gray-500 text-sm">任意</span>
-                </label>
-                <p className="text-sm text-gray-600 mb-3">
-                  ご来店またはオンライン査定のご希望日時がございましたら、ご選択ください。
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm text-gray-600 mb-2">ご希望日</label>
-                    <input
-                      type="date"
-                      className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
-                    />
+                <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Calendar className="text-kacchau" size={32} />
+                    <h3 className="text-xl font-bold text-gray-800">
+                      オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
+                    </h3>
                   </div>
-                  <div>
-                    <label className="block text-sm text-gray-600 mb-2">ご希望時間帯</label>
-                    <select className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau">
-                      <option value="">選択してください</option>
-                      <option value="morning">午前（9:00-12:00）</option>
-                      <option value="afternoon">午後（13:00-17:00）</option>
-                      <option value="evening">夕方（17:00-19:00）</option>
-                    </select>
+                  <p className="text-gray-700 mb-4">
+                    査定のご来店予約をオンラインで受け付けています。<br />
+                    以下のカレンダーからご都合の良い日時をお選びください。
+                  </p>
+                  
+                  {/* Timerex埋め込みエリア */}
+                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[400px] flex items-center justify-center">
+                    <div className="text-center text-gray-500">
+                      <Calendar size={48} className="mx-auto mb-4" />
+                      <p className="font-semibold mb-2">
+                        Timerexカレンダーをここに埋め込みます
+                      </p>
+                      <p className="text-sm">
+                        実装時には、Timerexの埋め込みコードを<br />
+                        このエリアに挿入してください
+                      </p>
+                    </div>
+                    {/* 
+                    実装例:
+                    <iframe 
+                      src="YOUR_TIMEREX_EMBED_URL" 
+                      width="100%" 
+                      height="600" 
+                      frameBorder="0"
+                    ></iframe>
+                    */}
                   </div>
                 </div>
               </div>
@@ -258,45 +269,6 @@ export default function SellPage() {
                 </button>
               </div>
             </form>
-          </div>
-
-          {/* ★ 新規追加：オンライン予約セクション */}
-          <div className="mt-12 pt-10 border-t border-gray-200">
-            <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
-              <div className="flex items-center gap-3 mb-4">
-                <Calendar className="text-kacchau" size={32} />
-                <h2 className="text-2xl font-bold text-gray-800">
-                  オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
-                </h2>
-              </div>
-              <p className="text-gray-700 mb-4">
-                査定のご来店予約をオンラインで受け付けています。<br />
-                以下のカレンダーからご都合の良い日時をお選びください。
-              </p>
-              
-              {/* Timerex埋め込みエリア */}
-              <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[400px] flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <Calendar size={48} className="mx-auto mb-4" />
-                  <p className="font-semibold mb-2">
-                    Timerexカレンダーをここに埋め込みます
-                  </p>
-                  <p className="text-sm">
-                    実装時には、Timerexの埋め込みコードを<br />
-                    このエリアに挿入してください
-                  </p>
-                </div>
-                {/* 
-                実装例:
-                <iframe 
-                  src="YOUR_TIMEREX_EMBED_URL" 
-                  width="100%" 
-                  height="600" 
-                  frameBorder="0"
-                ></iframe>
-                */}
-              </div>
-            </div>
           </div>
 
           {/* 既存のボタン群 */}

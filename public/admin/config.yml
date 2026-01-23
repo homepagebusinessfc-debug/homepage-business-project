@@ -5,6 +5,12 @@ backend:
   auth_type: pkce
   app_id: e9263f79115e4efa912d71cd06681c9d051e578a5625828b42a135c18bb8ded4
   base_url: https://gitlab.com
+  commit_messages:
+    create: 'Create {{collection}} {{slug}}'
+    update: 'Update {{collection}} {{slug}}'
+    delete: 'Delete {{collection}} {{slug}}'
+    uploadMedia: 'Upload media {{path}}'
+    deleteMedia: 'Delete media {{path}}'
 
 # メディアファイルの保存先
 media_folder: "public/uploads"

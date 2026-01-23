@@ -4,8 +4,7 @@ id: 1
 type: used
 category: imported
 maker: BMW
-body: ワゴン
-image: /car1.jpg
+image: /uploads/img20260113124822.jpg
 year: 2015年
 mileage: 8.5万km
 repairHistory: 修復歴なし

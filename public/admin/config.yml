@@ -198,10 +198,3 @@ collections:
         widget: "datetime"
         default: ""
         required: false
-      
-      # 本文
-      - label: "詳細説明"
-        name: "body"
-        widget: "markdown"
-        required: false
-        hint: "車両の詳細説明を記入してください"

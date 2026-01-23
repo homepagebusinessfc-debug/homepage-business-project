@@ -96,7 +96,7 @@ collections:
         required: false
       
       - label: "ボディタイプ"
-        name: "body"
+        name: "bodyType"
         widget: "string"
         hint: "例：セダン、SUV、軽自動車、ワゴン"
         required: false
@@ -198,3 +198,10 @@ collections:
         widget: "datetime"
         default: ""
         required: false
+      
+      # 本文
+      - label: "詳細説明"
+        name: "body"
+        widget: "markdown"
+        required: false
+        hint: "車両の詳細説明を記入してください"

@@ -6,11 +6,11 @@ backend:
   app_id: e9263f79115e4efa912d71cd06681c9d051e578a5625828b42a135c18bb8ded4
   base_url: https://gitlab.com
   commit_messages:
-    create: 'Create {{collection}} {{slug}}'
-    update: 'Update {{collection}} {{slug}}'
-    delete: 'Delete {{collection}} {{slug}}'
-    uploadMedia: 'Upload media {{path}}'
-    deleteMedia: 'Delete media {{path}}'
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload "{{path}}"'
+    deleteMedia: 'Delete "{{path}}"'
 
 # メディアファイルの保存先
 media_folder: "public/uploads"
@@ -45,7 +45,7 @@ collections:
       - { label: "Tags", name: "tags", widget: "list", required: false }
 
   # 新車・中古車コレクション
-  - name: "cars"
+  - name: "車両"
     label: "新車・中古車"
     label_singular: "車両"
     folder: "content/cars"
@@ -98,7 +98,7 @@ collections:
       - label: "ボディタイプ"
         name: "body"
         widget: "string"
-        hint: "例：セダン、SUV、軽自動車"
+        hint: "例：セダン、SUV、軽自動車、ワゴン"
         required: false
       
       # 車両画像
@@ -198,3 +198,10 @@ collections:
         widget: "datetime"
         default: ""
         required: false
+      
+      # 本文
+      - label: "詳細説明"
+        name: "body"
+        widget: "markdown"
+        required: false
+        hint: "車両の詳細説明を記入してください"

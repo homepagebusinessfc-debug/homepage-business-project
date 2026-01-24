@@ -106,6 +106,12 @@ collections:
         name: "image"
         widget: "image"
         hint: "車両のメイン画像をアップロードしてください"
+        preview: true
+      - label: "プレビュー"
+        name: "preview"
+        widget: "info"
+        hint: "実際のWebサイトでの表示を確認するには、以下のURLにアクセスしてください：/preview/cars?id=[車両ID]"
+        required: false
       
       # 詳細情報
       - label: "年式"

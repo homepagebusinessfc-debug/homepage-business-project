@@ -194,11 +194,11 @@ export default function CarsPage() {
                 >
                   {/* 車両画像 */}
                   <div className="h-56 relative bg-gray-200">
-                    <Image 
-                      src={car.image} 
-                      alt={car.name} 
+                    <Image
+                      src={car.image}
+                      alt={car.name}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                     />
                     {/* 保証バッジ（左上） */}
                     <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">

@@ -221,12 +221,3 @@ export default function CarPreviewPage() {
     </div>
   );
 }
-<task_progress>
-- [x] CMS設定ファイルを理解する
-- [x] 車両データの構造を確認する
-- [x] プレビュー機能の設計を決定する
-- [x] プレビュー用のページを作成する
-- [ ] CMS設定にプレビュー機能を追加する
-- [ ] 変更をテストする
-</task_progress>
-</write_to_file>

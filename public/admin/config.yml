@@ -59,14 +59,14 @@ collections:
         name: "name"
         widget: "string"
         hint: "例：ＢＭＷ 318ｉ ツーリング"
-      
+
       - label: "車両ID"
         name: "id"
         widget: "number"
         value_type: "int"
         min: 1
         hint: "車両の一意なID番号"
-      
+
       - label: "車両区分"
         name: "type"
         widget: "select"
@@ -74,7 +74,7 @@ collections:
           - { label: "新車", value: "new" }
           - { label: "中古車", value: "used" }
         default: "used"
-      
+
       - label: "カテゴリー"
         name: "category"
         widget: "select"
@@ -87,27 +87,29 @@ collections:
           - { label: "ワゴン", value: "wagon" }
           - { label: "輸入車", value: "imported" }
         default: "kei"
-      
+
       # メーカー・車種情報
       - label: "メーカー名"
         name: "maker"
         widget: "string"
         hint: "例：トヨタ、BMW、ダイハツ"
         required: false
-      
+
       - label: "ボディタイプ"
         name: "bodyType"
         widget: "string"
         hint: "例：セダン、SUV、軽自動車、ワゴン"
         required: false
-      
+
       # 車両画像
       - label: "車両画像"
         name: "image"
         widget: "image"
         hint: "車両のメイン画像をアップロードしてください"
         preview: true
-      - label: "プレビュー"
+
+      # プレビュー機能
+      - label: "🔍 プレビュー機能"
         name: "preview"
         widget: "info"
         hint: "実際のWebサイトでの表示を確認するには、以下のURLにアクセスしてください：/preview/cars?id=[車両ID]"

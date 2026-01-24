@@ -11,7 +11,7 @@ export default function RentalPage() {
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm">
           <Link href="/" className="text-kacchau hover:underline">ホーム</Link>
           <ChevronRight size={16} className="text-gray-400" />
-          <span className="text-gray-600">レンタカー（代車サービス）</span>
+          <span className="text-gray-600">レンタカー（代車）</span>
         </div>
       </div>
 
@@ -20,7 +20,7 @@ export default function RentalPage() {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Car size={48} className="text-gray-900" />
-            <h1 className="text-4xl md:text-5xl font-bold">レンタカー（代車サービス）</h1>
+            <h1 className="text-4xl md:text-5xl font-bold">レンタカー（代車）</h1>
           </div>
           <p className="text-lg md:text-xl mb-2">
             レンタカーもカッチャウで。

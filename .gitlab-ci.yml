@@ -284,3 +284,4 @@ deploy_cloudflare_pages:
     - CLOUDFLARE_API_TOKEN: $CLOUDFLARE_API_TOKEN
   only:
     - main
+    

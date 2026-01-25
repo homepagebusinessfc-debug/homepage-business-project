@@ -280,8 +280,8 @@ deploy_cloudflare_pages:
         --project-name=$env:CLOUDFLARE_PROJECT_NAME `
         --branch=main `
         --commit-dirty=true
-  env:
-    - CLOUDFLARE_API_TOKEN: $CLOUDFLARE_API_TOKEN
+  variables:
+    CLOUDFLARE_API_TOKEN: $CLOUDFLARE_API_TOKEN
   only:
     - main
     

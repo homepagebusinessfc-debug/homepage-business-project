@@ -263,3 +263,24 @@ sync_to_github:
       
       Write-Host "✅ Successfully synced to GitHub (Private): https://github.com/${env:GITHUB_REPO}"
   when: on_success
+
+# Cloudflare Pagesへのデプロイ（追加）
+deploy_cloudflare_pages:
+  stage: deploy
+  tags:
+    - windows
+  dependencies:
+    - build
+  before_script:
+    - npm install -g wrangler
+  script:
+    - |
+      Write-Host "===== Deploying to Cloudflare Pages ====="
+      npx wrangler pages deploy out `
+        --project-name=$env:CLOUDFLARE_PROJECT_NAME `
+        --branch=main `
+        --commit-dirty=true
+  env:
+    - CLOUDFLARE_API_TOKEN: $CLOUDFLARE_API_TOKEN
+  only:
+    - main

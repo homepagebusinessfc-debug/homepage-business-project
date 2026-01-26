@@ -1,0 +1,7 @@
+tunnel: homepage-business-project-tunnel
+credentials-file: C:\Users\user\.cloudflared\743f800f-b612-4178-b635-ef3c5d7f2c90.json
+
+ingress:
+  - hostname: homepage business-project.internal
+    service: http://localhost:3000
+  - service: http_status:404

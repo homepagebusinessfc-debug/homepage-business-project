@@ -264,3 +264,42 @@ sync_to_github:
       Write-Host "✅ Successfully synced to GitHub (Private): https://github.com/${env:GITHUB_REPO}"
   when: on_success
 
+# Cloudflare Pagesへのデプロイ
+deploy_cloudflare_pages:
+  stage: deploy
+  tags:
+    - windows
+  dependencies:
+    - build
+  only:
+    - main
+
+  before_script:
+    - npm install -g wrangler
+
+  script:
+    - |
+      Write-Host "===== Deploying to Cloudflare Pages ====="
+
+      # 環境変数チェック（デバッグ用）
+      if (-not $env:CLOUDFLARE_API_TOKEN) {
+        Write-Error "CLOUDFLARE_API_TOKEN is not set"
+        exit 1
+      }
+
+      if (-not $env:CLOUDFLARE_ACCOUNT_ID) {
+        Write-Error "CLOUDFLARE_ACCOUNT_ID is not set"
+        exit 1
+      }
+
+      if (-not $env:CLOUDFLARE_PROJECT_NAME) {
+        Write-Error "CLOUDFLARE_PROJECT_NAME is not set"
+        exit 1
+      }
+
+      wrangler pages deploy out `
+        --project-name $env:CLOUDFLARE_PROJECT_NAME `
+        --branch main `
+        --commit-dirty true
+
+    

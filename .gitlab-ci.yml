@@ -38,8 +38,8 @@ verify:
       if (Test-Path tsconfig.json) { Get-Content tsconfig.json } else { Write-Host "tsconfig.json not found!" }
       Write-Host "===== Checking package.json ====="
       Get-Content package.json
-  only:
-    - main
+rules:
+  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
     - develop
 
 # 色の一括変換ステージ
@@ -72,8 +72,8 @@ convert-colors:
       - app/
       - components/
     expire_in: 1 hour
-  only:
-    - main
+rules:
+  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
     - develop
 
 # ビルド
@@ -101,8 +101,8 @@ build:
     paths:
       - out/
     expire_in: 1 hour
-  only:
-    - main
+rules:
+  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
     - develop
 
 # GitLab Pagesへのデプロイ
@@ -131,16 +131,16 @@ pages:
   artifacts:
     paths:
       - public
-  only:
-    - main
+rules:
+  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
 
 # GitHubへの同期（プライベートリポジトリ）
 sync_to_github:
   stage: sync
   tags:
     - windows
-  only:
-    - main
+rules:
+  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
   before_script:
     - git config --global core.longPaths true
   script:
@@ -271,8 +271,8 @@ deploy_cloudflare_pages:
     - windows
   dependencies:
     - build
-  only:
-    - main
+rules:
+  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
 
   before_script:
     - npm install -g wrangler

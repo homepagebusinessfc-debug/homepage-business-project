@@ -145,12 +145,19 @@ sync_to_github:
     - windows
   script:
     - |
+      Write-Host "===== Syncing to GitHub ====="
+
       git config --global user.name "GitLab CI"
       git config --global user.email "ci@gitlab.com"
 
+      # shallow clone 対策（最重要）
+      git fetch --all --prune
+
+      # remote 設定
       git remote remove github 2>$null
       git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
 
+      # 明示的に refs を指定して push
       git push github HEAD:refs/heads/main --force
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'

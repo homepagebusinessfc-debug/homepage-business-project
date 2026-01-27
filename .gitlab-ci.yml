@@ -1,4 +1,4 @@
-# Windows PowerShell用の.gitlab-ci.yml
+# Windows PowerShell用 .gitlab-ci.yml（修正版・完全動作）
 
 stages:
   - verify
@@ -19,7 +19,9 @@ cache:
     - node_modules/
     - .next/cache/
 
-# ファイル構造を確認
+# =========================
+# verify
+# =========================
 verify:
   stage: verify
   tags:
@@ -33,16 +35,17 @@ verify:
       Write-Host "===== Checking components directory ====="
       if (Test-Path components) { Get-ChildItem components } else { Write-Host "components directory not found!" }
       Write-Host "===== Checking app directory ====="
-      Get-ChildItem app
+      if (Test-Path app) { Get-ChildItem app } else { Write-Host "app directory not found!" }
       Write-Host "===== Checking tsconfig.json ====="
       if (Test-Path tsconfig.json) { Get-Content tsconfig.json } else { Write-Host "tsconfig.json not found!" }
       Write-Host "===== Checking package.json ====="
       Get-Content package.json
-rules:
-  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
-    - develop
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && ($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop")'
 
-# 色の一括変換ステージ
+# =========================
+# convert
+# =========================
 convert-colors:
   stage: convert
   tags:
@@ -52,31 +55,31 @@ convert-colors:
     - npm cache clean --force
   script:
     - |
-      Write-Host "Node version:" (node --version)
-      Write-Host "NPM version:" (npm --version)
-      Write-Host "===== Installing dependencies ====="
+      Write-Host "Node:" (node --version)
+      Write-Host "NPM:" (npm --version)
+
       if (Test-Path package-lock.json) {
         npm ci --prefer-offline --no-audit
       } else {
         npm install --prefer-offline --no-audit
       }
-      Write-Host "===== Converting colors from red to yellow ====="
+
       if (Test-Path scripts/convert-colors.js) {
         npm run convert-colors
       } else {
-        Write-Host "⚠️  Warning: scripts/convert-colors.js not found, skipping color conversion"
+        Write-Host "⚠️ convert-colors.js not found, skipping"
       }
-      Write-Host "===== Color conversion completed ====="
   artifacts:
     paths:
       - app/
       - components/
     expire_in: 1 hour
-rules:
-  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
-    - develop
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && ($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop")'
 
-# ビルド
+# =========================
+# build
+# =========================
 build:
   stage: build
   tags:
@@ -88,24 +91,25 @@ build:
     - npm cache clean --force
   script:
     - |
-      Write-Host "Node version:" (node --version)
-      Write-Host "NPM version:" (npm --version)
-      Write-Host "===== Starting build process ====="
+      Write-Host "===== Build ====="
+
       if (Test-Path package-lock.json) {
         npm ci --prefer-offline --no-audit
       } else {
         npm install --prefer-offline --no-audit
       }
+
       npm run build
   artifacts:
     paths:
       - out/
     expire_in: 1 hour
-rules:
-  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
-    - develop
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && ($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop")'
 
-# GitLab Pagesへのデプロイ
+# =========================
+# GitLab Pages
+# =========================
 pages:
   stage: deploy
   tags:
@@ -116,182 +120,47 @@ pages:
     - git config --global core.longPaths true
   script:
     - |
-      Write-Host "===== Deploying to GitLab Pages ====="
+      Write-Host "===== Deploy GitLab Pages ====="
+
       if (-not (Test-Path public)) {
-        New-Item -ItemType Directory -Path public
+        New-Item -ItemType Directory -Path public | Out-Null
       }
+
       if (Test-Path out) {
-        Copy-Item -Path out/* -Destination public/ -Recurse -Force
+        Copy-Item out/* public/ -Recurse -Force
       } else {
-        Write-Host "エラー: out/フォルダが見つかりません"
-        Write-Host "利用可能なフォルダ:"
-        Get-ChildItem
+        Write-Error "out/ directory not found"
         exit 1
       }
   artifacts:
     paths:
       - public
-rules:
-  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
 
-# GitHubへの同期（プライベートリポジトリ）
-sync_to_github:
-  stage: sync
-  tags:
-    - windows
-rules:
-  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
-  before_script:
-    - git config --global core.longPaths true
-  script:
-    - |
-      $ProgressPreference = 'SilentlyContinue'
-      
-      Write-Host "===== Syncing to GitHub ====="
-      Write-Host "GitHub Repo: ${env:GITHUB_REPO}"
-      
-      git config --global user.name "GitLab CI"
-      git config --global user.email "ci@gitlab.com"
-      
-      Write-Host "===== Checking if GitHub repository exists ====="
-      $repoExists = $false
-      $repoInfo = $null
-      
-      try {
-        $response = Invoke-WebRequest `
-          -Uri "https://api.github.com/repos/${env:GITHUB_REPO}" `
-          -Headers @{Authorization = "token ${env:GITHUB_TOKEN}"} `
-          -Method Get `
-          -UseBasicParsing `
-          -ErrorAction Stop
-        
-        $repoExists = $true
-        $repoInfo = $response.Content | ConvertFrom-Json
-        Write-Host "✅ Repository exists on GitHub"
-        Write-Host "Current visibility: $(if ($repoInfo.private) { 'Private' } else { 'Public' })"
-      } catch {
-        $statusCode = $_.Exception.Response.StatusCode.value__
-        if ($statusCode -eq 404) {
-          Write-Host "⚠️  Repository does not exist on GitHub (404)"
-          $repoExists = $false
-        } else {
-          Write-Host "❌ Error checking repository (Status: $statusCode)"
-          Write-Host "Error: $($_.Exception.Message)"
-          exit 1
-        }
-      }
-      
-      if (-not $repoExists) {
-        Write-Host "===== Creating GitHub repository (Private) ====="
-        $repoName = ($env:GITHUB_REPO -split '/')[1]
-        $owner = ($env:GITHUB_REPO -split '/')[0]
-        
-        $body = @{
-          name = $repoName
-          description = "Synced from GitLab"
-          private = $true
-          auto_init = $false
-        } | ConvertTo-Json
-        
-        try {
-          $createUrl = "https://api.github.com/user/repos"
-          
-          $response = Invoke-RestMethod `
-            -Uri $createUrl `
-            -Headers @{
-              Authorization = "token ${env:GITHUB_TOKEN}"
-              Accept = "application/vnd.github.v3+json"
-            } `
-            -Method Post `
-            -Body $body `
-            -ContentType "application/json" `
-            -ErrorAction Stop
-          
-          Write-Host "✅ Private repository created successfully: ${env:GITHUB_REPO}"
-          Start-Sleep -Seconds 3
-        } catch {
-          Write-Host "❌ Failed to create repository"
-          Write-Host "Error: $($_.Exception.Message)"
-          if ($_.ErrorDetails.Message) {
-            Write-Host "Details: $($_.ErrorDetails.Message)"
-          }
-          exit 1
-        }
-      } else {
-        if ($repoInfo -and -not $repoInfo.private) {
-          Write-Host "===== Converting repository to Private ====="
-          $updateBody = @{
-            private = $true
-          } | ConvertTo-Json
-          
-          try {
-            $response = Invoke-RestMethod `
-              -Uri "https://api.github.com/repos/${env:GITHUB_REPO}" `
-              -Headers @{
-                Authorization = "token ${env:GITHUB_TOKEN}"
-                Accept = "application/vnd.github.v3+json"
-              } `
-              -Method Patch `
-              -Body $updateBody `
-              -ContentType "application/json" `
-              -ErrorAction Stop
-            
-            Write-Host "✅ Repository converted to Private"
-          } catch {
-            Write-Host "⚠️  Warning: Failed to convert repository to private"
-            Write-Host "Error: $($_.Exception.Message)"
-            Write-Host "Continuing with sync..."
-          }
-        } else {
-          Write-Host "✅ Repository is already Private"
-        }
-      }
-      
-      Write-Host "===== Adding GitHub remote ====="
-      git fetch --all
-      git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git 2>$null
-      if ($LASTEXITCODE -ne 0) {
-        git remote set-url github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
-      }
-      
-      Write-Host "===== Pushing to GitHub ====="
-      if (-not $repoExists) {
-        git push github HEAD:main
-      } else {
-        git push github HEAD:main --force
-      }
-      
-      Write-Host "✅ Successfully synced to GitHub (Private): https://github.com/${env:GITHUB_REPO}"
-  when: on_success
-
-# Cloudflare Pagesへのデプロイ
+# =========================
+# Cloudflare Pages
+# =========================
 deploy_cloudflare_pages:
   stage: deploy
   tags:
     - windows
   dependencies:
     - build
-rules:
-  - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
-
   before_script:
     - npm install -g wrangler
-
   script:
     - |
-      Write-Host "===== Deploying to Cloudflare Pages ====="
+      Write-Host "===== Deploy Cloudflare Pages ====="
 
-      # 環境変数チェック（デバッグ用）
       if (-not $env:CLOUDFLARE_API_TOKEN) {
         Write-Error "CLOUDFLARE_API_TOKEN is not set"
         exit 1
       }
-
       if (-not $env:CLOUDFLARE_ACCOUNT_ID) {
         Write-Error "CLOUDFLARE_ACCOUNT_ID is not set"
         exit 1
       }
-
       if (-not $env:CLOUDFLARE_PROJECT_NAME) {
         Write-Error "CLOUDFLARE_PROJECT_NAME is not set"
         exit 1
@@ -301,5 +170,31 @@ rules:
         --project-name $env:CLOUDFLARE_PROJECT_NAME `
         --branch main `
         --commit-dirty true
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
 
-    
+# =========================
+# GitHub Sync (Private)
+# =========================
+sync_to_github:
+  stage: sync
+  tags:
+    - windows
+  before_script:
+    - git config --global core.longPaths true
+  script:
+    - |
+      $ProgressPreference = 'SilentlyContinue'
+
+      git config --global user.name "GitLab CI"
+      git config --global user.email "ci@gitlab.com"
+
+      git fetch --all
+      git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git 2>$null
+      if ($LASTEXITCODE -ne 0) {
+        git remote set-url github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
+      }
+
+      git push github HEAD:main --force
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'

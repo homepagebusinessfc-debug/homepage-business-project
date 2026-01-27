@@ -5,6 +5,9 @@ backend:
   auth_type: pkce
   app_id: e9263f79115e4efa912d71cd06681c9d051e578a5625828b42a135c18bb8ded4
   base_url: https://gitlab.com
+  # セキュリティ設定
+  auth_scope: api
+  squash_merges: true
   commit_messages:
     create: 'Create {{collection}} "{{slug}}"'
     update: 'Update {{collection}} "{{slug}}"'
@@ -15,6 +18,13 @@ backend:
 # メディアファイルの保存先
 media_folder: "public/uploads"
 public_folder: "/uploads"
+# メディアファイルのサイズ制限
+media_library:
+  max_file_size: 5120000  # 5MB
+  folder_support: true
+
+# 公開ワークフロー（承認プロセス）
+publish_mode: editorial_workflow
 
 # コレクション設定
 collections:

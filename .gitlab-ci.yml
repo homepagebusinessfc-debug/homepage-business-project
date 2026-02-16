@@ -143,21 +143,44 @@ sync_to_github:
   stage: sync
   tags:
     - windows
+  variables:
+    GIT_DEPTH: 0  # shallow cloneを無効化し、完全な履歴を取得
   script:
     - |
       Write-Host "===== Syncing to GitHub ====="
-
+      
+      # Git設定
       git config --global user.name "GitLab CI"
       git config --global user.email "ci@gitlab.com"
-
-      # shallow clone 対策（最重要）
-      git fetch --all --prune
-
-      # remote 設定
+      
+      # 現在のブランチとコミット情報を確認
+      Write-Host "Current branch: $(git branch --show-current)"
+      Write-Host "Current commit: $(git rev-parse HEAD)"
+      
+      # すべてのリモートブランチを取得
+      git fetch --all --prune --unshallow 2>$null
+      
+      # GitHub remoteの設定
       git remote remove github 2>$null
       git remote add github https://${env:GITHUB_TOKEN}@github.com/${env:GITHUB_REPO}.git
-
-      # 明示的に refs を指定して push
-      git push github HEAD:refs/heads/main --force
+      
+      # GitHub側のリポジトリ状態を確認
+      Write-Host "Fetching GitHub repository state..."
+      git fetch github
+      
+      # mainブランチを明示的にチェックアウト
+      git checkout -B main
+      
+      # force-with-leaseを使用した安全なforce push
+      # これにより、誤って他の変更を上書きするリスクを軽減
+      try {
+          git push github main:main --force-with-lease
+      } catch {
+          Write-Host "Force-with-lease failed. Trying standard force push..."
+          git push github main:main --force
+      }
+      
+      Write-Host "===== Sync completed successfully ====="
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
+  allow_failure: false

@@ -18,6 +18,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    # GitHub Actionsに必要な権限を明示的に付与
+    permissions:
+      contents: read        # コードの読み取り
+      deployments: write    # デプロイメントステータスの書き込み（Cloudflare Pages Actionで必要）
+
     steps:
       # -------------------------------------------------------
       # 1. コードを取得

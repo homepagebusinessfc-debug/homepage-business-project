@@ -264,17 +264,11 @@ export default function CarsPage() {
                       </div>
                     </div>
 
-                    {/* ボタン */}
-                    <div className="space-y-2">
-                      <Link
-                        href={`/cars/${car.id}`}
-                        className="block w-full text-center px-6 py-3 bg-kacchau text-gray-900 rounded-full font-bold hover:bg-kacchau-dark transition-colors shadow-md"
-                      >
-                        詳細を見る
-                      </Link>
+                    {/* ボタン - タスク1: 「詳細を見る」削除 */}
+                    <div>
                       <Link
                         href="/contact"
-                        className="block w-full text-center px-6 py-3 bg-white text-kacchau border-2 border-kacchau rounded-full font-bold hover:bg-gray-50 transition-colors"
+                        className="block w-full text-center px-6 py-3 bg-kacchau text-gray-900 rounded-full font-bold hover:bg-kacchau-dark transition-colors shadow-md"
                       >
                         お問い合わせ
                       </Link>

@@ -211,30 +211,86 @@ export default function SellPage() {
                 />
               </div>
 
-              {/* Timerexカレンダーセクション */}
+              {/* タスク3: 日付選択UI（TimeRex削除） */}
               <div>
-                <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Calendar className="text-kacchau" size={32} />
-                    <h3 className="text-xl font-bold text-gray-800">
-                      オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
-                    </h3>
-                  </div>
-                  <p className="text-gray-700 mb-4">
-                    査定のご来店予約をオンラインで受け付けています。<br />
-                    以下のカレンダーからご都合の良い日時をお選びください。
-                  </p>
-                  
-                  {/* Timerex埋め込みエリア */}
-                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[250px] md:min-h-[400px] timerex-container">
-                    {/* Begin TimeRex Widget */}
-                    <div 
-                      id="timerex_calendar" 
-                      data-url="https://timerex.net/s/homepage.business.fc_8d0c/0b297a94"
-                    ></div>
-                    
-                    <Script 
-                      id="timerex_embed" 
+                <label className="block text-gray-700 font-semibold mb-2">
+                  ご希望の査定日時 <span className="text-gray-500 text-sm">（任意）</span>
+                </label>
+                <div className="grid grid-cols-2 gap-4">
+                  <input
+                    type="date"
+                    name="preferredDate"
+                    className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+                  />
+                  <select
+                    name="preferredTime"
+                    className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+                  >
+                    <option value="">時間帯</option>
+                    <option value="morning">午前（9:00-12:00）</option>
+                    <option value="afternoon">午後（13:00-17:00）</option>
+                    <option value="evening">夕方（17:00-19:00）</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* プライバシーポリシー同意チェックボックス */}
+              <div className="bg-gray-50 border border-gray-300 rounded-lg p-4">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    className="mt-1 w-5 h-5 text-kacchau border-gray-300 rounded focus:ring-2 focus:ring-kacchau"
+                  />
+                  <span className="text-gray-700">
+                    <a href="/privacy" target="_blank" className="text-kacchau hover:underline font-semibold">
+                      当社プライバシーポリシー
+                    </a>
+                    に同意する <span className="text-kacchau text-sm">必須</span>
+                  </span>
+                </label>
+              </div>
+
+              {/* 個人情報利用に関する注意書き */}
+              <p className="mt-6 text-sm text-gray-600 leading-relaxed">
+                ※お客様からご提供頂いた個人情報は、買取のご案内（電話・メール等）及びサービス提供のために利用いたします。
+              </p>
+
+              <div className="text-center pt-4">
+                <button
+                  type="submit"
+                  className="inline-block w-full md:w-auto px-12 py-4 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
+                >
+                  無料査定を申し込む
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* 既存のボタン群 */}
+          <div className="text-center mt-12 space-y-4">
+            <Link 
+              href="/shop"
+              className="inline-block px-12 py-4 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
+            >
+              お問い合わせは各店舗まで
+            </Link>
+            <div className="text-sm text-gray-600">
+              または
+            </div>
+            <Link 
+              href="/contact"
+              className="inline-block px-12 py-4 bg-white text-kacchau text-lg font-bold rounded-full hover:bg-gray-50 transition-colors shadow-lg border-2 border-kacchau"
+            >
+              オンラインで相談予約
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+      }
+               id="timerex_embed" 
                       src="https://asset.timerex.net/js/embed.js"
                       strategy="lazyOnload"
                       onLoad={() => {

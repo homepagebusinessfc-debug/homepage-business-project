@@ -457,7 +457,7 @@ export default function Home() {
       </section>
 
       {/* Page Top Button */}
-      <section className="py-12 pb-32 sm:pb-12 text-center bg-gray-50">
+      <section className="py-12 text-center bg-gray-50">
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="px-8 py-4 bg-kacchau text-gray-900 rounded-full font-bold text-lg hover:bg-kacchau-dark transition-colors"

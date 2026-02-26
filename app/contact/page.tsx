@@ -213,7 +213,7 @@ export default function ContactPage() {
                 {/* Googleマップ埋め込み */}
                 <div className="mt-4 rounded-lg overflow-hidden border-2 border-gray-300">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3334.8!2d130.27!3d33.26!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDE1JzM2LjAiTiAxMzDCsDE2JzEyLjAiRQ!5e0!3m2!1sja!2sjp!4v1234567890"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.6!2d130.2756!3d33.2653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354204a8c6d6e2b1%3A0x0!2z5L2Q6LOA55S65pys5bqE55S656eTIOOBquOBi+OBoeOCg+OBhiBSZWFsdHkgQ+ODrOOCueODiOODvOODqw!5e0!3m2!1sja!2sjp!4v1234567890"
                     width="100%"
                     height="300"
                     style={{ border: 0 }}

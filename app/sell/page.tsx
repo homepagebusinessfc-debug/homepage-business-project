@@ -183,17 +183,6 @@ export default function SellPage() {
                 )}
               </div>
 
-              {/* ご要望 */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  ご要望・ご質問など
-                </label>
-                <textarea
-                  className="w-full border rounded-lg px-4 py-3 shadow-sm h-32 focus:outline-none focus:ring-2 focus:ring-kacchau"
-                  placeholder="ご希望の査定方法（来店・出張など）やご相談事項があればご記入ください。"
-                />
-              </div>
-
               {/* 修正版: 1時間刻みの日付選択UI */}
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
@@ -224,6 +213,17 @@ export default function SellPage() {
                 </div>
               </div>
 
+                            {/* ご要望 */}
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2">
+                  ご要望・ご質問など
+                </label>
+                <textarea
+                  className="w-full border rounded-lg px-4 py-3 shadow-sm h-32 focus:outline-none focus:ring-2 focus:ring-kacchau"
+                  placeholder="ご希望の査定方法（来店・出張など）やご相談事項があればご記入ください。"
+                />
+              </div>
+              
               {/* プライバシーポリシー同意チェックボックス */}
               <div className="bg-gray-50 border border-gray-300 rounded-lg p-4">
                 <label className="flex items-start gap-3 cursor-pointer">

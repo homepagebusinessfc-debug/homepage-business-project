@@ -25,16 +25,6 @@ export default function RootLayout({
     <html lang="ja">
       <body className={inter.className}>
         <Header />
-        {children}
-        export default function RootLayout({
-  children,
-}: {
-  children: React.Node
-}) {
-  return (
-    <html lang="ja">
-      <body className={inter.className}>
-        <Header />
         <main>{children}</main>
         <Footer />
         
@@ -42,11 +32,5 @@ export default function RootLayout({
         <FloatingContactButton />
       </body>
     </html>
-  )
-        }
-        <Footer />
-      </body>
-    </html>
   );
 }
-

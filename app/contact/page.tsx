@@ -119,32 +119,39 @@ export default function ContactPage() {
                   </select>
                 </div>
 
-                {/* タスク3: TimeRex削除し、既存の日付選択UIを使用 */}
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    ご希望の来店日時 <span className="text-gray-500 text-sm">（任意）</span>
-                  </label>
-                  <div className="grid grid-cols-2 gap-4">
-                    <input
-                      type="date"
-                      name="preferredDate"
-                      value={formData.preferredDate}
-                      onChange={handleChange}
-                      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
-                    />
-                    <select
-                      name="preferredTime"
-                      value={formData.preferredTime}
-                      onChange={handleChange}
-                      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
-                    >
-                      <option value="">時間帯</option>
-                      <option value="morning">午前（9:00-12:00）</option>
-                      <option value="afternoon">午後（13:00-17:00）</option>
-                      <option value="evening">夕方（17:00-19:00）</option>
-                    </select>
-                  </div>
-                </div>
+<div>
+  <label className="block text-gray-700 font-semibold mb-2">
+    ご希望の来店日時 <span className="text-gray-500 text-sm">（任意）</span>
+  </label>
+  <div className="grid grid-cols-2 gap-4">
+    <input
+      type="date"
+      name="preferredDate"
+      value={formData.preferredDate}
+      onChange={handleChange}
+      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+    />
+    <select
+      name="preferredTime"
+      value={formData.preferredTime}
+      onChange={handleChange}
+      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+    >
+      <option value="">時間を選択</option>
+      <option value="09:00">9:00</option>
+      <option value="10:00">10:00</option>
+      <option value="11:00">11:00</option>
+      <option value="12:00">12:00</option>
+      <option value="13:00">13:00</option>
+      <option value="14:00">14:00</option>
+      <option value="15:00">15:00</option>
+      <option value="16:00">16:00</option>
+      <option value="17:00">17:00</option>
+      <option value="18:00">18:00</option>
+      <option value="19:00">19:00</option>
+    </select>
+  </div>
+</div>
 
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">

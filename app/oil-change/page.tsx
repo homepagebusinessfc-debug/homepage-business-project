@@ -264,6 +264,39 @@ export default function OilChangePage() {
                 </div>
               </div>
 
+              <div>
+  <label className="block text-gray-700 font-semibold mb-2">
+    ご希望の来店日時 <span className="text-gray-500 text-sm">（任意）</span>
+  </label>
+  <div className="grid grid-cols-2 gap-4">
+    <input
+      type="date"
+      name="preferredDate"
+      value={formData.preferredDate}
+      onChange={handleChange}
+      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+    />
+    <select
+      name="preferredTime"
+      value={formData.preferredTime}
+      onChange={handleChange}
+      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+    >
+      <option value="">時間を選択</option>
+      <option value="09:00-10:00">9:00〜10:00</option>
+      <option value="10:00-11:00">10:00〜11:00</option>
+      <option value="11:00-12:00">11:00〜12:00</option>
+      <option value="12:00-13:00">12:00〜13:00</option>
+      <option value="13:00-14:00">13:00〜14:00</option>
+      <option value="14:00-15:00">14:00〜15:00</option>
+      <option value="15:00-16:00">15:00〜16:00</option>
+      <option value="16:00-17:00">16:00〜17:00</option>
+      <option value="17:00-18:00">17:00〜18:00</option>
+      <option value="18:00-19:00">18:00〜19:00</option>
+    </select>
+  </div>
+</div>
+
               {/* ご質問・ご要望 */}
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
@@ -345,3 +378,4 @@ export default function OilChangePage() {
   );
 
 }
+

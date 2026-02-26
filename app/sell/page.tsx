@@ -194,7 +194,7 @@ export default function SellPage() {
                 />
               </div>
 
-              {/* タスク3: 日付選択UI（TimeRex削除） */}
+              {/* 修正版: 1時間刻みの日付選択UI */}
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
                   ご希望の査定日時 <span className="text-gray-500 text-sm">（任意）</span>
@@ -209,10 +209,17 @@ export default function SellPage() {
                     name="preferredTime"
                     className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
                   >
-                    <option value="">時間帯</option>
-                    <option value="morning">午前（9:00-12:00）</option>
-                    <option value="afternoon">午後（13:00-17:00）</option>
-                    <option value="evening">夕方（17:00-19:00）</option>
+                    <option value="">時間を選択</option>
+                    <option value="09:00-10:00">9:00〜10:00</option>
+                    <option value="10:00-11:00">10:00〜11:00</option>
+                    <option value="11:00-12:00">11:00〜12:00</option>
+                    <option value="12:00-13:00">12:00〜13:00</option>
+                    <option value="13:00-14:00">13:00〜14:00</option>
+                    <option value="14:00-15:00">14:00〜15:00</option>
+                    <option value="15:00-16:00">15:00〜16:00</option>
+                    <option value="16:00-17:00">16:00〜17:00</option>
+                    <option value="17:00-18:00">17:00〜18:00</option>
+                    <option value="18:00-19:00">18:00〜19:00</option>
                   </select>
                 </div>
               </div>

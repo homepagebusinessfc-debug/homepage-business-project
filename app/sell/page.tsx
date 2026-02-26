@@ -1,12 +1,10 @@
 'use client';
 import Link from 'next/link';
-import { ChevronRight, Calendar } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import Script from 'next/script';
+import { ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 
 export default function SellPage() {
   const [images, setImages] = useState<File[]>([]);
-  const [timerexLoaded, setTimerexLoaded] = useState(false);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -14,23 +12,8 @@ export default function SellPage() {
     setImages(files as File[]);
   };
 
-  useEffect(() => {
-    // Timerexスクリプトがロードされたら初期化
-    if (timerexLoaded && typeof window !== 'undefined' && (window as any).TimerexCalendar) {
-      (window as any).TimerexCalendar();
-    }
-  }, [timerexLoaded]);
-
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Timerex Script */}
-      <Script
-        id="timerex_embed"
-        src="https://asset.timerex.net/js/embed.js"
-        strategy="lazyOnload"
-        onLoad={() => setTimerexLoaded(true)}
-      />
-
       {/* Breadcrumb */}
       <div className="bg-white py-4 px-4 border-b">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm">
@@ -48,155 +31,155 @@ export default function SellPage() {
             <h1 className="text-4xl md:text-5xl font-bold">クルマを売る</h1>
           </div>
           <p className="text-lg md:text-xl mb-2">
-            カッチャウの高額査定システムで高価買い取りが可能です。
+            カッチャウの高額買取システムで、あなたの愛車を最高値で。
           </p>
           <p className="text-base md:text-lg">
-            あなたの愛車を、データだけにとらわれない独自査定で適正価格で買い取ります。
+            他店の見積もりよりも高く買い取る自信があります！
           </p>
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto py-12 px-4">
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto py-12 px-4">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
-          <div className="space-y-8">
-            <p className="text-xl text-gray-700 leading-relaxed">
-              「車が不要になったから処分したい」「車庫に眠った車がある」<br />
-              などなど要らないクルマの処分に困ったら、カッチャウにお声掛けください！
-            </p>
+          <h2 className="text-3xl font-bold text-kacchau mb-8 pb-4 border-b-4 border-kacchau">
+            無料査定お申し込み
+          </h2>
 
-            <div className="bg-kacchau-yellow-50 border-l-4 border-kacchau p-6">
-              <p className="text-xl text-gray-800 leading-relaxed font-semibold">
-                あなたの愛車を、カッチャウ独自査定で高価買取させていただきます。<br />
-                事故車や長走行距離車、古い年式でも大丈夫です。まずは一度お車を見せてください！
-              </p>
-            </div>
+          <form className="space-y-8">
+            {/* お客様情報 */}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">お客様情報</h3>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    お名前 <span className="text-kacchau">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                    placeholder="山田 太郎"
+                  />
+                </div>
 
-            {/* 特徴リスト */}
-            <div className="grid md:grid-cols-2 gap-6 mt-8">
-              <div className="bg-gradient-to-br from-kacchau-yellow-50 to-white p-6 rounded-lg border border-kacchau-yellow-200">
-                <h3 className="text-xl font-bold text-kacchau mb-3">✓ 高価買取</h3>
-                <p className="text-gray-700">データだけにとらわれない、カッチャウオリジナルの高価査定システム</p>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    電話番号 <span className="text-kacchau">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                    placeholder="090-1234-5678"
+                  />
+                </div>
               </div>
-              <div className="bg-gradient-to-br from-kacchau-yellow-50 to-white p-6 rounded-lg border border-kacchau-yellow-200">
-                <h3 className="text-xl font-bold text-kacchau mb-3">✓ 幅広い対応</h3>
-                <p className="text-gray-700">事故車、長走行距離車、古い年式の車も大歓迎</p>
-              </div>
-              <div className="bg-gradient-to-br from-kacchau-yellow-50 to-white p-6 rounded-lg border border-kacchau-yellow-200">
-                <h3 className="text-xl font-bold text-kacchau mb-3">✓ 全国ネットワーク</h3>
-                <p className="text-gray-700">全国規模のネットワークで最適な売却先を確保</p>
-              </div>
-              <div className="bg-gradient-to-br from-kacchau-yellow-50 to-white p-6 rounded-lg border border-kacchau-yellow-200">
-                <h3 className="text-xl font-bold text-kacchau mb-3">✓ スピード対応</h3>
-                <p className="text-gray-700">迅速な査定と手続きで、スムーズな売却をサポート</p>
-              </div>
-            </div>
-          </div>
 
-          {/* 無料査定フォーム */}
-          <div className="mt-12 pt-10 border-t border-gray-200">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">
-              無料査定お申し込み
-            </h2>
-            <p className="text-gray-700 mb-8">
-              下記フォームに必要事項をご入力のうえ送信してください。担当スタッフより折り返しご連絡いたします。<br />
-              おクルマのお写真は任意ですが、よりスムーズな査定のために可能であればご添付ください。
-            </p>
-
-            <form className="space-y-6">
-              {/* お名前 */}
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
-                  お名前 <span className="text-kacchau text-sm">必須</span>
-                </label>
-                <input
-                  type="text"
-                  className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
-                />
-              </div>
-
-              {/* メールアドレス */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  メールアドレス <span className="text-gray-500 text-sm">任意</span>
+                  メールアドレス <span className="text-kacchau">*</span>
                 </label>
                 <input
                   type="email"
+                  required
                   className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                  placeholder="example@email.com"
                 />
               </div>
+            </div>
 
-              {/* 電話番号 */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  お電話番号 <span className="text-kacchau text-sm">必須</span>
-                </label>
-                <input
-                  type="tel"
-                  className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
-                />
+            {/* 車両情報 */}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">車両情報</h3>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    メーカー <span className="text-kacchau">*</span>
+                  </label>
+                  <select
+                    required
+                    className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                  >
+                    <option value="">選択してください</option>
+                    <option value="toyota">トヨタ</option>
+                    <option value="nissan">ニッサン</option>
+                    <option value="honda">ホンダ</option>
+                    <option value="mazda">マツダ</option>
+                    <option value="subaru">スバル</option>
+                    <option value="suzuki">スズキ</option>
+                    <option value="daihatsu">ダイハツ</option>
+                    <option value="mitsubishi">ミツビシ</option>
+                    <option value="other">その他</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    車種名 <span className="text-kacchau">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                    placeholder="例: プリウス"
+                  />
+                </div>
               </div>
 
-              {/* 車種・年式 */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  車種・年式 <span className="text-kacchau text-sm">必須</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="例:トヨタ プリウス 2018年式"
-                  className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
-                />
-                <p className="mt-2 text-sm text-gray-600">
-                  ※年式・車種が不明な方はお電話ください。（
-                  <a href="tel:0952-27-0060" className="text-kacchau hover:underline font-semibold">
-                    ℡0952-27-0060
-                  </a>
-                  ）
-                </p>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    年式
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                    placeholder="例: 2020年"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    走行距離
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                    placeholder="例: 5万km"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    カラー
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
+                    placeholder="例: ホワイト"
+                  />
+                </div>
               </div>
 
-              {/* 走行距離 */}
+              {/* 車両写真アップロード */}
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
-                  走行距離 <span className="text-kacchau text-sm">必須</span>
+                  車両写真 <span className="text-gray-500 text-sm">（任意・最大5枚）</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="例:50,000km"
-                  className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
-                />
-              </div>
-
-              {/* 写真アップロード（任意） */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  おクルマの写真 <span className="text-gray-500 text-sm">任意</span>
-                </label>
-                <p className="text-sm text-gray-600 mb-2">
-                  外装（前・後ろ・側面）、内装、キズやヘコミがある箇所などのお写真があると、よりスムーズに査定できます。
-                </p>
                 <input
                   type="file"
-                  multiple
                   accept="image/*"
+                  multiple
                   onChange={handleImageUpload}
-                  className="w-full border rounded-lg px-4 py-3 shadow-sm bg-white"
+                  className="w-full border rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
                 />
                 {images.length > 0 && (
-                  <div className="flex flex-wrap gap-4 mt-4">
-                    {images.map((img, i) => (
-                      <div
-                        key={i}
-                        className="w-24 h-24 border rounded-lg overflow-hidden bg-gray-100"
-                      >
-                        <img
-                          src={URL.createObjectURL(img)}
-                          alt={`upload-${i}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ))}
-                  </div>
+                  <p className="mt-2 text-sm text-gray-600">
+                    {images.length}枚の画像が選択されています
+                  </p>
                 )}
               </div>
 
@@ -244,49 +227,97 @@ export default function SellPage() {
                   />
                   <span className="text-gray-700">
                     <a href="/privacy" target="_blank" className="text-kacchau hover:underline font-semibold">
-                      当社プライバシーポリシー
+                      プライバシーポリシー
                     </a>
-                    に同意する <span className="text-kacchau text-sm">必須</span>
+                    に同意します
                   </span>
                 </label>
               </div>
-
-              {/* 個人情報利用に関する注意書き */}
-              <p className="mt-6 text-sm text-gray-600 leading-relaxed">
-                ※お客様からご提供頂いた個人情報は、買取のご案内（電話・メール等）及びサービス提供のために利用いたします。
-              </p>
-
-              <div className="text-center pt-4">
-                <button
-                  type="submit"
-                  className="inline-block w-full md:w-auto px-12 py-4 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
-                >
-                  無料査定を申し込む
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* 既存のボタン群 */}
-          <div className="text-center mt-12 space-y-4">
-            <Link 
-              href="/shop"
-              className="inline-block px-12 py-4 bg-kacchau text-gray-900 text-lg font-bold rounded-full hover:bg-kacchau-dark transition-colors shadow-lg"
-            >
-              お問い合わせは各店舗まで
-            </Link>
-            <div className="text-sm text-gray-600">
-              または
             </div>
-            <Link 
-              href="/contact"
-              className="inline-block px-12 py-4 bg-white text-kacchau text-lg font-bold rounded-full hover:bg-gray-50 transition-colors shadow-lg border-2 border-kacchau"
+
+            {/* 送信ボタン */}
+            <button
+              type="submit"
+              className="w-full bg-kacchau text-gray-900 py-4 rounded-lg font-bold text-lg hover:bg-kacchau-dark transition-colors shadow-lg"
             >
-              オンラインで相談予約
-            </Link>
+              無料査定を申し込む
+            </button>
+          </form>
+
+          {/* お問い合わせ情報 */}
+          <div className="mt-12 pt-8 border-t-2 border-gray-200">
+            <h3 className="text-2xl font-bold text-gray-800 mb-6">お電話でのお問い合わせ</h3>
+            <div className="bg-gradient-to-br from-kacchau-yellow-50 to-white p-6 rounded-lg border border-kacchau-yellow-200">
+              <a 
+                href="tel:0952-27-0060"
+                className="text-3xl font-bold text-kacchau hover:text-kacchau-dark transition-colors"
+              >
+                0952-27-0060
+              </a>
+              <p className="text-gray-600 mt-2">
+                受付時間: 9:00〜19:00（不定休）
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 買取の流れ */}
+        <div className="mt-12 bg-white rounded-lg shadow-lg p-8 md:p-12">
+          <h2 className="text-3xl font-bold text-kacchau mb-8 pb-4 border-b-4 border-kacchau">
+            買取の流れ
+          </h2>
+          
+          <div className="space-y-6">
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-12 h-12 bg-kacchau rounded-full flex items-center justify-center text-gray-900 font-bold text-xl">
+                1
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">お申し込み</h3>
+                <p className="text-gray-700">
+                  上記フォームまたはお電話でお気軽にお申し込みください。
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-12 h-12 bg-kacchau rounded-full flex items-center justify-center text-gray-900 font-bold text-xl">
+                2
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">査定</h3>
+                <p className="text-gray-700">
+                  ご来店または出張にて、専門スタッフが丁寧に査定いたします。
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-12 h-12 bg-kacchau rounded-full flex items-center justify-center text-gray-900 font-bold text-xl">
+                3
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">ご契約</h3>
+                <p className="text-gray-700">
+                  査定額にご納得いただけましたら、その場でご契約。必要書類もご案内します。
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-12 h-12 bg-kacchau rounded-full flex items-center justify-center text-gray-900 font-bold text-xl">
+                4
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">お支払い</h3>
+                <p className="text-gray-700">
+                  手続き完了後、迅速にお支払いいたします。
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-      }
+}

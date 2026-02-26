@@ -119,39 +119,39 @@ export default function ContactPage() {
                   </select>
                 </div>
 
-<div>
-  <label className="block text-gray-700 font-semibold mb-2">
-    ご希望の来店日時 <span className="text-gray-500 text-sm">（任意）</span>
-  </label>
-  <div className="grid grid-cols-2 gap-4">
-    <input
-      type="date"
-      name="preferredDate"
-      value={formData.preferredDate}
-      onChange={handleChange}
-      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
-    />
-    <select
-      name="preferredTime"
-      value={formData.preferredTime}
-      onChange={handleChange}
-      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
-    >
-      <option value="">時間を選択</option>
-      <option value="09:00">9:00</option>
-      <option value="10:00">10:00</option>
-      <option value="11:00">11:00</option>
-      <option value="12:00">12:00</option>
-      <option value="13:00">13:00</option>
-      <option value="14:00">14:00</option>
-      <option value="15:00">15:00</option>
-      <option value="16:00">16:00</option>
-      <option value="17:00">17:00</option>
-      <option value="18:00">18:00</option>
-      <option value="19:00">19:00</option>
-    </select>
-  </div>
-</div>
+                {/* 修正版: 1時間刻みの日付選択UI */}
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    ご希望の来店日時 <span className="text-gray-500 text-sm">（任意）</span>
+                  </label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <input
+                      type="date"
+                      name="preferredDate"
+                      value={formData.preferredDate}
+                      onChange={handleChange}
+                      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+                    />
+                    <select
+                      name="preferredTime"
+                      value={formData.preferredTime}
+                      onChange={handleChange}
+                      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+                    >
+                      <option value="">時間を選択</option>
+                      <option value="09:00-10:00">9:00〜10:00</option>
+                      <option value="10:00-11:00">10:00〜11:00</option>
+                      <option value="11:00-12:00">11:00〜12:00</option>
+                      <option value="12:00-13:00">12:00〜13:00</option>
+                      <option value="13:00-14:00">13:00〜14:00</option>
+                      <option value="14:00-15:00">14:00〜15:00</option>
+                      <option value="15:00-16:00">15:00〜16:00</option>
+                      <option value="16:00-17:00">16:00〜17:00</option>
+                      <option value="17:00-18:00">17:00〜18:00</option>
+                      <option value="18:00-19:00">18:00〜19:00</option>
+                    </select>
+                  </div>
+                </div>
 
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
@@ -217,10 +217,10 @@ export default function ContactPage() {
                   TEL: 0952-27-0060
                 </p>
                 
-                {/* Googleマップ埋め込み */}
+                {/* Googleマップ埋め込み - 正確な住所 */}
                 <div className="mt-4 rounded-lg overflow-hidden border-2 border-gray-300">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.6!2d130.2756!3d33.2653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354204a8c6d6e2b1%3A0x0!2z5L2Q6LOA55S65pys5bqE55S656eTIOOBquOBi+OBoeOCg+OBhiBSZWFsdHkgQ+ODrOOCueODiOODvOODqw!5e0!3m2!1sja!2sjp!4v1234567890"
+                    src="https://www.google.com/maps?q=佐賀市本庄町大字本庄968-1&output=embed"
                     width="100%"
                     height="300"
                     style={{ border: 0 }}

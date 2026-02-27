@@ -1,6 +1,6 @@
 # カッチャウ ウェブサイト
 
-佐賀県の自動車販売・買取専門店「カッチャウ」の公式ウェブサイトです。
+自動車販売・買取専門店「カッチャウ」の公式ウェブサイトです。
 
 ## 🚀 技術スタック
 
@@ -81,19 +81,6 @@ npm install -g vercel
 vercel
 ```
 
-## 📝 Timerex統合
-
-`app/contact/page.tsx` のコメント部分にTimerexの埋め込みコードを追加してください:
-
-```tsx
-<iframe
-  src="YOUR_TIMEREX_EMBED_URL"
-  width="100%"
-  height="600"
-  frameBorder="0"
-></iframe>
-```
-
 ## 📱 CMS管理方式
 
 このプロジェクトでは、Netlify CMSを使用してコンテンツを管理しています。
@@ -155,11 +142,7 @@ vercel
 - `/question` - よくある質問
 - `/contact` - お問い合わせ
 
-## 📞 お問い合わせ
-
-- 電話: 0952-27-0060
-- 住所: 〒840-0027 佐賀市本庄町大字本庄968-1
-
 ## 📄 ライセンス
 
 © Kacchau All Rights Reserved.
+

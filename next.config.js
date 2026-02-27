@@ -16,8 +16,8 @@ const nextConfig = {
     },
     // 静的ページ生成
     experimental: {
-      appDir: true,
     },
   }
   
+
   module.exports = nextConfig

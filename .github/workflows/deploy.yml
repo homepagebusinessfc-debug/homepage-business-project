@@ -1,0 +1,106 @@
+# ============================================================
+# GitHub Actions: Deploy to Cloudflare Pages + GitLabに逆同期
+# 【トリガー】GitHubのmainブランチにpushされたとき
+# 【動作】
+#   1. Next.jsをビルド（npm run build）
+#   2. Cloudflare Pagesにデプロイ
+#   3. GitLabリポジトリに逆同期（Windowsからすぐコミットできるように）
+# ============================================================
+
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # GitHub Actionsに必要な権限を明示的に付与
+    permissions:
+      contents: read        # コードの読み取り
+      deployments: write    # デプロイメントステータスの書き込み（Cloudflare Pages Actionで必要）
+
+    steps:
+      # -------------------------------------------------------
+      # 1. コードを取得
+      # -------------------------------------------------------
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 完全な履歴を取得（GitLab逆同期のため）
+
+      # -------------------------------------------------------
+      # 2. Node.js セットアップ
+      # -------------------------------------------------------
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          # cache: 'npm' を削除（package-lock.jsonが無い場合のエラー回避）
+
+      # -------------------------------------------------------
+      # 3. 依存パッケージのインストール
+      # -------------------------------------------------------
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit
+          else
+            npm install --no-audit
+          fi
+
+      # -------------------------------------------------------
+      # 4. カラー変換スクリプト（存在する場合のみ実行）
+      # -------------------------------------------------------
+      - name: Convert colors (if script exists)
+        run: |
+          if [ -f scripts/convert-colors.js ]; then
+            npm run convert-colors
+          else
+            echo "convert-colors script not found - skipping"
+          fi
+
+      # -------------------------------------------------------
+      # 5. Next.js ビルド
+      # -------------------------------------------------------
+      - name: Build
+        run: npm run build
+
+      # -------------------------------------------------------
+      # 6. Cloudflare Pages にデプロイ
+      # -------------------------------------------------------
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          directory: out        # Next.js静的書き出し先（next.config.jsのoutput:'export'で生成）
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      # -------------------------------------------------------
+      # 7. GitLabに逆同期（オプション - 一時的に無効化中）
+      #    Windowsからすぐコミットできるようにするため
+      #    使用する場合：GitHubのSecretsにGITLAB_TOKENとGITLAB_REPOを登録
+      # -------------------------------------------------------
+      # - name: Sync back to GitLab
+      #   env:
+      #     GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+      #     GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
+      #   run: |
+      #     echo "===== Syncing back to GitLab ====="
+      #
+      #     git config --global user.name "GitHub Actions"
+      #     git config --global user.email "actions@github.com"
+      #
+      #     # GitLab remoteを設定
+      #     git remote remove gitlab 2>/dev/null || true
+      #     git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/${GITLAB_REPO}.git
+      #
+      #     echo "Pushing to GitLab..."
+      #     git push gitlab main:main --force
+      #
+      #     echo "===== Sync to GitLab completed ====="

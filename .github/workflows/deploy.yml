@@ -86,21 +86,21 @@ jobs:
       #    Windowsからすぐコミットできるようにするため
       #    使用する場合：GitHubのSecretsにGITLAB_TOKENとGITLAB_REPOを登録
       # -------------------------------------------------------
-      # - name: Sync back to GitLab
-      #   env:
-      #     GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
-      #     GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
-      #   run: |
-      #     echo "===== Syncing back to GitLab ====="
-      #
-      #     git config --global user.name "GitHub Actions"
-      #     git config --global user.email "actions@github.com"
-      #
-      #     # GitLab remoteを設定
-      #     git remote remove gitlab 2>/dev/null || true
-      #     git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/${GITLAB_REPO}.git
-      #
-      #     echo "Pushing to GitLab..."
-      #     git push gitlab main:main --force
-      #
-      #     echo "===== Sync to GitLab completed ====="
+      - name: Sync back to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
+        run: |
+          echo "===== Syncing back to GitLab ====="
+
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          # GitLab remoteを設定
+          git remote remove gitlab 2>/dev/null || true
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/${GITLAB_REPO}.git
+
+          echo "Pushing to GitLab..."
+          git push gitlab main:main --force
+
+          echo "===== Sync to GitLab completed ====="

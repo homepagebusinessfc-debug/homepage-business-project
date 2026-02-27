@@ -81,7 +81,7 @@ jobs:
           directory: out        # Next.js静的書き出し先（next.config.jsのoutput:'export'で生成）
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-       - name: Debug repo
+      - name: Debug repo
         run: |
          if [ -z "$GITLAB_REPO" ]; then
           echo "GITLAB_REPO is EMPTY"

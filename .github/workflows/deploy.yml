@@ -80,17 +80,6 @@ jobs:
           projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
           directory: out        # Next.js静的書き出し先（next.config.jsのoutput:'export'で生成）
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Debug repo
-        run: |
-         if [ -z "$GITLAB_REPO" ]; then
-          echo "GITLAB_REPO is EMPTY"
-         else
-          echo "GITLAB_REPO is SET"
-          echo "Value:" $GITLAB_REPO
-         fi
-        env:
-         GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
     
       # -------------------------------------------------------
       # 7. GitLabに逆同期（オプション - 一時的に無効化中）

@@ -187,57 +187,57 @@ deploy_cloudflare_pages:
 #   GITHUB_REPO  : 例) your-username/your-repo-name
 # ====================
 
-sync_to_github:
-  stage: sync
-  image: alpine:latest
-  variables:
-    GIT_DEPTH: 0          # shallow cloneを無効化（ファイルが確実に届く）
-    GIT_STRATEGY: clone   # 毎回クリーンなcloneを実行
-  before_script:
-    - echo "===== Installing Git ====="
-    - apk add --no-cache git
-    - echo "Git version:" $(git --version)
-  script:
-    - echo "===== Syncing to GitHub ====="
+# sync_to_github:
+#   stage: sync
+#   image: alpine:latest
+#   variables:
+#     GIT_DEPTH: 0          # shallow cloneを無効化（ファイルが確実に届く）
+#     GIT_STRATEGY: clone   # 毎回クリーンなcloneを実行
+#   before_script:
+#     - echo "===== Installing Git ====="
+#     - apk add --no-cache git
+#     - echo "Git version:" $(git --version)
+#   script:
+#     - echo "===== Syncing to GitHub ====="
 
-    # Git設定
-    - git config --global user.name "GitLab CI"
-    - git config --global user.email "ci@gitlab.com"
+#     # Git設定
+#     - git config --global user.name "GitLab CI"
+#     - git config --global user.email "ci@gitlab.com"
 
-    # 現在の状態を確認（デバッグ用）
-    - echo "Current branch:" $(git branch --show-current)
-    - echo "Current commit:" $(git rev-parse HEAD)
-    - echo "Files in repository:"
-    - ls -la
+#     # 現在の状態を確認（デバッグ用）
+#     - echo "Current branch:" $(git branch --show-current)
+#     - echo "Current commit:" $(git rev-parse HEAD)
+#     - echo "Files in repository:"
+#     - ls -la
 
-    # shallow cloneの場合は完全な履歴に変換
-    - |
-      IS_SHALLOW=$(git rev-parse --is-shallow-repository)
-      if [ "$IS_SHALLOW" = "true" ]; then
-        echo "Unshallowing repository..."
-        git fetch --unshallow
-      else
-        git fetch --all --prune
-      fi
+#     # shallow cloneの場合は完全な履歴に変換
+#     - |
+#       IS_SHALLOW=$(git rev-parse --is-shallow-repository)
+#       if [ "$IS_SHALLOW" = "true" ]; then
+#         echo "Unshallowing repository..."
+#         git fetch --unshallow
+#       else
+#         git fetch --all --prune
+#       fi
 
-    # GitHub remoteを設定
-    - git remote remove github 2>/dev/null || true
-    - git remote add github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git
-    - echo "GitHub remote configured:" $GITHUB_REPO
+#     # GitHub remoteを設定
+#     - git remote remove github 2>/dev/null || true
+#     - git remote add github https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git
+#     - echo "GitHub remote configured:" $GITHUB_REPO
 
-    # mainブランチに切り替え
-    - git checkout -B main
+#     # mainブランチに切り替え
+#     - git checkout -B main
 
-    # pushする内容を確認（デバッグ用）
-    - echo "Commits to push:"
-    - git log --oneline -5
+#     # pushする内容を確認（デバッグ用）
+#     - echo "Commits to push:"
+#     - git log --oneline -5
 
-    # GitHub へ push（force pushで確実に同期）
-    - echo "Pushing to GitHub..."
-    - git push github main:main --force
+#     # GitHub へ push（force pushで確実に同期）
+#     - echo "Pushing to GitHub..."
+#     - git push github main:main --force
 
-    - echo "✅ Successfully synced to GitHub"
-  only:
-    - main
-  when: on_success
-  allow_failure: false
+#     - echo "✅ Successfully synced to GitHub"
+#   only:
+#     - main
+#   when: on_success
+#   allow_failure: false

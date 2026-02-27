@@ -81,6 +81,16 @@ jobs:
           directory: out        # Next.js静的書き出し先（next.config.jsのoutput:'export'で生成）
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Debug secrets
+  run: |
+    if [ -z "$GITLAB_TOKEN" ]; then
+      echo "GITLAB_TOKEN is EMPTY"
+    else
+      echo "GITLAB_TOKEN is SET"
+    fi
+  env:
+    GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+
       # -------------------------------------------------------
       # 7. GitLabに逆同期（オプション - 一時的に無効化中）
       #    Windowsからすぐコミットできるようにするため

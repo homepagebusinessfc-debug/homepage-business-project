@@ -138,7 +138,7 @@ export default function Header() {
         style={{ backgroundImage: 'url(/shop_picture.jpg)' }}
       >
       </div>
-
+      /*
       {/* スマホ表示のみ: 下部固定の連絡先バー */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50">
         <div className="flex flex-col items-center py-2 px-4">
@@ -167,6 +167,8 @@ export default function Header() {
           </Link>
         </div>
       </div>
+     */ 
     </>
   );
 }
+

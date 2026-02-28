@@ -183,13 +183,13 @@ export default function Home() {
                   key={car.id} 
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
                 >
-                  {/* 車両画像 */}
+                  {/* 車両画像 - タスク4: object-containに変更 */}
                   <div className="h-56 relative bg-gray-200">
                     <Image 
                       src={car.image} 
                       alt={car.name} 
                       fill
-                      className="object-cover"
+                      className="object-contain"
                     />
                     {/* 保証バッジ（左上） */}
                     <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
@@ -229,23 +229,23 @@ export default function Home() {
                         <span className="text-gray-600">年式</span>
                         <span className="font-semibold text-gray-900">{car.year}</span>
                       </div>
-                      <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
+                      <div className="flex justify-between py-1.5">
                         <span className="text-gray-600">走行距離</span>
                         <span className="font-semibold text-gray-900">{car.mileage}</span>
                       </div>
                       <div className="flex justify-between py-1.5">
                         <span className="text-gray-600">修復歴</span>
-                        <span className="font-semibold text-green-600">{car.repairHistory}</span>
+                        <span className="font-semibold text-gray-900">{car.repairHistory}</span>
                       </div>
-                      <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
-                        <span className="text-gray-600">シフト</span>
+                      <div className="flex justify-between py-1.5">
+                        <span className="text-gray-600">ミッション</span>
                         <span className="font-semibold text-gray-900">{car.transmission}</span>
                       </div>
                       <div className="flex justify-between py-1.5">
-                        <span className="text-gray-600">駆動</span>
+                        <span className="text-gray-600">駆動方式</span>
                         <span className="font-semibold text-gray-900">{car.drive}</span>
                       </div>
-                      <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
+                      <div className="flex justify-between py-1.5">
                         <span className="text-gray-600">排気量</span>
                         <span className="font-semibold text-gray-900">{car.displacement}</span>
                       </div>
@@ -255,17 +255,11 @@ export default function Home() {
                       </div>
                     </div>
 
-                    {/* ボタン */}
-                    <div className="space-y-2">
-                      <Link
-                        href={`/cars/${car.id}`}
-                        className="block w-full text-center px-6 py-3 bg-kacchau text-gray-900 rounded-full font-bold hover:bg-kacchau-dark transition-colors shadow-md"
-                      >
-                        詳細を見る
-                      </Link>
+                    {/* ボタン - タスク1: 「詳細を見る」ボタンを削除 */}
+                    <div>
                       <Link
                         href="/contact"
-                        className="block w-full text-center px-6 py-3 bg-white text-kacchau border-2 border-kacchau rounded-full font-bold hover:bg-gray-50 transition-colors"
+                        className="block w-full text-center px-6 py-3 bg-kacchau text-gray-900 rounded-full font-bold hover:bg-kacchau-dark transition-colors shadow-md"
                       >
                         お問い合わせ
                       </Link>
@@ -463,7 +457,7 @@ export default function Home() {
       </section>
 
       {/* Page Top Button */}
-      <section className="py-12 pb-32 sm:pb-12 text-center bg-gray-50">
+      <section className="py-12 text-center bg-gray-50">
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="px-8 py-4 bg-kacchau text-gray-900 rounded-full font-bold text-lg hover:bg-kacchau-dark transition-colors"

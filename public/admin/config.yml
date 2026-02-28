@@ -18,6 +18,7 @@ backend:
 # メディアファイルの保存先
 media_folder: "public/uploads"
 public_folder: "/uploads"
+
 # メディアファイルのサイズ制限
 media_library:
   name: uploadcare

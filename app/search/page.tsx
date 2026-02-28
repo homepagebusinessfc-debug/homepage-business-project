@@ -405,7 +405,7 @@ export default function SearchPage() {
                     className="w-full border rounded-lg px-4 py-3 text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-kacchau"
                   />
                 </div>
-
+                
                 {/* ご要望・ご質問など */}
                 <div className="mb-6">
                   <label className="block text-gray-700 font-semibold mb-2">
@@ -502,4 +502,6 @@ export default function SearchPage() {
       </div>
     </div>
   );
+
 }
+

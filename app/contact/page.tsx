@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
-import Script from 'next/script';
-import { ChevronRight, Mail, Phone, MapPin, Calendar } from 'lucide-react';
+import { ChevronRight, Mail, Phone, MapPin } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactPage() {
@@ -120,6 +119,7 @@ export default function ContactPage() {
                   </select>
                 </div>
 
+                {/* 修正版: 1時間刻みの日付選択UI */}
                 <div>
                   <label className="block text-gray-700 font-semibold mb-2">
                     ご希望の来店日時 <span className="text-gray-500 text-sm">（任意）</span>
@@ -138,10 +138,17 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
                     >
-                      <option value="">時間帯</option>
-                      <option value="morning">午前（9:00-12:00）</option>
-                      <option value="afternoon">午後（13:00-17:00）</option>
-                      <option value="evening">夕方（17:00-19:00）</option>
+                      <option value="">時間を選択</option>
+                      <option value="09:00-10:00">9:00〜10:00</option>
+                      <option value="10:00-11:00">10:00〜11:00</option>
+                      <option value="11:00-12:00">11:00〜12:00</option>
+                      <option value="12:00-13:00">12:00〜13:00</option>
+                      <option value="13:00-14:00">13:00〜14:00</option>
+                      <option value="14:00-15:00">14:00〜15:00</option>
+                      <option value="15:00-16:00">15:00〜16:00</option>
+                      <option value="16:00-17:00">16:00〜17:00</option>
+                      <option value="17:00-18:00">17:00〜18:00</option>
+                      <option value="18:00-19:00">18:00〜19:00</option>
                     </select>
                   </div>
                 </div>
@@ -168,50 +175,15 @@ export default function ContactPage() {
                   送信する
                 </button>
 
-                {/* 🆕 個人情報の取り扱いに関する注意書き */}
+                {/* 個人情報の取り扱いに関する注意書き */}
                 <p className="mt-4 text-sm text-gray-600 leading-relaxed">
                   ※お客様からご提供頂いた個人情報は、お車の買取、販売など当社サービスのご案内（電話・メール等）及びご提供のために利用いたします。
                 </p>
               </form>
             </div>
 
-            {/* 店舗情報・カレンダー予約 */}
+            {/* 店舗情報 */}
             <div className="space-y-8">
-              {/* Timerex カレンダー統合エリア */}
-              <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
-                <div className="flex items-center gap-3 mb-4">
-                  <Calendar className="text-kacchau" size={32} />
-                  <h2 className="text-2xl font-bold text-gray-800">
-                    オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
-                  </h2>
-                </div>
-                <p className="text-gray-700 mb-4">
-                  ご来店の予約をオンラインで受け付けています。<br />
-                  以下のカレンダーからご都合の良い日時をお選びください。
-                </p>
-                
-                {/* Timerex埋め込みエリア */}
-                <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[250px] md:min-h-[400px] timerex-container">
-                  {/* Begin TimeRex Widget */}
-                  <div 
-                    id="timerex_calendar" 
-                    data-url="https://timerex.net/s/homepage.business.fc_8d0c/0b297a94"
-                  ></div>
-                  
-                  <Script 
-                    id="timerex_embed" 
-                    src="https://asset.timerex.net/js/embed.js"
-                    strategy="lazyOnload"
-                    onLoad={() => {
-                      if (typeof window !== 'undefined' && (window as any).TimerexCalendar) {
-                        (window as any).TimerexCalendar();
-                      }
-                    }}
-                  />
-                  {/* End TimeRex Widget */}
-                </div>
-              </div>
-
               {/* 電話でのお問い合わせ */}
               <div className="bg-gradient-to-br from-kacchau-yellow-50 to-white p-6 rounded-lg border border-kacchau-yellow-200">
                 <div className="flex items-center gap-3 mb-4">
@@ -231,7 +203,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              {/* 所在地 */}
+              {/* タスク2: 所在地 + Googleマップ埋め込み */}
               <div className="bg-gray-50 p-6 rounded-lg border">
                 <div className="flex items-center gap-3 mb-4">
                   <MapPin className="text-kacchau" size={32} />
@@ -239,11 +211,26 @@ export default function ContactPage() {
                     所在地
                   </h2>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed mb-4">
                   〒840-0027<br />
                   佐賀市本庄町大字本庄968-1<br />
                   TEL: 0952-27-0060
                 </p>
+                
+                {/* Googleマップ埋め込み - 正確な住所 */}
+                <div className="mt-4 rounded-lg overflow-hidden border-2 border-gray-300">
+                  <iframe
+                    src="https://www.google.com/maps?q=佐賀市本庄町大字本庄968-1&output=embed"
+                    width="100%"
+                    height="300"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="カッチャウ本庄店の地図"
+                  />
+                </div>
+                
                 <Link 
                   href="/shop"
                   className="inline-block mt-4 text-kacchau font-semibold hover:underline"

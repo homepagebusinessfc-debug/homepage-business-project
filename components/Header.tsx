@@ -138,35 +138,9 @@ export default function Header() {
         style={{ backgroundImage: 'url(/shop_picture.jpg)' }}
       >
       </div>
-
-      {/* スマホ表示のみ: 下部固定の連絡先バー */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50">
-        <div className="flex flex-col items-center py-2 px-4">
-          {/* お気軽にお問い合わせ下さい */}
-          <span className="text-[10px] text-gray-600 mb-1">お気軽にお問い合わせ下さい</span>
-          
-          {/* 電話番号 */}
-          <a 
-            href="tel:0952-27-0060" 
-            className="flex items-center gap-1 mb-1 hover:opacity-80 transition-opacity"
-          >
-            <Phone size={16} className="text-kacchau" />
-            <span className="font-bold text-base text-gray-900">0952-27-0060</span>
-          </a>
-          
-          {/* 受付時間 */}
-          <span className="text-[9px] text-gray-500 mb-2">受付時間: 9:00〜19:00（不定休）</span>
-          
-          {/* お問い合わせボタン */}
-          <Link 
-            href="/contact"
-            className="flex items-center gap-1.5 bg-kacchau text-gray-900 px-6 py-2 rounded-full hover:bg-kacchau-dark transition-colors border-2 border-kacchau text-sm font-semibold w-full justify-center"
-          >
-            <Mail size={16} />
-            <span>お問い合わせ</span>
-          </Link>
-        </div>
-      </div>
+      
     </>
   );
 }
+
+

@@ -256,6 +256,39 @@ export default function InspectionPage() {
                 />
               </div>
 
+              <div>
+  <label className="block text-gray-700 font-semibold mb-2">
+    ご希望の来店日時 <span className="text-gray-500 text-sm">（任意）</span>
+  </label>
+  <div className="grid grid-cols-2 gap-4">
+    <input
+      type="date"
+      name="preferredDate"
+      value={formData.preferredDate}
+      onChange={handleChange}
+      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+    />
+    <select
+      name="preferredTime"
+      value={formData.preferredTime}
+      onChange={handleChange}
+      className="px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-kacchau focus:outline-none"
+    >
+      <option value="">時間を選択</option>
+      <option value="09:00-10:00">9:00〜10:00</option>
+      <option value="10:00-11:00">10:00〜11:00</option>
+      <option value="11:00-12:00">11:00〜12:00</option>
+      <option value="12:00-13:00">12:00〜13:00</option>
+      <option value="13:00-14:00">13:00〜14:00</option>
+      <option value="14:00-15:00">14:00〜15:00</option>
+      <option value="15:00-16:00">15:00〜16:00</option>
+      <option value="16:00-17:00">16:00〜17:00</option>
+      <option value="17:00-18:00">17:00〜18:00</option>
+      <option value="18:00-19:00">18:00〜19:00</option>
+    </select>
+  </div>
+</div>
+              
               {/* ご質問・ご要望 */}
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
@@ -271,42 +304,6 @@ export default function InspectionPage() {
                 ></textarea>
               </div>
 
-              {/* ★ Timerexカレンダーセクションを追加 */}
-              <div>
-                <div className="bg-kacchau-yellow-50 p-6 rounded-lg border-2 border-kacchau-yellow-200">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Calendar className="text-kacchau" size={32} />
-                    <h3 className="text-xl font-bold text-gray-800">
-                      オンライン予約 <span className="text-gray-500 text-base font-normal ml-2">（任意）</span>
-                    </h3>
-                  </div>
-                  <p className="text-gray-700 mb-4">
-                    車検のご入庫予約をオンラインで受け付けています。<br />
-                    以下のカレンダーからご都合の良い日時をお選びください。
-                  </p>
-                  
-                  {/* Timerex埋め込みエリア */}
-                  <div className="bg-white p-4 rounded-lg border-2 border-gray-300 min-h-[250px] md:min-h-[400px] timerex-container">
-                    {/* Begin TimeRex Widget */}
-                    <div 
-                      id="timerex_calendar" 
-                      data-url="https://timerex.net/s/homepage.business.fc_8d0c/0b297a94"
-                    ></div>
-                    
-                    <Script 
-                      id="timerex_embed" 
-                      src="https://asset.timerex.net/js/embed.js"
-                      strategy="lazyOnload"
-                      onLoad={() => {
-                        if (typeof window !== 'undefined' && (window as any).TimerexCalendar) {
-                          (window as any).TimerexCalendar();
-                        }
-                      }}
-                    />
-                    {/* End TimeRex Widget */}
-                  </div>
-                </div>
-              </div>
 
               {/* プライバシーポリシー同意チェックボックス */}
               <div className="bg-gray-50 border border-gray-300 rounded-lg p-4">
@@ -372,4 +369,6 @@ export default function InspectionPage() {
       </section>
     </div>
   );
+
 }
+

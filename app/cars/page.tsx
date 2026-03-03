@@ -200,10 +200,6 @@ export default function CarsPage() {
                       fill
                       className="object-contain"
                     />
-                    {/* 保証バッジ（左上） */}
-                    <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
-                      {car.warranty}
-                    </div>
                     {/* 新車/中古車バッジ（右上） */}
                     <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-sm font-bold shadow-lg ${
                       car.type === 'new' 
@@ -227,44 +223,21 @@ export default function CarsPage() {
                         支払総額 {car.totalPrice}万円
                         <span className="text-sm text-gray-600 ml-1 font-normal">(税込)</span>
                       </div>
-                      <div className="text-sm text-gray-600">
-                        車両本体 <span className="font-semibold text-gray-900">{car.vehiclePrice}万円</span> / 諸費用 <span className="font-semibold text-gray-900">{car.fees}万円</span>
-                      </div>
                     </div>
 
-                    {/* 詳細情報 */}
+                    {/* 簡略版詳細情報 - 年式・走行距離のみ */}
                     <div className="space-y-2 text-sm mb-6">
                       <div className="flex justify-between py-1.5">
                         <span className="text-gray-600">年式</span>
                         <span className="font-semibold text-gray-900">{car.year}</span>
                       </div>
-                      <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
+                      <div className="flex justify-between py-1.5">
                         <span className="text-gray-600">走行距離</span>
                         <span className="font-semibold text-gray-900">{car.mileage}</span>
                       </div>
-                      <div className="flex justify-between py-1.5">
-                        <span className="text-gray-600">修復歴</span>
-                        <span className="font-semibold text-green-600">{car.repairHistory}</span>
-                      </div>
-                      <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
-                        <span className="text-gray-600">シフト</span>
-                        <span className="font-semibold text-gray-900">{car.transmission}</span>
-                      </div>
-                      <div className="flex justify-between py-1.5">
-                        <span className="text-gray-600">駆動</span>
-                        <span className="font-semibold text-gray-900">{car.drive}</span>
-                      </div>
-                      <div className="flex justify-between py-1.5 bg-gray-50 px-2 rounded">
-                        <span className="text-gray-600">排気量</span>
-                        <span className="font-semibold text-gray-900">{car.displacement}</span>
-                      </div>
-                      <div className="flex justify-between py-1.5">
-                        <span className="text-gray-600">系統色</span>
-                        <span className="font-semibold text-gray-900">{car.color}</span>
-                      </div>
                     </div>
 
-                    {/* ボタン - タスク1: 「詳細を見る」削除 */}
+                    {/* ボタン */}
                     <div>
                       <Link
                         href="/contact"

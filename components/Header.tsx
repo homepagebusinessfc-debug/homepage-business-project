@@ -32,7 +32,7 @@ export default function Header() {
             {/* スマホ: ロゴ左、テキスト中央、PC: 中央寄せ */}
             <div className="flex flex-row flex-nowrap justify-start sm:justify-center items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8 relative">
               {/* 左側: ロゴ - スマホ時は大きく */}
-              <Link href="/" className="flex items-center hover:opacity-90 transition-opacity shrink-0">
+              <Link href="/cars" className="flex items-center hover:opacity-90 transition-opacity shrink-0">
                 <Image 
                   src="/logo_kacchau.png" 
                   alt="カッチャウロゴ" 
@@ -142,5 +142,6 @@ export default function Header() {
     </>
   );
 }
+
 
 

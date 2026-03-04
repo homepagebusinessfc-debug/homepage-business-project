@@ -3,7 +3,7 @@ backend:
   repo: homepagebusinessfc-debug/homepage-business-project
   branch: main
   auth_type: pkce
-  app_id: Ov23liX2Lnk3yYJqZGGF
+  app_id: Ov23libcdpaBs3JQDOov
   # base_url: https://github.com
   # セキュリティ設定
   # auth_scope: repo
@@ -225,6 +225,7 @@ collections:
         widget: "markdown"
         required: false
         hint: "車両の詳細説明を記入してください"
+
 
 
 

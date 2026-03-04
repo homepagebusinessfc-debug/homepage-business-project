@@ -4,7 +4,7 @@ backend:
   branch: main
   # auth_type: pkce
   app_id: Ov23liX2Lnk3yYJqZGGF
-  # base_url: https://gitlab.com
+  base_url: https://github.com
   # セキュリティ設定
   auth_scope: repo
   squash_merges: true
@@ -225,6 +225,7 @@ collections:
         widget: "markdown"
         required: false
         hint: "車両の詳細説明を記入してください"
+
 
 
 

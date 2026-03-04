@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: homepagebusinessfc-debug/kacchau-sagaminami3gouten
+  repo: homepagebusinessfc-debug/homepage-business-project
   branch: main
   auth_type: pkce
   app_id: Ov23liX2Lnk3yYJqZGGF
@@ -225,6 +225,7 @@ collections:
         widget: "markdown"
         required: false
         hint: "車両の詳細説明を記入してください"
+
 
 
 

@@ -6,7 +6,7 @@ backend:
   app_id: Ov23liX2Lnk3yYJqZGGF
   # base_url: https://gitlab.com
   # セキュリティ設定
-  # auth_scope: repo
+  auth_scope: api
   squash_merges: true
   commit_messages:
     create: 'Create {{collection}} "{{slug}}"'
@@ -225,6 +225,7 @@ collections:
         widget: "markdown"
         required: false
         hint: "車両の詳細説明を記入してください"
+
 
 
 

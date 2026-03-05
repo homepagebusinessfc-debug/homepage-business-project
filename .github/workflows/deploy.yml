@@ -74,21 +74,27 @@ jobs:
         run: |
           echo "📁 Copying admin folder to build output..."
           if [ -d "public/admin" ]; then
-            # adminフォルダを削除してから再作成（確実にコピー）
             rm -rf out/admin
             mkdir -p out/admin
             cp -r public/admin/* out/admin/
-            
-            # .nojekyllファイルを作成（GitHubの_ファイル無視を防ぐ）
             touch out/.nojekyll
             
             echo "✅ Admin folder copied successfully!"
+            echo ""
+            echo "📋 Full out/ directory structure:"
+            find out -type f | head -50
+            echo ""
             echo "📋 Files in out/admin:"
             ls -la out/admin/
-            
-            # HTMLファイルの内容を確認
-            echo "📄 index.html content:"
-            cat out/admin/index.html
+            echo ""
+            echo "📄 index.html content (first 20 lines):"
+            head -20 out/admin/index.html
+            echo ""
+            echo "📄 Checking if admin.html exists:"
+            ls -la out/admin.html 2>/dev/null || echo "admin.html not found (good)"
+            echo ""
+            echo "📄 Checking if admin/index exists without extension:"
+            ls -la out/admin/index 2>/dev/null || echo "admin/index not found (good)"
           else
             echo "❌ Error: public/admin folder not found!"
             exit 1

@@ -8,3 +8,9 @@
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+
+# Admin folder - serve as static files (do not process with Next.js)
+/admin/* /admin/:splat 200
+
+# All other routes - handle with Next.js
+/* /404.html 404

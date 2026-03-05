@@ -68,6 +68,23 @@ jobs:
         run: npm run build
 
       # -------------------------------------------------------
+      # 6. CMS用adminフォルダをコピー
+      # -------------------------------------------------------
+      - name: Copy admin folder to build output
+        run: |
+          echo "📁 Copying admin folder to build output..."
+          if [ -d "public/admin" ]; then
+            mkdir -p out/admin
+            cp -r public/admin/* out/admin/
+            echo "✅ Admin folder copied successfully!"
+            echo "📋 Files in out/admin:"
+            ls -la out/admin/
+          else
+            echo "⚠️ Warning: public/admin folder not found - skipping"
+          fi
+
+
+      # -------------------------------------------------------
       # 6. Cloudflare Pages にデプロイ
       # -------------------------------------------------------
       - name: Deploy to Cloudflare Pages

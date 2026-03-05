@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - ページが見つかりません</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <p>お探しのページが見つかりませんでした。</p>
+    <p>現在のURL: <span id="url"></span></p>
+    <a href="/">トップページへ戻る</a>
+  </div>
+  <script>
+    document.getElementById('url').textContent = window.location.pathname;
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Admin folder - serve as static files
+/admin/*
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=0, must-revalidate
+
+# All other paths
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

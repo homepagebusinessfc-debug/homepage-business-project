@@ -3,8 +3,8 @@
 # 【トリガー】GitHubのmainブランチにpushされたとき
 # 【動作】
 #   1. Next.jsをビルド（npm run build）
-#   2. Cloudflare Pagesにデプロイ
-#   ※ GitLab逆同期は現在無効化
+#   2. public/admin を out/admin にコピー（強制上書き）
+#   3. Cloudflare Pagesにデプロイ
 # ============================================================
 
 name: Deploy to Cloudflare Pages
@@ -68,24 +68,34 @@ jobs:
         run: npm run build
 
       # -------------------------------------------------------
-      # 6. CMS用adminフォルダをコピー
+      # 6. CMS用adminフォルダをコピー（強制上書き）
       # -------------------------------------------------------
       - name: Copy admin folder to build output
         run: |
           echo "📁 Copying admin folder to build output..."
           if [ -d "public/admin" ]; then
+            # adminフォルダを削除してから再作成（確実にコピー）
+            rm -rf out/admin
             mkdir -p out/admin
             cp -r public/admin/* out/admin/
+            
+            # .nojekyllファイルを作成（GitHubの_ファイル無視を防ぐ）
+            touch out/.nojekyll
+            
             echo "✅ Admin folder copied successfully!"
             echo "📋 Files in out/admin:"
             ls -la out/admin/
+            
+            # HTMLファイルの内容を確認
+            echo "📄 index.html content:"
+            cat out/admin/index.html
           else
-            echo "⚠️ Warning: public/admin folder not found - skipping"
+            echo "❌ Error: public/admin folder not found!"
+            exit 1
           fi
 
-
       # -------------------------------------------------------
-      # 6. Cloudflare Pages にデプロイ
+      # 7. Cloudflare Pages にデプロイ
       # -------------------------------------------------------
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
@@ -95,6 +105,7 @@ jobs:
           projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
           directory: out
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
 
       # -------------------------------------------------------
       # 7. GitLabに逆同期（現在無効化）

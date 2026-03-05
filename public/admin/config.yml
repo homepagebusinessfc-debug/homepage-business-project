@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: homepagebusinessfc-debug/homepage-business-project
+  repo: homepage-business-group/homepage-business-project
   branch: main
   auth_type: pkce
   app_id: Ov23libcdpaBs3JQDOov
@@ -226,6 +226,7 @@ collections:
         widget: "markdown"
         required: false
         hint: "車両の詳細説明を記入してください"
+
 
 
 

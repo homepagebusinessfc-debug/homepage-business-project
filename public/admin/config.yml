@@ -6,6 +6,7 @@ backend:
   app_id: Ov23libcdpaBs3JQDOov
   base_url: https://github.com
   # セキュリティ設定
+  auth_endpoint: auth
   auth_scope: repo
   squash_merges: true
   commit_messages:
@@ -225,6 +226,7 @@ collections:
         widget: "markdown"
         required: false
         hint: "車両の詳細説明を記入してください"
+
 
 
 
